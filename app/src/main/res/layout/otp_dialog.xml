@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textInputLayout2">
+
+        <TextView
+            android:text="@string/otp_sent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/OTPLabel"
+            android:layout_weight="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:paddingBottom="20dp"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <AutoCompleteTextView
+        android:id="@+id/input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/otp_enter"
+        android:imeOptions="actionDone"
+        android:layout_below="@+id/textInputLayout2"/>
+
+
+</RelativeLayout>

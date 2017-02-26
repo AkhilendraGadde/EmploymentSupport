@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.charolia.gadde.ess">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".InitActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/login_entry"
+            android:screenOrientation="portrait"
+            android:theme="@style/LoginTheme"></activity>
+        <activity
+            android:name=".FeedbackActivity"
+            android:label="@string/feedback_form"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".UserActivity"
+            android:label="@string/app_name"
+            android:theme="@style/NavigationTheme"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:label="@string/register"
+            android:screenOrientation="portrait"></activity>
+    </application>
+
+</manifest>

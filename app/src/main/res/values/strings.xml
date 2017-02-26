@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Employment Support</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <!--Register Module-->
+    <string name="register">Sign Up</string>
+    <string name="reg_type">Register as :</string>
+    <string name="reg_js">Job Seeker</string>
+    <string name="reg_rec">Recruiter</string>
+    <string name="reg_btn">REGISTER</string>
+    <string name="reg_name">Name</string>
+    <string name="reg_uname">Username</string>
+    <string name="reg_pass">Password</string>
+    <string name="reg_rpass">Re-enter Password</string>
+    <string name="reg_email">E-mail</string>
+    <string name="reg_loc">Location</string>
+    <string name="reg_dob">Date of birth</string>
+    <string name="reg_phone">Phone Number</string>
+    <string-array name="spinner_gender">
+        <item>Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <!--Login Module-->
+    <string name="login_entry">ESS Login</string>
+    <string name="login_username">Username</string>
+    <string name="login_pass">Password</string>
+    <string name="login_btn">LOGIN</string>
+    <string name="login_regtext">Not Registered? Sign Up Here</string>
+
+    <!--OTP Dialog-->
+    <string name="otp_sent">OTP Sent via SMS</string>
+    <string name="otp_enter">Enter OTP Here</string>
+
+    <!--Feedback Form-->
+    <string name="feedback_form">Feedback</string>
+    <string name="feedback_form_name">Name</string>
+    <string name="feedback_form_email">Email</string>
+    <string name="feedback_form_subject">Subject</string>
+    <string name="feedback_form_message">Message</string>
+    <string name="feedback_form_button">Submit</string>
+    <string name="feedback_form_post_message">Please wait! We\'re sending your message to the support department...</string>
+    <string name="feedback_posted">Your feedback has been successfully posted.</string>
+</resources>
