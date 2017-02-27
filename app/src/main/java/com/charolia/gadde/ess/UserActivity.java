@@ -33,7 +33,7 @@ public class UserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
-        final TextView tv = (TextView) findViewById(R.id.tv_nav);
+//        final TextView tv = (TextView) findViewById(R.id.tv_nav);
         final TextView tvEmail, tvName, tvType;
 
         //Fetching values from shared preferences
@@ -46,8 +46,8 @@ public class UserActivity extends AppCompatActivity {
         String type = sharedPreferences.getString(Config.TYPE_SHARED_PREF,"Not Available");
 
         //Showing the current logged in user details to textview
-        String message = "\n Name : "+name + "\n Username : " + username + "\n Email : " + email + "\n Phone : " + phone + "\n Type : " + type;
-        tv.setText(message);
+        /*String message = "\n Name : "+name + "\n Username : " + username + "\n Email : " + email + "\n Phone : " + phone + "\n Type : " + type;
+        tv.setText(message);*/
 
 
         // Navigation View
