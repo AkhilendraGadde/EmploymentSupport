@@ -124,6 +124,4 @@ public class FeedbackActivity extends AppCompatActivity {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
-
-
 }
