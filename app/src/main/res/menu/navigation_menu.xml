@@ -1,43 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/nav_srch"
-        android:title="Search"
-        android:icon="@drawable/ic_search_white_24px"/>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/nav_jobalert"
-        android:title="Job Alerts"
-        android:icon="@drawable/ic_alert"/>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_srch"
+            android:title="Search"
+            android:icon="@drawable/ic_search_white_24px"/>
 
-    <item
-        android:id="@+id/nav_resume"
-        android:title="Resume"
-        android:icon="@drawable/ic_resume"/>
+        <item
+            android:id="@+id/nav_jobalert"
+            android:title="Job Alerts"
+            android:icon="@drawable/ic_alert"/>
+
+        <item
+            android:id="@+id/nav_resume"
+            android:title="Resume"
+            android:icon="@drawable/ic_resume"/>
 
 
-    <item
-        android:id="@+id/nav_cf"
-        android:title="Community Forum"
-        android:icon="@drawable/ic_chat"/>
+        <item
+            android:id="@+id/nav_cf"
+            android:title="Community Forum"
+            android:icon="@drawable/ic_chat"/>
+    </group>
 
-    <item
-        android:id="@+id/nav_null"
-        android:title=""/>
 
-    <item
-        android:id="@+id/nav_feedback"
-        android:title="Feedback"
-        android:icon="@drawable/ic_feedback"/>
+    <item android:title="Support">
+        <menu>
+            <item
+                android:id="@+id/nav_feedback"
+                android:title="Feedback"
+                android:icon="@drawable/ic_feedback"/>
+            <item
+                android:id="@+id/nav_sup"
+                android:title="Contact"
+                android:icon="@drawable/ic_support"/>
+            <item
+                android:id="@+id/nav_logout"
+                android:title="Logout"
+                android:icon="@drawable/ic_logout"/>
+        </menu>
+    </item>
 
-    <item
-        android:id="@+id/nav_sup"
-        android:title="Support"
-        android:icon="@drawable/ic_support"/>
-
-    <item
-        android:id="@+id/nav_logout"
-        android:title="Logout"
-        android:icon="@drawable/ic_logout"/>
 </menu>
