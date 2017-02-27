@@ -40,6 +40,5 @@
     <string name="feedback_form_subject">Subject</string>
     <string name="feedback_form_message">Message</string>
     <string name="feedback_form_button">Submit</string>
-    <string name="feedback_form_post_message">Please wait! We\'re sending your message to the support department...</string>
     <string name="feedback_posted">Your feedback has been successfully posted.</string>
 </resources>
