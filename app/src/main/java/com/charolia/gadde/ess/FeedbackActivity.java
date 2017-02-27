@@ -22,11 +22,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FeedbackActivity extends AppCompatActivity {
-    private Activity activity;
-
-    //SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-    //String name = sharedPreferences.getString(Config.NAME_SHARED_PREF,"Not Available");
-    //String email = sharedPreferences.getString(Config.EMAIL_SHARED_PREF,"Not Available");
+//    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
