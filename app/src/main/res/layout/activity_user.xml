@@ -25,6 +25,12 @@
             android:id="@+id/tv_nav"
             android:layout_weight="1"
             android:layout_gravity="center" />
+
+        <include
+            layout="@layout/user_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
     <android.support.design.widget.NavigationView
