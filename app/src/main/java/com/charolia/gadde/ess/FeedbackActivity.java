@@ -84,10 +84,10 @@ public class FeedbackActivity extends AppCompatActivity {
 
             /* Fill it with Data */
                 sendEmail.setType("plain/text");
-                sendEmail.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"akhilendragadde17@gmail.com"});
+                sendEmail.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"empsupess1725@gmail.com"});
                 sendEmail.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
                 sendEmail.putExtra(android.content.Intent.EXTRA_TEXT,
-                        "name:"+name+'\n'+"Email ID:"+email+'\n'+"Message:"+'\n'+message);
+                        "\nName : \t"+name+"\n"+"E-mail : \t"+email+"\n\n"+"Message : "+"\n"+message);
 
             /* Send it off to the Activity-Chooser */
                 startActivity(Intent.createChooser(sendEmail, "Send mail..."));
