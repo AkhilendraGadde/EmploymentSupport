@@ -226,10 +226,12 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_logout) {
 
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             LogoutFragment logout = new LogoutFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, logout);
             fragmentTransaction.commit();
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
