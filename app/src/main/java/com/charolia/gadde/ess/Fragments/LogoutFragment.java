@@ -1,7 +1,6 @@
 package com.charolia.gadde.ess.Fragments;
 
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +14,7 @@ import android.widget.Button;
 import com.charolia.gadde.ess.Config;
 import com.charolia.gadde.ess.LoginActivity;
 import com.charolia.gadde.ess.R;
+import com.charolia.gadde.ess.UserActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +44,7 @@ public class LogoutFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 logout();
+                ((UserActivity )  getActivity()).ShowActionBar();
             }
         });
 
@@ -54,6 +55,7 @@ public class LogoutFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, home);
                 fragmentTransaction.commit();
+                ((UserActivity )  getActivity()).ShowActionBar();
             }
         });
 
@@ -80,8 +82,9 @@ public class LogoutFragment extends Fragment {
             editor.commit();
 
             //Starting login activity
-            Intent intent = new Intent(getContext(), LoginActivity.class);
+            Intent intent = new Intent(((UserActivity) getActivity()), LoginActivity.class);
             startActivity(intent);
+            ((UserActivity) getActivity()).finish();
     }
 
 }
