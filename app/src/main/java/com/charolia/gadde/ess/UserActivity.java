@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.charolia.gadde.ess.Fragments.HomeFragment;
+import com.charolia.gadde.ess.Fragments.LogoutFragment;
 
 public class UserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -225,6 +226,10 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_logout) {
 
+            LogoutFragment logout = new LogoutFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, logout);
+            fragmentTransaction.commit();
             logout();
         }
 
