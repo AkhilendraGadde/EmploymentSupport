@@ -22,8 +22,13 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.charolia.gadde.ess.Fragments.ForumFragment;
 import com.charolia.gadde.ess.Fragments.HomeFragment;
+import com.charolia.gadde.ess.Fragments.JobAlertFragment;
 import com.charolia.gadde.ess.Fragments.LogoutFragment;
+import com.charolia.gadde.ess.Fragments.ResumeFragment;
+import com.charolia.gadde.ess.Fragments.SearchFragment;
+import com.charolia.gadde.ess.Fragments.SupportFragment;
 
 public class UserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -173,6 +178,9 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(final MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        if (id != R.id.nav_logout)   {
+            ShowActionBar();
+        }
 
         if (id == R.id.nav_home) {
 
@@ -185,36 +193,34 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_srch) {
 
             Toast.makeText(UserActivity.this, "Search Selected", Toast.LENGTH_SHORT).show();
-            Intent fb = new Intent(UserActivity.this, FeedbackActivity.class);
-            UserActivity.this.startActivity(fb);
-            /*AccInfo fragment = new AccInfo();
+            SearchFragment search = new SearchFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, fragment);
-            fragmentTransaction.commit();*/
+            fragmentTransaction.replace(R.id.fragment_container, search);
+            fragmentTransaction.commit();
 
         } else if (id == R.id.nav_jobalert) {
 
-            Toast.makeText(UserActivity.this, "Search Selected", Toast.LENGTH_SHORT).show();
-            /*BillFragment fragment = new BillFragment();
+            Toast.makeText(UserActivity.this, "JobAlert Selected", Toast.LENGTH_SHORT).show();
+            JobAlertFragment jobalert = new JobAlertFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, fragment);
-            fragmentTransaction.commit();*/
+            fragmentTransaction.replace(R.id.fragment_container, jobalert);
+            fragmentTransaction.commit();
 
         } else if (id == R.id.nav_resume) {
 
-            Toast.makeText(UserActivity.this, "Search Selected", Toast.LENGTH_SHORT).show();
-            /*TransferFragment fragment = new TransferFragment();
+            Toast.makeText(UserActivity.this, "Resume Selected", Toast.LENGTH_SHORT).show();
+            ResumeFragment resume = new ResumeFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, fragment);
-            fragmentTransaction.commit();*/
+            fragmentTransaction.replace(R.id.fragment_container, resume);
+            fragmentTransaction.commit();
 
         } else if (id == R.id.nav_cf) {
 
-            Toast.makeText(UserActivity.this, "Search Selected", Toast.LENGTH_SHORT).show();
-            /*StatementFragment fragment = new StatementFragment();
+            Toast.makeText(UserActivity.this, "Forum Selected", Toast.LENGTH_SHORT).show();
+            ForumFragment forum = new ForumFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, fragment);
-            fragmentTransaction.commit();*/
+            fragmentTransaction.replace(R.id.fragment_container, forum);
+            fragmentTransaction.commit();
 
         } else if (id == R.id.nav_feedback) {
 
@@ -225,21 +231,19 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_sup) {
 
             Toast.makeText(UserActivity.this, "Support Selected", Toast.LENGTH_SHORT).show();
+            SupportFragment support = new SupportFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, support);
+            fragmentTransaction.commit();
 
         } else if (id == R.id.nav_logout) {
 
-            flag = 1;
-            while (flag == 1) {
-                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
-                getSupportActionBar().hide();
+            HideActionBar();
+            LogoutFragment logout = new LogoutFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, logout);
+            fragmentTransaction.commit();
 
-                LogoutFragment logout = new LogoutFragment();
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, logout);
-                fragmentTransaction.commit();
-                flag = 0;
-            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -248,4 +252,17 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+    private void HideActionBar(){
+
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().hide();
+    }
+
+    public void ShowActionBar(){
+
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+        getSupportActionBar().show();
+    }
 }
