@@ -48,12 +48,13 @@ public class LogoutFragment extends Fragment {
         bCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HomeFragment home = new HomeFragment();
+
+                ((UserActivity )  getActivity()).refreshContent();
+               /* HomeFragment home = new HomeFragment();
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, home);
-                fragmentTransaction.commit();
+                fragmentTransaction.commit();*/
                 ((UserActivity )  getActivity()).ShowActionBar();
-                ((UserActivity )  getActivity()).refreshContent();
             }
         });
 
