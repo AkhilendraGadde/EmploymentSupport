@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle mToggle;
     private Toolbar mToolbar;
     private NavigationView mNavigationView;
+    private int flag = 0;
 
 
     @Override
@@ -226,7 +228,13 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_logout) {
 
-            getSupportActionBar().hide();
+            flag = 1;
+            if (flag == 1) {
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                getSupportActionBar().hide();
+                flag = 0;
+            }
             LogoutFragment logout = new LogoutFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, logout);
