@@ -5,7 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -20,8 +20,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.charolia.gadde.ess.Fragments.FeedbackFragment;
 import com.charolia.gadde.ess.Fragments.ForumFragment;
 import com.charolia.gadde.ess.Fragments.HomeFragment;
 import com.charolia.gadde.ess.Fragments.JobAlertFragment;
@@ -36,7 +36,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle mToggle;
     private Toolbar mToolbar;
     private NavigationView mNavigationView;
-    private int flag = 0;
+    private String ActionBarTitle = "Employment Support";
 
 
     @Override
@@ -141,6 +141,10 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            /*if(ActionBarTitle.equals("Employment Support"))
+                moveTaskToBack(true);
+            else
+                super.onBackPressed();*/
             moveTaskToBack(true);
         }
     }
@@ -173,73 +177,62 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(final MenuItem item) {
         // Handle navigation view item clicks here.
+        Fragment fragment = null;
+
         int id = item.getItemId();
         if (id != R.id.nav_logout)   {
             ShowActionBar();
+        }   else {
+            HideActionBar();
         }
 
-        if (id == R.id.nav_home) {
+        switch (item.getItemId()) {
+            case R.id.nav_home:
+                fragment = new HomeFragment();
+                ActionBarTitle = "Employment Support";
+                break;
+            case R.id.nav_srch:
+                fragment = new SearchFragment();
+                ActionBarTitle = "Search Jobs";
+                break;
+            case R.id.nav_jobalert:
+                fragment = new JobAlertFragment();
+                ActionBarTitle = "Job Alerts";
+                break;
+            case R.id.nav_resume:
+                fragment = new ResumeFragment();
+                ActionBarTitle = "Manage Resume";
+                break;
+            case R.id.nav_cf:
+                fragment = new ForumFragment();
+                ActionBarTitle = "Community Forum";
+                break;
+            case R.id.nav_feedback:
+                fragment = new FeedbackFragment();
+                ActionBarTitle = "Feedback";
+                break;
+            case R.id.nav_sup:
+                fragment = new SupportFragment();
+                ActionBarTitle = "Contact Support";
+                break;
+            case R.id.nav_logout:
+                fragment = new LogoutFragment();
+                ActionBarTitle = "Logout";
+                break;
 
-            Toast.makeText(UserActivity.this, "Home Selected", Toast.LENGTH_SHORT).show();
-            HomeFragment home = new HomeFragment();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, home);
-            fragmentTransaction.commit();
+            default:
+                break;
+        }
 
-        } else if (id == R.id.nav_srch) {
+        // update selected fragment and title
+        if (fragment != null) {
 
-            Toast.makeText(UserActivity.this, "Search Selected", Toast.LENGTH_SHORT).show();
-            SearchFragment search = new SearchFragment();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, search);
-            fragmentTransaction.commit();
-
-        } else if (id == R.id.nav_jobalert) {
-
-            Toast.makeText(UserActivity.this, "JobAlert Selected", Toast.LENGTH_SHORT).show();
-            JobAlertFragment jobalert = new JobAlertFragment();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, jobalert);
-            fragmentTransaction.commit();
-
-        } else if (id == R.id.nav_resume) {
-
-            Toast.makeText(UserActivity.this, "Resume Selected", Toast.LENGTH_SHORT).show();
-            ResumeFragment resume = new ResumeFragment();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, resume);
-            fragmentTransaction.commit();
-
-        } else if (id == R.id.nav_cf) {
-
-            Toast.makeText(UserActivity.this, "Forum Selected", Toast.LENGTH_SHORT).show();
-            ForumFragment forum = new ForumFragment();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, forum);
-            fragmentTransaction.commit();
-
-        } else if (id == R.id.nav_feedback) {
-
-            Intent fb = new Intent(UserActivity.this, FeedbackActivity.class);
-            UserActivity.this.startActivity(fb);
-            Toast.makeText(UserActivity.this, "Feedback Selected", Toast.LENGTH_SHORT).show();
-
-        } else if (id == R.id.nav_sup) {
-
-            Toast.makeText(UserActivity.this, "Support Selected", Toast.LENGTH_SHORT).show();
-            SupportFragment support = new SupportFragment();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, support);
-            fragmentTransaction.commit();
-
-        } else if (id == R.id.nav_logout) {
-
-            HideActionBar();
-            LogoutFragment logout = new LogoutFragment();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, logout);
-            fragmentTransaction.commit();
-
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(null)
+                    .commit();
+            getSupportActionBar().setTitle(ActionBarTitle);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
