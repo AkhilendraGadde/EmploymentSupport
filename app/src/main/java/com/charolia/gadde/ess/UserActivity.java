@@ -226,7 +226,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_logout) {
 
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().hide();
             LogoutFragment logout = new LogoutFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, logout);
