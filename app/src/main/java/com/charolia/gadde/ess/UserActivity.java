@@ -230,67 +230,12 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, logout);
             fragmentTransaction.commit();
-            logout();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    /*@Override
-    public boolean onNavigationItemSelected(MenuItem menuItem) {
-
-        int id = menuItem.getItemId();
-        switch (id) {
-            case R.id.nav_srch:
-
-                Toast.makeText(UserActivity.this, "Search Selected", Toast.LENGTH_SHORT).show();
-                mDrawerLayout.closeDrawers();
-                return true;
-
-            case R.id.nav_jobalert:
-
-                Toast.makeText(UserActivity.this, "JobAlert Selected", Toast.LENGTH_SHORT).show();
-                mDrawerLayout.closeDrawers();
-                return true;
-
-            case R.id.nav_resume:
-
-                Toast.makeText(UserActivity.this, "Resume Selected", Toast.LENGTH_SHORT).show();
-                mDrawerLayout.closeDrawers();
-                return true;
-
-            case R.id.nav_cf:
-
-                Toast.makeText(UserActivity.this, "Community Forum Selected", Toast.LENGTH_SHORT).show();
-                mDrawerLayout.closeDrawers();
-                return true;
-
-            case R.id.nav_feedback:
-
-                Intent fb = new Intent(UserActivity.this, FeedbackActivity.class);
-                UserActivity.this.startActivity(fb);
-                Toast.makeText(UserActivity.this, "Feedback Selected", Toast.LENGTH_SHORT).show();
-                mDrawerLayout.closeDrawers();
-                return true;
-
-            case R.id.nav_sup:
-                Toast.makeText(UserActivity.this, "Support Selected", Toast.LENGTH_SHORT).show();
-                mDrawerLayout.closeDrawers();
-                return true;
-
-            case R.id.nav_logout:
-
-                logout();
-                mDrawerLayout.closeDrawers();
-                return true;
-
-            default:
-                mDrawerLayout.closeDrawers();
-                return true;
-        }
-    }*/
 
 
 }
