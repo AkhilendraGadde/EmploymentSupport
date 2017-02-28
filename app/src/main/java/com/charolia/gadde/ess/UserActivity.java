@@ -182,6 +182,8 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_srch) {
 
             Toast.makeText(UserActivity.this, "Search Selected", Toast.LENGTH_SHORT).show();
+            Intent fb = new Intent(UserActivity.this, FeedbackActivity.class);
+            UserActivity.this.startActivity(fb);
             /*AccInfo fragment = new AccInfo();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
