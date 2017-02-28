@@ -162,11 +162,8 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case R.id.refresh:
 
-                Intent intent = getIntent();
-                finish();
-                startActivity(intent);
-                View parentLayout = findViewById(R.id.drawerLayout);
-                Snackbar.make(parentLayout, "Employment Support App v1.1.0", Snackbar.LENGTH_LONG).show();
+                refreshContent();
+                Snackbar.make(getWindow().getDecorView().getRootView(), "Employment Support App v1.1.0", Snackbar.LENGTH_LONG).show();
                 return true;
 
             default:
@@ -264,5 +261,11 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
         getSupportActionBar().show();
+    }
+
+    public void refreshContent(){
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 }
