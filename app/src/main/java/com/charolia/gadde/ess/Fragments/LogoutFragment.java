@@ -1,6 +1,7 @@
 package com.charolia.gadde.ess.Fragments;
 
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,11 +30,12 @@ public class LogoutFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_logout, container, false);
         // Inflate the layout for this fragment
-        getActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
+
+        //getContext().getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         //getActivity().getActionBar().hide();
+
         View view = inflater.inflate(R.layout.fragment_logout, container, false);
         final Button bLogout = (Button) view.findViewById(R.id.bLogoutYes);
         final Button bCancel = (Button) view.findViewById(R.id.bLogoutNo);
