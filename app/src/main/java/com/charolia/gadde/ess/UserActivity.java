@@ -163,7 +163,6 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
             case R.id.refresh:
 
                 refreshContent();
-                Snackbar.make(getWindow().getDecorView().getRootView(), "Employment Support App v1.1.0", Snackbar.LENGTH_LONG).show();
                 return true;
 
             default:
