@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,6 +21,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.charolia.gadde.ess.Fragments.HomeFragment;
+
 public class UserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
@@ -33,11 +36,15 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
-//        final TextView tv = (TextView) findViewById(R.id.tv_nav);
+        // set initial fragment.
+        HomeFragment home = new HomeFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, home);
+        fragmentTransaction.commit();
+
         final TextView tvEmail, tvName, tvType;
 
         //Fetching values from shared preferences
-
         SharedPreferences sharedPreferences = this.getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         String name = sharedPreferences.getString(Config.NAME_SHARED_PREF,"Not Available");
         String username = sharedPreferences.getString(Config.USERNAME_SHARED_PREF,"Not Available");
@@ -51,17 +58,12 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
 
 
         // Navigation View
-
         mToolbar = (Toolbar) findViewById(R.id.nav_action);
         setSupportActionBar(mToolbar);
-
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
-
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Set up Navigation Texts and actions.
@@ -76,11 +78,6 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         tvName.setText(name);
         tvEmail.setText(email);
         mNavigationView.setNavigationItemSelectedListener(this);
-
-        //mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-
-        //});
-
     }
 
     private void logout(){
@@ -157,12 +154,11 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case R.id.refresh:
 
-                View parentLayout = findViewById(R.id.drawerLayout);
-                Snackbar.make(parentLayout, "Employment Support App v1.1.0", Snackbar.LENGTH_LONG).show();
                 Intent intent = getIntent();
                 finish();
                 startActivity(intent);
-
+                View parentLayout = findViewById(R.id.drawerLayout);
+                Snackbar.make(parentLayout, "Employment Support App v1.1.0", Snackbar.LENGTH_LONG).show();
                 return true;
 
             default:
@@ -175,7 +171,15 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_srch) {
+        if (id == R.id.nav_home) {
+
+            Toast.makeText(UserActivity.this, "Home Selected", Toast.LENGTH_SHORT).show();
+            HomeFragment home = new HomeFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, home);
+            fragmentTransaction.commit();
+
+        } else if (id == R.id.nav_srch) {
 
             Toast.makeText(UserActivity.this, "Search Selected", Toast.LENGTH_SHORT).show();
             /*AccInfo fragment = new AccInfo();
