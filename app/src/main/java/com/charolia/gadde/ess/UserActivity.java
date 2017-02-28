@@ -229,17 +229,17 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_logout) {
 
             flag = 1;
-            if (flag == 1) {
+            while (flag == 1) {
                 getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                         WindowManager.LayoutParams.FLAG_FULLSCREEN);
                 getSupportActionBar().hide();
+
+                LogoutFragment logout = new LogoutFragment();
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, logout);
+                fragmentTransaction.commit();
                 flag = 0;
             }
-            LogoutFragment logout = new LogoutFragment();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, logout);
-            fragmentTransaction.commit();
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
