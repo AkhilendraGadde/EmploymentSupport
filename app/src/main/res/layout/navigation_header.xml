@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="350dp"
-    android:background="@drawable/ic_home">
+    android:layout_height="163dp"
+    android:background="@drawable/canvas">
 
     <View
         android:layout_marginTop="10dp"
@@ -14,7 +14,7 @@
 
     <TextView
         android:text=""
-        android:textSize="16sp"
+        android:textSize="15sp"
         android:textColor="@android:color/background_light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,11 +25,11 @@
 
     <TextView
         android:text=""
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/tvName"
-        android:layout_marginBottom="45dp"
+        android:layout_marginBottom="40dp"
         android:layout_alignWithParentIfMissing="true"
         android:id="@+id/tvType"
         android:includeFontPadding="false"
@@ -40,7 +40,7 @@
 
     <TextView
         android:text=""
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/circleView"
@@ -49,7 +49,7 @@
         android:textColor="@android:color/background_light"
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="8dp"
         android:maxLines="1"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
