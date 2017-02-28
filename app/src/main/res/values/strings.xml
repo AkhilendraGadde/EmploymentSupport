@@ -41,4 +41,7 @@
     <string name="feedback_form_message">Message</string>
     <string name="feedback_form_button">Submit</string>
     <string name="feedback_posted">Your feedback has been successfully posted.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
