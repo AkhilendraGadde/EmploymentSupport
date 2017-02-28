@@ -20,7 +20,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class UserActivity extends AppCompatActivity {
+public class UserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
@@ -75,62 +75,11 @@ public class UserActivity extends AppCompatActivity {
         tvType.setText(type);
         tvName.setText(name);
         tvEmail.setText(email);
+        mNavigationView.setNavigationItemSelectedListener(this);
 
-        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(final MenuItem menuItem) {
+        //mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
-                int id = menuItem.getItemId();
-                switch (id) {
-                    case R.id.nav_srch:
-
-                        Toast.makeText(UserActivity.this, "Search Selected", Toast.LENGTH_SHORT).show();
-                        mDrawerLayout.closeDrawers();
-                        return true;
-
-                    case R.id.nav_jobalert:
-
-                        Toast.makeText(UserActivity.this, "JobAlert Selected", Toast.LENGTH_SHORT).show();
-                        mDrawerLayout.closeDrawers();
-                        return true;
-
-                    case R.id.nav_resume:
-
-                        Toast.makeText(UserActivity.this, "Resume Selected", Toast.LENGTH_SHORT).show();
-                        mDrawerLayout.closeDrawers();
-                        return true;
-
-                    case R.id.nav_cf:
-
-                        Toast.makeText(UserActivity.this, "Community Forum Selected", Toast.LENGTH_SHORT).show();
-                        mDrawerLayout.closeDrawers();
-                        return true;
-
-                    case R.id.nav_feedback:
-
-                        Intent fb = new Intent(UserActivity.this, FeedbackActivity.class);
-                        UserActivity.this.startActivity(fb);
-                        Toast.makeText(UserActivity.this, "Feedback Selected", Toast.LENGTH_SHORT).show();
-                        mDrawerLayout.closeDrawers();
-                        return true;
-
-                    case R.id.nav_sup:
-                        Toast.makeText(UserActivity.this, "Support Selected", Toast.LENGTH_SHORT).show();
-                        mDrawerLayout.closeDrawers();
-                        return true;
-
-                    case R.id.nav_logout:
-
-                        logout();
-                        mDrawerLayout.closeDrawers();
-                        return true;
-
-                    default:
-                        mDrawerLayout.closeDrawers();
-                        return true;
-                }
-            }
-        });
+        //});
 
     }
 
@@ -208,19 +157,129 @@ public class UserActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.refresh:
 
+                View parentLayout = findViewById(R.id.drawerLayout);
+                Snackbar.make(parentLayout, "Employment Support App v1.1.0", Snackbar.LENGTH_LONG).show();
                 Intent intent = getIntent();
                 finish();
                 startActivity(intent);
-                View parentLayout = findViewById(R.id.drawerLayout);
-                Snackbar.make(parentLayout, "Employment Support App v1.1.0", Snackbar.LENGTH_LONG).show();
+
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
-
-        //return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public boolean onNavigationItemSelected(final MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_srch) {
+
+            Toast.makeText(UserActivity.this, "Search Selected", Toast.LENGTH_SHORT).show();
+            /*AccInfo fragment = new AccInfo();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();*/
+
+        } else if (id == R.id.nav_jobalert) {
+
+            Toast.makeText(UserActivity.this, "Search Selected", Toast.LENGTH_SHORT).show();
+            /*BillFragment fragment = new BillFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();*/
+
+        } else if (id == R.id.nav_resume) {
+
+            Toast.makeText(UserActivity.this, "Search Selected", Toast.LENGTH_SHORT).show();
+            /*TransferFragment fragment = new TransferFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();*/
+
+        } else if (id == R.id.nav_cf) {
+
+            Toast.makeText(UserActivity.this, "Search Selected", Toast.LENGTH_SHORT).show();
+            /*StatementFragment fragment = new StatementFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();*/
+
+        } else if (id == R.id.nav_feedback) {
+
+            Intent fb = new Intent(UserActivity.this, FeedbackActivity.class);
+            UserActivity.this.startActivity(fb);
+            Toast.makeText(UserActivity.this, "Feedback Selected", Toast.LENGTH_SHORT).show();
+
+        } else if (id == R.id.nav_sup) {
+
+            Toast.makeText(UserActivity.this, "Support Selected", Toast.LENGTH_SHORT).show();
+
+        } else if (id == R.id.nav_logout) {
+
+            logout();
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    /*@Override
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
+
+        int id = menuItem.getItemId();
+        switch (id) {
+            case R.id.nav_srch:
+
+                Toast.makeText(UserActivity.this, "Search Selected", Toast.LENGTH_SHORT).show();
+                mDrawerLayout.closeDrawers();
+                return true;
+
+            case R.id.nav_jobalert:
+
+                Toast.makeText(UserActivity.this, "JobAlert Selected", Toast.LENGTH_SHORT).show();
+                mDrawerLayout.closeDrawers();
+                return true;
+
+            case R.id.nav_resume:
+
+                Toast.makeText(UserActivity.this, "Resume Selected", Toast.LENGTH_SHORT).show();
+                mDrawerLayout.closeDrawers();
+                return true;
+
+            case R.id.nav_cf:
+
+                Toast.makeText(UserActivity.this, "Community Forum Selected", Toast.LENGTH_SHORT).show();
+                mDrawerLayout.closeDrawers();
+                return true;
+
+            case R.id.nav_feedback:
+
+                Intent fb = new Intent(UserActivity.this, FeedbackActivity.class);
+                UserActivity.this.startActivity(fb);
+                Toast.makeText(UserActivity.this, "Feedback Selected", Toast.LENGTH_SHORT).show();
+                mDrawerLayout.closeDrawers();
+                return true;
+
+            case R.id.nav_sup:
+                Toast.makeText(UserActivity.this, "Support Selected", Toast.LENGTH_SHORT).show();
+                mDrawerLayout.closeDrawers();
+                return true;
+
+            case R.id.nav_logout:
+
+                logout();
+                mDrawerLayout.closeDrawers();
+                return true;
+
+            default:
+                mDrawerLayout.closeDrawers();
+                return true;
+        }
+    }*/
 
 
 }
