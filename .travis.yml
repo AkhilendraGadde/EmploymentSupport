@@ -33,7 +33,7 @@ before_install:
 after_success:
 - sh addtags.sh
 before_deploy:
-- "./gradlew assembleRelease -Pandroid.injected.signing.store.file=key.jks -Pandroid.injected.signing.store.password=$storepass
+- "./gradlew assembleRelease -Pandroid.injected.signing.store.file=ess_keystore_build.jks -Pandroid.injected.signing.store.password=$storepass
   -Pandroid.injected.signing.key.alias=GCESS -Pandroid.injected.signing.key.password=$keypass"
 - cd app/build/outputs/apk/
 - mv app-release.apk ES-release.apk
