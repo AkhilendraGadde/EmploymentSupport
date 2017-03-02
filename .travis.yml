@@ -26,12 +26,27 @@ before_script:
 - adb shell input keyevent 82 &
 script: "./gradlew clean assembleDebug"
 before_install:
+- openssl aes-256-cbc -K $encrypted_281d7c7372d2_key -iv $encrypted_281d7c7372d2_iv
+  -in ess_keystore_build.jks.enc -out ess_keystore_build.jks -d
 - chmod +x gradlew
 - chmod +x addtags.sh
 after_success:
 - sh addtags.sh
 before_deploy:
 - "./gradlew assembleRelease -Pandroid.injected.signing.store.file=key.jks -Pandroid.injected.signing.store.password=$storepass
-  -Pandroid.injected.signing.key.alias=eskeystore -Pandroid.injected.signing.key.password=$keypass"
+  -Pandroid.injected.signing.key.alias=GCESS -Pandroid.injected.signing.key.password=$keypass"
 - cd app/build/outputs/apk/
 - mv app-release.apk ES-release.apk
+deploy:
+  provider: releases
+  api_key:
+    secure: b357050ed91d3c27b1059ed01c557a7cee331af0
+  file_glob: "true"
+  skip_cleanup: true
+  file: ES-release.apk
+  on:
+    repo: AkhilendraGadde/EmploymentSupport
+env:
+  global:
+  - secure: kk0kKd3aWrc0eKwY7G160i0eF+M/kYflNeya9BfE1x4zcgClJC+UhrwI9WQbgLkSr5tBIWPRqpyDUQ/2VqIKsUXgf0YEI/KtkLbLnKnKwP/rpTzkDn3JUeJjZeICFJdpalQM4Qli3Kq2TgPNDx7C10z0GnX+kYCyeroAVxNfq6klJS9fFgO5oD3buvSFbPR9J5jx3WkNdNlpSwclzqUH3X8pf50IrMy3BTNzr/1re9z30BYdbc/Cufk+9hDK8xGFx/RHomAFYK0o1IGHE59lgOwB+/a0Kb7M+UYFFgplWpeN4tJHfj4/aP8IZ3N6ZtqtjzgRofnnWAn+OSS+imq9PZB41VqAsPI/j/7Pvnd/To0Y0K7MzagCP7Qe6nPPnlMTreLUXe8ZbhxWySIG+A431VIgH2D+lImorSQb1R5bpt5/4vdKTnSFEdPXrjd4ThK/UIKvNigGTp8hyP9QW0l+uJXb4eJP2RPLl+H5SjmJWPi2o5UXwhjgJjx9kZ8XZP9fEwI77aPYx3gIPidodb6nGdEy8/16AoPHWohjqrzYo0t8GqTC5mjQmL7sN5Oss8GXAV8IRi9Cwuf+UVW7njtFvQsbwRKGMY9hdo6wcy/tuETTe7xMHhrP3gOclP21Uf4HhzwS1yQjjAGJUMk1zgJlP/+rjqB1dNaxd4c+zNdZ0u8=
+  - secure: xr7l3BKowjP4sBpzHSvllKDIvt5+c4EPYOvvAUN/9VrPrZXBS/FVgSLckzkRijy13GnBpGN4I6dJU9A+MpERW92sM452JgB+nG0iuNdvtzeaAu44sxHsttcXeVSQsQOHuIC2TQd1ja2DNJWL4qX4zeDMEu1DPLgTcUSADabiWXE6JrhIF6JLQy5kBoreqpZz70MUn1s3zLeABDGLEuR+EcLvf5QSo3fUDQyMrLtWeZMudgjvWSdZe3dgoAHlkR4Vkir1IzTRmLiSOtuiu3038x2ElZFdqfgJBujZj1irfo+tXKVz9o76vy3D8WSmMBpUW/49FQ5Vm1FImeysjQnqnt45/9BS458/94eUVvMggyGOvUqywdNGU7LAaVSh9NC7NC6fqh6yXSPfskmwhK+lYPREaLZ79yemKZ4LPwK5VOG978FQlte4SBGpF+HoTCs/x2lFL+dwPLNdTEAqk1imNqZa47MWBhxoyHBFVzAdR7oDaSrAta8qzG/p1Uo0AZ/O3W8HZ3eN7TGeN15e3it+TyUNIB5oH51V+EjE23VvAl4oG/O6QivpP9pepbvuqCUOKf72I2mzxJ1fvz3W/NnbNIsxHCDjU551WS9FhBEXjZr9O26Ewzb9oP8RhWLgQzJUPdlwqIUzH6dN2zaNe0aTUJDFuGeWlmhV3j/XWoyYdi4=
