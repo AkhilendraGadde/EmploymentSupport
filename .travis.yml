@@ -40,7 +40,7 @@ before_deploy:
 deploy:
   provider: releases
   api_key:
-    secure: b357050ed91d3c27b1059ed01c557a7cee331af0
+    secure: null
   file_glob: "true"
   skip_cleanup: true
   file: ES-release.apk
