@@ -1,12 +1,20 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     tools:context="com.charolia.gadde.ess.Fragments.SearchFragment">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/recycler_view_srcjob"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="This is Search Fragment" />
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        card_view:cardCornerRadius="1dp"
+        card_view:contentPadding="10dp"
+        card_view:cardBackgroundColor="@color/white"
+        card_view:cardElevation="5dp"
+        android:scrollbars="vertical" />
 
-</LinearLayout>
+</RelativeLayout>
