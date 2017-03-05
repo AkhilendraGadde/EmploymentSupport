@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,6 +31,8 @@ import com.charolia.gadde.ess.Fragments.ResumeFragment;
 import com.charolia.gadde.ess.Fragments.SearchFragment;
 import com.charolia.gadde.ess.Fragments.SupportFragment;
 
+import java.util.List;
+
 public class UserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
@@ -37,7 +40,6 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar mToolbar;
     private NavigationView mNavigationView;
     private String ActionBarTitle = "Employment Support";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
