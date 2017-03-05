@@ -41,6 +41,11 @@ class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder> {
     }
 
     @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
+
+    @Override
     public int getItemCount() {
         return job_data.size();
     }

@@ -4,8 +4,7 @@ package com.charolia.gadde.ess.Fragments;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,22 +44,25 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        // return inflater.inflate(R.layout.c, container, false);
+
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_srcjob);
         mDataList = new ArrayList<>();
         load_data_from_server(0);
 
-        mJobAdapter = new JobAdapter(getActivity(),mDataList);
+        final LinearLayoutManager  mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mJobAdapter = new JobAdapter(getContext(),mDataList);
         mRecyclerView.setAdapter(mJobAdapter);
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 
-                //if(mRecyclerView.findLas)
-                super.onScrolled(recyclerView, dx, dy);
+                if( mLayoutManager.findLastCompletelyVisibleItemPosition() == mDataList.size()-1){
+                    load_data_from_server(mDataList.get(mDataList.size()-1).getId());
+                }
             }
         });
 
@@ -84,7 +86,8 @@ public class SearchFragment extends Fragment {
                     for (int i=0; i<array.length(); i++){
 
                         JSONObject obj = array.getJSONObject(i);
-                        JobData data = new JobData(obj.getInt("id"),obj.getString("desc"),obj.getString("title"));
+                        // get column names from db
+                        JobData data = new JobData(obj.getInt("id"),obj.getString("Description"),obj.getString("Title"));
                         mDataList.add(data);
 
                     }

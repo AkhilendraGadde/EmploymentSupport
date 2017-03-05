@@ -8,7 +8,7 @@
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view_srchjob"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         card_view:cardCornerRadius="1dp"
         card_view:contentPadding="10dp"
