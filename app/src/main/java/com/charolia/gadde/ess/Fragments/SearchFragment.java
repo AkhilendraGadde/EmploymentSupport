@@ -31,8 +31,8 @@ public class SearchFragment extends Fragment {
 
 
     private RecyclerView mRecyclerView;
-    private JobAdapter mJobAdapter;
-    private List<JobData> mDataList;
+    private SearchFragment$JobAdapter mJobAdapter;
+    private List<SearchFragment$JobData> mDataList;
 
 
     public SearchFragment() {
@@ -53,17 +53,14 @@ public class SearchFragment extends Fragment {
 
         final LinearLayoutManager  mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mJobAdapter = new JobAdapter(getContext(),mDataList);
+        mJobAdapter = new SearchFragment$JobAdapter(getContext(),mDataList);
         mRecyclerView.setAdapter(mJobAdapter);
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 
-                /*if( mLayoutManager.findLastCompletelyVisibleItemPosition() == mDataList.size()-1){
-                    load_data_from_server(mDataList.get(mDataList.size()-1).getId());
-                }*/
-               // super.onScrolled(recyclerView, dx, dy);
+                super.onScrolled(recyclerView, dx, dy);
             }
         });
 
@@ -88,7 +85,7 @@ public class SearchFragment extends Fragment {
 
                         JSONObject obj = array.getJSONObject(i);
                         // get column names from db
-                        JobData data = new JobData(obj.getInt("id"),obj.getString("Description"),obj.getString("Title"));
+                        SearchFragment$JobData data = new SearchFragment$JobData(obj.getInt("id"),obj.getString("Description"),obj.getString("Title"));
                         mDataList.add(data);
 
                     }

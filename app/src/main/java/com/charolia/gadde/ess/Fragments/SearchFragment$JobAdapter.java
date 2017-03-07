@@ -16,12 +16,12 @@ import java.util.List;
  * Created by Administrator on 3/5/2017.
  */
 
-class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder> {
+class SearchFragment$JobAdapter extends RecyclerView.Adapter<SearchFragment$JobAdapter.ViewHolder> {
 
     private Context context;
-    private List<JobData> job_data;
+    private List<SearchFragment$JobData> job_data;
 
-    public JobAdapter(Context context, List<JobData> job_data) {
+    public SearchFragment$JobAdapter(Context context, List<SearchFragment$JobData> job_data) {
         this.context = context;
         this.job_data = job_data;
     }
