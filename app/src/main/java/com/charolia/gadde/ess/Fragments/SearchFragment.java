@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.charolia.gadde.ess.R;
+import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,8 +32,8 @@ public class SearchFragment extends Fragment {
 
 
     private RecyclerView mRecyclerView;
-    private SearchFragment$JobAdapter mJobAdapter;
-    private List<SearchFragment$JobData> mDataList;
+    private SearchFragmentJobAdapter mJobAdapter;
+    private List<SearchFragmentJobData> mDataList;
 
 
     public SearchFragment() {
@@ -53,8 +54,42 @@ public class SearchFragment extends Fragment {
 
         final LinearLayoutManager  mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mJobAdapter = new SearchFragment$JobAdapter(getContext(),mDataList);
+        mJobAdapter = new SearchFragmentJobAdapter(getContext(),mDataList);
         mRecyclerView.setAdapter(mJobAdapter);
+
+        SwipeableRecyclerViewTouchListener swipeTouchListener =
+                new SwipeableRecyclerViewTouchListener(mRecyclerView,
+                        new SwipeableRecyclerViewTouchListener.SwipeListener() {
+                            @Override
+                            public boolean canSwipeLeft(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public boolean canSwipeRight(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+                                    mDataList.remove(position);
+                                    mJobAdapter.notifyItemRemoved(position);
+                                }
+                                mJobAdapter.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+                                    mDataList.remove(position);
+                                    mJobAdapter.notifyItemRemoved(position);
+                                }
+                                mJobAdapter.notifyDataSetChanged();
+                            }
+                        });
+        mRecyclerView.addOnItemTouchListener(swipeTouchListener);
+
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -85,7 +120,7 @@ public class SearchFragment extends Fragment {
 
                         JSONObject obj = array.getJSONObject(i);
                         // get column names from db
-                        SearchFragment$JobData data = new SearchFragment$JobData(obj.getInt("id"),obj.getString("Description"),obj.getString("Title"));
+                        SearchFragmentJobData data = new SearchFragmentJobData(obj.getInt("id"),obj.getString("Description"),obj.getString("Title"));
                         mDataList.add(data);
 
                     }
