@@ -60,9 +60,10 @@ public class SearchFragment extends Fragment {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 
-                if( mLayoutManager.findLastCompletelyVisibleItemPosition() == mDataList.size()-1){
+                /*if( mLayoutManager.findLastCompletelyVisibleItemPosition() == mDataList.size()-1){
                     load_data_from_server(mDataList.get(mDataList.size()-1).getId());
-                }
+                }*/
+               // super.onScrolled(recyclerView, dx, dy);
             }
         });
 
