@@ -55,7 +55,7 @@ class SearchFragmentJobAdapter extends RecyclerView.Adapter<SearchFragmentJobAda
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        private String mItem;// onclick
+        private String mItem;// on Click
         public TextView description;
         public TextView title;
         public ImageView imageView;
