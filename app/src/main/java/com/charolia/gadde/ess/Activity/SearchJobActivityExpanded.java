@@ -36,7 +36,7 @@ public class SearchJobActivityExpanded extends SwipeBackActivity {
         title_tv.setText(title);
         desc_tv.setText(description);
 
-        Snackbar.make(getWindow().getDecorView().getRootView(), "Tap on FAB button to Apply for this job.", Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(getWindow().getDecorView().getRootView(), "Tap on FAB button to Apply for this job", Snackbar.LENGTH_SHORT).show();
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
