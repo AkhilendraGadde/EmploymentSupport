@@ -250,6 +250,11 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().hide();
     }
 
+    public void HideActionBarForSearch(){
+
+        getSupportActionBar().hide();
+    }
+
     public void ShowActionBar(){
 
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
