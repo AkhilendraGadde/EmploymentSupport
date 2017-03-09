@@ -1,6 +1,7 @@
 package com.charolia.gadde.ess.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.charolia.gadde.ess.Activity.SearchJobActivityExpanded;
 import com.charolia.gadde.ess.R;
 
 import java.util.List;
@@ -41,6 +43,8 @@ class SearchFragmentJobAdapter extends RecyclerView.Adapter<SearchFragmentJobAda
         holder.title.setText(job_data.get(position).getJob_title());
         // onclick
         holder.setItem(job_data.get(position).getJob_title());
+        holder.setnTitle(job_data.get(position).getJob_title());
+        holder.setDesc(job_data.get(position).getJob_desc());
     }
 
     @Override
@@ -53,9 +57,11 @@ class SearchFragmentJobAdapter extends RecyclerView.Adapter<SearchFragmentJobAda
         return job_data.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private String mItem;// on Click
+        private String mTitle;// on Click
+        private String mDesc;// on Click
         public TextView description;
         public TextView title;
         public ImageView imageView;
@@ -71,9 +77,21 @@ class SearchFragmentJobAdapter extends RecyclerView.Adapter<SearchFragmentJobAda
         public void setItem(String item) {
             mItem = item;
         }
+
+        public void setnTitle(String item) {
+            mTitle = item;
+        }
+
+        public void setDesc(String item) {
+            mDesc = item;
+        }
         @Override
         public void onClick(View view) {
-            Snackbar.make(view, "Selected Job : "+getAdapterPosition() + " " +mItem, Snackbar.LENGTH_LONG).show();
+            Intent myIntent = new Intent(view.getContext(), SearchJobActivityExpanded.class);
+            myIntent.putExtra("title", mTitle);
+            myIntent.putExtra("description", mDesc);
+            context.startActivity(myIntent);
+            //Snackbar.make(view, "Selected Job : "+getAdapterPosition() + " " +mItem, Snackbar.LENGTH_LONG).show();
         }
         // -----------onclick
     }

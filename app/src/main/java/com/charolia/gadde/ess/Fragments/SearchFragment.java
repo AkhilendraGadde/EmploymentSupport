@@ -1,9 +1,13 @@
 package com.charolia.gadde.ess.Fragments;
 
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,6 +29,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -34,7 +39,8 @@ public class SearchFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private SearchFragmentJobAdapter mJobAdapter;
     private List<SearchFragmentJobData> mDataList;
-
+    private SwipeRefreshLayout swipeRefreshLayout;
+    public Context context;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -47,15 +53,32 @@ public class SearchFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-
+        context = view.getContext();
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_srcjob);
         mDataList = new ArrayList<>();
         load_data_from_server(0);
+
 
         final LinearLayoutManager  mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mJobAdapter = new SearchFragmentJobAdapter(getContext(),mDataList);
         mRecyclerView.setAdapter(mJobAdapter);
+
+
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout_recycler_view);
+        swipeRefreshLayout.setColorSchemeResources(R.color.google_blue, R.color.google_green, R.color.google_red, R.color.google_yellow);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 10300);
+
+            }
+        });
 
         SwipeableRecyclerViewTouchListener swipeTouchListener =
                 new SwipeableRecyclerViewTouchListener(mRecyclerView,
@@ -72,24 +95,41 @@ public class SearchFragment extends Fragment {
 
                             @Override
                             public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
-                                for (int position : reverseSortedPositions) {
+                                for (final int position : reverseSortedPositions) {
+                                    final SearchFragmentJobData jData = mDataList.get(position);
                                     mDataList.remove(position);
                                     mJobAdapter.notifyItemRemoved(position);
+                                    Snackbar.make(recyclerView, "Delete Successful on swipe left", Snackbar.LENGTH_LONG)
+                                            .setAction("Undo", new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    mDataList.add(position,jData);
+                                                    mJobAdapter.notifyDataSetChanged();
+                                                }
+                                            }).show();
                                 }
                                 mJobAdapter.notifyDataSetChanged();
                             }
 
                             @Override
                             public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
-                                for (int position : reverseSortedPositions) {
+                                for (final int position : reverseSortedPositions) {
+                                    final SearchFragmentJobData jData = mDataList.get(position);
                                     mDataList.remove(position);
                                     mJobAdapter.notifyItemRemoved(position);
+                                    Snackbar.make(recyclerView, "Delete Successful on swipe right", Snackbar.LENGTH_LONG)
+                                            .setAction("Undo", new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    mDataList.add(position,jData);
+                                                    mJobAdapter.notifyDataSetChanged();
+                                                }
+                                            }).show();
                                 }
                                 mJobAdapter.notifyDataSetChanged();
                             }
                         });
         mRecyclerView.addOnItemTouchListener(swipeTouchListener);
-
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -100,6 +140,16 @@ public class SearchFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void refresh(){
+        swipeRefreshLayout.setRefreshing(true);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        }, 10300);
     }
 
     private void load_data_from_server(final int id) {
@@ -141,13 +191,10 @@ public class SearchFragment extends Fragment {
         task.execute(id);
     }
 
-
-
-    /*@Override
+    @Override
     public void onResume() {
+
+        refresh();
         super.onResume();
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        ActionBar actionBar = activity.getSupportActionBar();
-        actionBar.setTitle("Search Jobs");
-    }*/
+    }
 }
