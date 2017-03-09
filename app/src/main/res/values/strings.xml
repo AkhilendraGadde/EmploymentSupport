@@ -44,4 +44,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="query_suggestions">
+        <item>Programming</item>
+        <item>Design</item>
+        <item>TypeWriter</item>
+        <item>BoT</item>
+        <item>JavaScripting</item>
+    </string-array>
 </resources>
