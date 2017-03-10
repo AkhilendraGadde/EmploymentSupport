@@ -1,23 +1,28 @@
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
-android:id="@+id/swipe_refresh_layout_recycler_view"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 xmlns:card_view="http://schemas.android.com/apk/res-auto"
 tools:context="com.charolia.gadde.ess.Fragments.SearchFragment"
 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-<android.support.v7.widget.RecyclerView
-    android:id="@+id/recycler_view_srcjob"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:cacheColorHint="@android:color/transparent"
-    card_view:cardCornerRadius="1dp"
-    card_view:contentPadding="10dp"
-    card_view:cardBackgroundColor="@color/white"
-    card_view:cardElevation="5dp"
-    android:scrollbars="vertical" />
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/swipe_refresh_layout_recycler_view">
 
-</android.support.v4.widget.SwipeRefreshLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_srcjob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:cacheColorHint="@android:color/transparent"
+            card_view:cardCornerRadius="1dp"
+            card_view:contentPadding="10dp"
+            card_view:cardBackgroundColor="@color/white"
+            card_view:cardElevation="5dp"
+            android:scrollbars="vertical" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

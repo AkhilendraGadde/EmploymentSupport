@@ -58,12 +58,10 @@ public class SearchFragment extends Fragment {
         mDataList = new ArrayList<>();
         load_data_from_server(0);
 
-
         final LinearLayoutManager  mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mJobAdapter = new SearchFragmentJobAdapter(getContext(),mDataList);
         mRecyclerView.setAdapter(mJobAdapter);
-
 
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout_recycler_view);
         swipeRefreshLayout.setColorSchemeResources(R.color.google_blue, R.color.google_green, R.color.google_red, R.color.google_yellow);
@@ -75,7 +73,7 @@ public class SearchFragment extends Fragment {
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
                     }
-                }, 10300);
+                }, 5000);
 
             }
         });
@@ -149,7 +147,7 @@ public class SearchFragment extends Fragment {
             public void run() {
                 swipeRefreshLayout.setRefreshing(false);
             }
-        }, 10300);
+        }, 5000);
     }
 
     private void load_data_from_server(final int id) {
