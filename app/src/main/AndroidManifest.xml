@@ -37,7 +37,14 @@
             android:name=".RegisterActivity"
             android:label="@string/register"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activity.SearchJobActivityExpanded"  android:screenOrientation="portrait" android:theme="@style/ThemeSwipeBack" />
+        <activity
+            android:name=".Activity.SearchJobActivityExpanded"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeSwipeBack" />
+        <activity android:name=".Activity.SearchJobActivity"
+            android:label="Search Jobs"
+            android:theme="@style/SearchTheme"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

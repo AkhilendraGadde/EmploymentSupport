@@ -4,7 +4,7 @@ package com.charolia.gadde.ess.Fragments;
  * Created by Administrator on 3/5/2017.
  */
 
-class SearchFragmentJobData {
+public class SearchFragmentJobData {
 
     private int id;
     private String job_desc,job_title;

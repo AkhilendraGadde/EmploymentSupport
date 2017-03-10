@@ -16,4 +16,7 @@
     <color name="google_green">#34A853</color>
     <color name="google_yellow">#FBBC05</color>
     <color name="google_red">#EA4335</color>
+    <!-- Search Logo -->
+    <color name="colorTextPrimary">#FFFFFF</color>
+    <color name="colorTextDisable">#66FFFFFF</color>
 </resources>

@@ -10,10 +10,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.charolia.gadde.ess.Activity.SearchJobActivity;
 import com.charolia.gadde.ess.R;
 import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener;
 
@@ -41,11 +43,39 @@ public class SearchFragment extends Fragment {
     private List<SearchFragmentJobData> mDataList;
     private SwipeRefreshLayout swipeRefreshLayout;
     public Context context;
+    String searchQuery;
 
     public SearchFragment() {
         // Required empty public constructor
     }
 
+    public void onSearch(String query){
+        /*// In activity
+        Bundle bundle = new Bundle();
+        bundle.putString("edttext", "From Activity");
+        // set Fragmentclass Arguments
+        SearchFragment fragobj = new SearchFragment();
+        fragobj.setArguments(bundle);
+
+        // In Fragment
+        //textquery = getArguments().getString("intent");*/
+        searchQuery = query;
+        Log.d("Query From Activity",searchQuery);
+        List<SearchFragmentJobData> filteredList = new ArrayList<>();
+
+        for (int i = 0; i < mDataList.size(); i++) {
+
+            final String text = mDataList.get(i).getJob_title().toLowerCase();
+            if (text.contains(searchQuery)) {
+                filteredList.add(mDataList.get(i));
+            }
+        }
+        final LinearLayoutManager  mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mJobAdapter = new SearchFragmentJobAdapter(getContext(),filteredList);
+        mRecyclerView.setAdapter(mJobAdapter);
+        mJobAdapter.notifyDataSetChanged();  // data set changed
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +83,7 @@ public class SearchFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_search, container, false);
+
         context = view.getContext();
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_srcjob);
         mDataList = new ArrayList<>();

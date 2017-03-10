@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.charolia.gadde.ess.Activity.SearchJobActivity;
 import com.charolia.gadde.ess.Fragments.FeedbackFragment;
 import com.charolia.gadde.ess.Fragments.ForumFragment;
 import com.charolia.gadde.ess.Fragments.HomeFragment;
@@ -194,7 +195,12 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
                 ActionBarTitle = "Employment Support";
                 break;
             case R.id.nav_srch:
-                fragment = new SearchFragment();
+
+                Intent i = new Intent(UserActivity.this, SearchJobActivity.class);
+                UserActivity.this.startActivity(i);
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
+                drawer.closeDrawer(GravityCompat.START);
+                //fragment = new SearchFragment();
                 ActionBarTitle = "Search Jobs";
                 break;
             case R.id.nav_jobalert:

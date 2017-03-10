@@ -3,4 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="activity_margin">16dp</dimen>
+    <dimen name="abc_action_button_min_width_material">46dp</dimen>
+    <dimen name="abc_action_button_min_width_overflow_material">34dp</dimen>
+    <dimen name="padding">4dp</dimen>
 </resources>
