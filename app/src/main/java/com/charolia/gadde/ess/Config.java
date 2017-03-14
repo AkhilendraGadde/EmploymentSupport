@@ -8,6 +8,7 @@ public class Config {
     public static final String OTP_URL = "https://akhilendragadde17.000webhostapp.com/sendsms.php";
     public static final String REGISTER_REQUEST_URL = "https://akhilendragadde17.000webhostapp.com/nRegister.php";
     public static final String LOGIN_REQUEST_URL = "https://akhilendragadde17.000webhostapp.com/nnLogin.php";
+    public static final String DATA_REQUEST_URL = "https://akhilendragadde17.000webhostapp.com/job_desc.php?id=";
 
     //Keys as defined in our $_POST['key'] in login.php & register.php
     public static final String KEY_NAME = "name";

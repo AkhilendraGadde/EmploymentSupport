@@ -19,11 +19,31 @@
         <include layout="@layout/activity_search_job_srchtoolbar"
             android:visibility="gone"/>
 
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/tabs"
             android:layout_below="@+id/toolbar"
-            android:id="@+id/fragment_container">
+            android:orientation="vertical">
+                <com.charolia.gadde.ess.Activity.SearchViewPager
+                    android:id="@+id/view_pager"
+                    android:layout_below="@+id/tab_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/tab_layout"
+                    android:id="@+id/fragment_container"/>
 
-        </FrameLayout>
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tab_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/colorPrimary"
+                    android:minHeight="?attr/actionBarSize"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+        </RelativeLayout>
+
+
 </RelativeLayout>

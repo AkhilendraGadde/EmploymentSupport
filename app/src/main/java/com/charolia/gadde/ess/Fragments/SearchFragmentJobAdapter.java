@@ -19,7 +19,7 @@ import java.util.List;
  * Created by Administrator on 3/5/2017.
  */
 
-class SearchFragmentJobAdapter extends RecyclerView.Adapter<SearchFragmentJobAdapter.ViewHolder> {
+public class SearchFragmentJobAdapter extends RecyclerView.Adapter<SearchFragmentJobAdapter.ViewHolder> {
 
     private Context context;
     private List<SearchFragmentJobData> job_data;
@@ -39,6 +39,7 @@ class SearchFragmentJobAdapter extends RecyclerView.Adapter<SearchFragmentJobAda
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
+        holder.imageView.setImageResource(R.drawable.ic_job);
         holder.description.setText(job_data.get(position).getJob_desc());
         holder.title.setText(job_data.get(position).getJob_title());
         // onclick

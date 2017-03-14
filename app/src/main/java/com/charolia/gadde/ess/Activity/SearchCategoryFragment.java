@@ -1,4 +1,4 @@
-package com.charolia.gadde.ess.Fragments;
+package com.charolia.gadde.ess.Activity;
 
 
 import android.content.Context;
@@ -23,6 +23,8 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.charolia.gadde.ess.Config;
+import com.charolia.gadde.ess.Fragments.SearchFragmentJobAdapter;
+import com.charolia.gadde.ess.Fragments.SearchFragmentJobData;
 import com.charolia.gadde.ess.R;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,41 +36,20 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SearchFragment extends Fragment {
+public class SearchCategoryFragment extends Fragment {
 
 
     private RecyclerView mRecyclerView;
     private SearchFragmentJobAdapter mJobAdapter;
     private List<SearchFragmentJobData> mDataList;
-    private SwipeRefreshLayout swipeRefreshLayout;
     public Context context;
-    String searchQuery;
 
     private RequestQueue requestQueue;
     //The request counter to send ?page=1, ?page=2  requests
     private int requestCount = 0;
 
-    public SearchFragment() {
+    public SearchCategoryFragment() {
         // Required empty public constructor
-    }
-
-    public void onSearch(String query){
-        searchQuery = query;
-        Log.d("Query From Activity",searchQuery);
-        List<SearchFragmentJobData> filteredList = new ArrayList<>();
-
-        for (int i = 0; i < mDataList.size(); i++) {
-
-            final String text = mDataList.get(i).getJob_title().toLowerCase();
-            if (text.contains(searchQuery)) {
-                filteredList.add(mDataList.get(i));
-            }
-        }
-        final LinearLayoutManager  mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL,false);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mJobAdapter = new SearchFragmentJobAdapter(getContext(),filteredList);
-        mRecyclerView.setAdapter(mJobAdapter);
-        mJobAdapter.notifyDataSetChanged();  // data set changed
     }
 
     @Override
@@ -93,26 +74,6 @@ public class SearchFragment extends Fragment {
         SnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(mRecyclerView);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout_recycler_view);
-        swipeRefreshLayout.setColorSchemeResources(R.color.google_blue, R.color.google_green, R.color.google_red, R.color.google_yellow);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
-                        //new SearchFragment();
-
-                        //getData();
-                        //mJobAdapter.notifyDataSetChanged();
-                    }
-                }, 5000);
-
-
-            }
-        });
-
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -125,8 +86,8 @@ public class SearchFragment extends Fragment {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 //if (isLastItemDisplaying(recyclerView)) {
-                    //Calling the method getdata again
-                   // getData(0);
+                //Calling the method getdata again
+                // getData(0);
                 //}
             }
         });
@@ -162,14 +123,12 @@ public class SearchFragment extends Fragment {
                         //Calling method parseData to parse the json response
                         parseData(response);
                         //Hiding the progressbar
-                        swipeRefreshLayout.setRefreshing(false);
                     }
                 },
 
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        swipeRefreshLayout.setRefreshing(false);
                         //progressBar.setVisibility(View.GONE);
                         //If an error occurs that means end of the list has reached
                         Toast.makeText(getActivity(), "no internet access!", Toast.LENGTH_SHORT).show();
@@ -204,22 +163,8 @@ public class SearchFragment extends Fragment {
         mJobAdapter.notifyDataSetChanged();
     }
 
-    private void refresh(){
-        swipeRefreshLayout.setRefreshing(true);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(false);
-                //getData(0);
-                //mJobAdapter.notifyDataSetChanged();
-            }
-        }, 5000);
-    }
-
     @Override
     public void onResume() {
-
-        refresh();
         super.onResume();
     }
 }

@@ -5,8 +5,13 @@ import android.animation.AnimatorListenerAdapter;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
@@ -16,10 +21,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.charolia.gadde.ess.Fragments.ForumFragment;
 import com.charolia.gadde.ess.Fragments.SearchFragment;
 import com.charolia.gadde.ess.R;
 import java.lang.reflect.Field;
@@ -30,6 +39,14 @@ public class SearchJobActivity extends AppCompatActivity {
     private Menu search_menu;
     private MenuItem item_search;
 
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+    private String[] pageTitle = {"Results", "Categories"};
+    private int[] tabIcons = {
+            R.drawable.ic_search_results,
+            R.drawable.ic_category
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,16 +55,83 @@ public class SearchJobActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setSearchtoolbar();
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        viewPager = (ViewPager)findViewById(R.id.view_pager);
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        for (int i = 0; i < 2; i++) {
+            //tabLayout.addTab(tabLayout.newTab().setText(pageTitle[i]));
+            tabLayout.addTab(tabLayout.newTab().setIcon(tabIcons[i]));
+            //tabLayout.getTabAt(i).setIcon(tabIcons[i]);
+        }
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
+        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        //change ViewPager page when tab selected
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+                newFrameDim(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        initFragment();
+    }
+
+    public void initFragment(){
         SearchFragment searchFragment = new SearchFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, searchFragment);
         fragmentTransaction.commit();
+        newFrameDim(0);
     }
 
+    public void newFrameDim(int flag) {
+        FrameLayout mframeLayout = (FrameLayout) findViewById(R.id.fragment_container);
+        if(flag == 0)   {
+           // mframeLayout.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            mframeLayout.setVisibility(View.VISIBLE);
+        } else if(flag == 1)   {
+            //mframeLayout.setLayoutParams(new FrameLayout.LayoutParams(0, 0));
+            mframeLayout.setVisibility(View.GONE);
+        }
+    }
+
+    public class ViewPagerAdapter extends FragmentPagerAdapter {
+
+        public ViewPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            if (position ==0) {
+                return new NullFragment();
+            } else if (position == 1) {
+                return new CategoryFragment();
+            } else return null;
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+    }
     @Override
     public void onBackPressed() {
 
