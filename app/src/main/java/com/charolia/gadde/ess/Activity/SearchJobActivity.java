@@ -35,10 +35,8 @@ import java.lang.reflect.Field;
 
 public class SearchJobActivity extends AppCompatActivity {
 
-    private Toolbar toolbar, searchtollbar;
-    private Menu search_menu;
-    private MenuItem item_search;
-
+    private Toolbar toolbar;
+    private ViewPager viewPager;
     private TabLayout tabLayout;
     private String[] pageTitle = {"Results", "Categories"};
     private int[] tabIcons = {
@@ -53,23 +51,23 @@ public class SearchJobActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setSearchtoolbar();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        viewPager = (ViewPager)findViewById(R.id.view_pager);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         for (int i = 0; i < 2; i++) {
             tabLayout.addTab(tabLayout.newTab().setText(pageTitle[i]));
             //tabLayout.addTab(tabLayout.newTab().setIcon(tabIcons[i]));
         }
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getPosition() == 0)
-                    replaceFragment(new SearchFragment());
-                else
-                    replaceFragment(new CategoryFragment());
+                viewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
@@ -83,14 +81,27 @@ public class SearchJobActivity extends AppCompatActivity {
             }
         });
 
-        replaceFragment(new SearchFragment());
     }
 
-    private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
-        transaction.commit();
+    public class ViewPagerAdapter extends FragmentPagerAdapter {
+
+        public ViewPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            if (position == 0) {
+                return new SearchFragment();
+            } else if (position == 1) {
+                return new CategoryFragment();
+            } else return null;
+        }
+
+        @Override
+       public int getCount() {
+            return 2;
+        }
     }
 
     @Override
@@ -103,123 +114,6 @@ public class SearchJobActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search, menu);
         return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-
-            case R.id.action_search:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-                    circleReveal(R.id.searchtoolbar,1,true,true);
-                else
-                    searchtollbar.setVisibility(View.VISIBLE);
-
-                item_search.expandActionView();
-                return true;
-
-            default:
-                onBackPressed();
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    public void setSearchtoolbar()
-    {
-        searchtollbar = (Toolbar) findViewById(R.id.searchtoolbar);
-        if (searchtollbar != null) {
-            searchtollbar.inflateMenu(R.menu.menu_search_filter);
-            search_menu=searchtollbar.getMenu();
-
-            searchtollbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-                        circleReveal(R.id.searchtoolbar,1,true,false);
-                    else
-                        searchtollbar.setVisibility(View.GONE);
-                }
-            });
-
-            item_search = search_menu.findItem(R.id.action_filter_search);
-
-            MenuItemCompat.setOnActionExpandListener(item_search, new MenuItemCompat.OnActionExpandListener() {
-                @Override
-                public boolean onMenuItemActionCollapse(MenuItem item) {
-                    // Do something when collapsed
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        circleReveal(R.id.searchtoolbar,1,true,false);
-                    }
-                    else
-                        searchtollbar.setVisibility(View.GONE);
-                    return true;
-                }
-
-                @Override
-                public boolean onMenuItemActionExpand(MenuItem item) {
-                    // Do something when expanded
-                    return true;
-                }
-            });
-            initSearchView();
-        } else
-            Log.d("toolbar", "setSearchtollbar: NULL");
-    }
-
-    public void initSearchView()
-    {
-        final SearchView searchView =
-                (SearchView) search_menu.findItem(R.id.action_filter_search).getActionView();
-
-        // Enable/Disable Submit button in the keyboard
-
-        searchView.setSubmitButtonEnabled(false);
-
-        // Change search close button image
-
-        ImageView closeButton = (ImageView) searchView.findViewById(R.id.search_close_btn);
-        closeButton.setImageResource(R.drawable.ic_close);
-
-        // set hint and the text colors
-
-        EditText txtSearch = ((EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text));
-        txtSearch.setHint("Search..");
-        txtSearch.setHintTextColor(Color.DKGRAY);
-        txtSearch.setTextColor(getResources().getColor(R.color.colorPrimary));
-
-        // set the cursor
-
-        AutoCompleteTextView searchTextView = (AutoCompleteTextView) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        try {
-            Field mCursorDrawableRes = TextView.class.getDeclaredField("mCursorDrawableRes");
-            mCursorDrawableRes.setAccessible(true);
-            mCursorDrawableRes.set(searchTextView, R.drawable.search_cursor); //This sets the cursor resource ID to 0 or @null which will make it visible on white background
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                callSearch(query);
-                searchView.clearFocus();
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                callSearch(newText);
-                return true;
-            }
-
-            public void callSearch(String query) {
-                query = query.toLowerCase();
-                Log.i("query", "" + query);
-                SearchFragment fragment = (SearchFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-                fragment.onSearch(query);
-            }
-
-        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
