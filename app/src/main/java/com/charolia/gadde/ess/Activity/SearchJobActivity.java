@@ -60,8 +60,8 @@ public class SearchJobActivity extends AppCompatActivity {
         viewPager = (ViewPager)findViewById(R.id.view_pager);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         for (int i = 0; i < 2; i++) {
-            //tabLayout.addTab(tabLayout.newTab().setText(pageTitle[i]));
-            tabLayout.addTab(tabLayout.newTab().setIcon(tabIcons[i]));
+            tabLayout.addTab(tabLayout.newTab().setText(pageTitle[i]));
+            //tabLayout.addTab(tabLayout.newTab().setIcon(tabIcons[i]));
             //tabLayout.getTabAt(i).setIcon(tabIcons[i]);
         }
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
