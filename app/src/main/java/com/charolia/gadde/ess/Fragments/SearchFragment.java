@@ -59,12 +59,14 @@ public class SearchFragment extends Fragment {
 
         for (int i = 0; i < mDataList.size(); i++) {
 
-            final String text = mDataList.get(i).getJob_title().toLowerCase();
-            if (text.contains(searchQuery)) {
+            final String jTitle = mDataList.get(i).getJob_title().toLowerCase();
+            final String jCompany = mDataList.get(i).getJob_company().toLowerCase();
+            final String jLoc = mDataList.get(i).getJob_locationy().toLowerCase();
+            if (jTitle.contains(searchQuery) || jCompany.contains(searchQuery) || jLoc.contains(searchQuery) ) {
                 filteredList.add(mDataList.get(i));
             }
         }
-        final LinearLayoutManager  mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL,false);
+        final LinearLayoutManager  mLayoutManager = new LinearLayoutManager(getActivity());//, LinearLayoutManager.HORIZONTAL,false);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mJobAdapter = new SearchFragmentJobAdapter(getContext(),filteredList);
         mRecyclerView.setAdapter(mJobAdapter);
@@ -85,13 +87,13 @@ public class SearchFragment extends Fragment {
         getData();
         //load_data_from_server(0);
 
-        final LinearLayoutManager  mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL,false);
+        final LinearLayoutManager  mLayoutManager = new LinearLayoutManager(getActivity());//, LinearLayoutManager.HORIZONTAL,false);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mJobAdapter = new SearchFragmentJobAdapter(getContext(),mDataList);
         mRecyclerView.setAdapter(mJobAdapter);
 
-        SnapHelper snapHelper = new PagerSnapHelper();
-        snapHelper.attachToRecyclerView(mRecyclerView);
+        //SnapHelper snapHelper = new PagerSnapHelper();
+        //snapHelper.attachToRecyclerView(mRecyclerView);
 
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout_recycler_view);
         swipeRefreshLayout.setColorSchemeResources(R.color.google_blue, R.color.google_green, R.color.google_red, R.color.google_yellow);
@@ -155,7 +157,7 @@ public class SearchFragment extends Fragment {
     private JsonArrayRequest getDataFromServer(int requestCount) {
 
         //JsonArrayRequest of volley
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Config.DATA_REQUEST_URL + String.valueOf(requestCount),
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Config.JOBS_LIST_URL + String.valueOf(requestCount),
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -192,7 +194,7 @@ public class SearchFragment extends Fragment {
                 obj = array.getJSONObject(i);
 
                 //Adding data to the superhero object
-                SearchFragmentJobData data = new SearchFragmentJobData(obj.getInt("id"),obj.getString("Description"),obj.getString("Title"));
+                SearchFragmentJobData data = new SearchFragmentJobData(obj.getInt("ID"),obj.getString("jTitle"),obj.getString("jDesc"),obj.getString("jCompany"),obj.getString("jLoc"));
                 mDataList.add(data);
             } catch (JSONException e) {
                 e.printStackTrace();

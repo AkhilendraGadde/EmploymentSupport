@@ -3,16 +3,11 @@ package com.charolia.gadde.ess.Activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +19,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.charolia.gadde.ess.Config;
 import com.charolia.gadde.ess.Fragments.SearchFragmentJobAdapter;
-import com.charolia.gadde.ess.Fragments.SearchFragmentJobData;
 import com.charolia.gadde.ess.R;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,8 +34,8 @@ public class SearchCategoryFragment extends Fragment {
 
 
     private RecyclerView mRecyclerView;
-    private SearchFragmentJobAdapter mJobAdapter;
-    private List<SearchFragmentJobData> mDataList;
+    private SearchCategoryJobAdapter mJobAdapter;
+    private List<SearchCategoryJobData> mDataList;
     public Context context;
 
     private RequestQueue requestQueue;
@@ -68,7 +62,7 @@ public class SearchCategoryFragment extends Fragment {
 
         final LinearLayoutManager  mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL,false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mJobAdapter = new SearchFragmentJobAdapter(getContext(),mDataList);
+        mJobAdapter = new SearchCategoryJobAdapter(getContext(),mDataList);
         mRecyclerView.setAdapter(mJobAdapter);
 
         SnapHelper snapHelper = new PagerSnapHelper();
@@ -151,7 +145,7 @@ public class SearchCategoryFragment extends Fragment {
                 obj = array.getJSONObject(i);
 
                 //Adding data to the superhero object
-                SearchFragmentJobData data = new SearchFragmentJobData(obj.getInt("id"),obj.getString("Description"),obj.getString("Title"));
+                SearchCategoryJobData data = new SearchCategoryJobData(obj.getInt("id"),obj.getString("Description"),obj.getString("Title"));
                 mDataList.add(data);
             } catch (JSONException e) {
                 e.printStackTrace();

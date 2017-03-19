@@ -7,12 +7,14 @@ package com.charolia.gadde.ess.Fragments;
 public class SearchFragmentJobData {
 
     private int id;
-    private String job_desc,job_title;
+    private String job_desc,job_title,job_company,job_location;
 
-    public SearchFragmentJobData(int id, String job_desc, String job_title) {
+    public SearchFragmentJobData(int id, String job_title,String job_desc, String job_company, String job_location) {
         this.id = id;
         this.job_desc = job_desc;
         this.job_title = job_title;
+        this.job_company = job_company;
+        this.job_location = job_location;
     }
 
     public int getId() {
@@ -37,5 +39,21 @@ public class SearchFragmentJobData {
 
     public void setJob_title(String job_title) {
         this.job_title = job_title;
+    }
+
+    public String getJob_company() {
+        return job_company;
+    }
+
+    public void setJob_company(String job_company) {
+        this.job_company = job_company;
+    }
+
+    public String getJob_locationy() {
+        return job_location;
+    }
+
+    public void setJob_location(String job_location) {
+        this.job_location = job_location;
     }
 }

@@ -39,13 +39,15 @@ public class SearchFragmentJobAdapter extends RecyclerView.Adapter<SearchFragmen
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        holder.imageView.setImageResource(R.drawable.ic_job);
-        holder.description.setText(job_data.get(position).getJob_desc());
-        holder.title.setText(job_data.get(position).getJob_title());
+        holder.imageView.setImageResource(R.drawable.ic_job_loc_16);
+        holder.jCompany.setText(job_data.get(position).getJob_company());
+        holder.jTitle.setText(job_data.get(position).getJob_title());
+        holder.jLocation.setText(job_data.get(position).getJob_locationy());
         // onclick
-        holder.setItem(job_data.get(position).getJob_title());
-        holder.setnTitle(job_data.get(position).getJob_title());
-        holder.setDesc(job_data.get(position).getJob_desc());
+        holder.setjTitle(job_data.get(position).getJob_title());
+        holder.setjCompany(job_data.get(position).getJob_company());
+        holder.setjLocation(job_data.get(position).getJob_locationy());
+        holder.setjDesc(job_data.get(position).getJob_desc());
     }
 
     @Override
@@ -60,40 +62,43 @@ public class SearchFragmentJobAdapter extends RecyclerView.Adapter<SearchFragmen
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        private String mItem;// on Click
-        private String mTitle;// on Click
-        private String mDesc;// on Click
-        public TextView description;
-        public TextView title;
-        public ImageView imageView;
+        private String mTitle,mDesc,mComp,mLoc;
+
+        ImageView imageView;
+        TextView jTitle,jCompany,jLocation;
 
         public ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);// onclick
-            title = (TextView) itemView.findViewById(R.id.tvJobTitle);
-            description = (TextView) itemView.findViewById(R.id.tvJobDesc);
             imageView = (ImageView) itemView.findViewById(R.id.img_job);
+            jTitle = (TextView) itemView.findViewById(R.id.tvJobTitle);
+            jCompany = (TextView) itemView.findViewById(R.id.tvJobC_Name);
+            jLocation = (TextView) itemView.findViewById(R.id.tvJobLoc);
         }
         // onclick----------
-        public void setItem(String item) {
-            mItem = item;
+        public void setjCompany(String item) {
+            mComp = item;
         }
 
-        public void setnTitle(String item) {
+        public void setjTitle(String item) {
             mTitle = item;
         }
 
-        public void setDesc(String item) {
+        public void setjDesc(String item) {
             mDesc = item;
+        }
+
+        public void setjLocation(String item) {
+            mLoc = item;
         }
         @Override
         public void onClick(View view) {
             Intent myIntent = new Intent(view.getContext(), SearchJobActivityExpanded.class);
             myIntent.putExtra("title", mTitle);
             myIntent.putExtra("description", mDesc);
+            myIntent.putExtra("company", mComp);
+            myIntent.putExtra("location", mLoc);
             context.startActivity(myIntent);
-            //Snackbar.make(view, "Selected Job : "+getAdapterPosition() + " " +mItem, Snackbar.LENGTH_LONG).show();
         }
-        // -----------onclick
     }
 }
