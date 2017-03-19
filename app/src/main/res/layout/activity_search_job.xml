@@ -25,17 +25,6 @@
             android:id="@+id/tabs"
             android:layout_below="@+id/toolbar"
             android:orientation="vertical">
-                <com.charolia.gadde.ess.Activity.SearchViewPager
-                    android:id="@+id/view_pager"
-                    android:layout_below="@+id/tab_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/tab_layout"
-                    android:id="@+id/fragment_container"/>
-
                 <android.support.design.widget.TabLayout
                     android:id="@+id/tab_layout"
                     android:layout_width="match_parent"
@@ -43,6 +32,11 @@
                     android:background="@color/colorPrimary"
                     android:minHeight="?attr/actionBarSize"
                     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/tab_layout"
+                    android:id="@+id/fragment_container"/>
         </RelativeLayout>
 
 

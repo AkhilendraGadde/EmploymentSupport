@@ -9,6 +9,8 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -38,7 +40,7 @@ public class CategoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_category, container, false);
-
+        setHasOptionsMenu(true);
         RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_job_cat);
         mRecyclerView.setHasFixedSize(true);
         final LinearLayoutManager  mLayoutManager = new LinearLayoutManager(getActivity());
@@ -48,6 +50,12 @@ public class CategoryFragment extends Fragment {
         mRecyclerView.setAdapter(mCategoryViewAdapter);
 
         return view;
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem item = menu.findItem(R.id.action_search);
+        item.setVisible(false);
     }
 
     private void initializeData(){

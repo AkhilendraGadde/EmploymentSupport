@@ -39,7 +39,6 @@ public class SearchJobActivity extends AppCompatActivity {
     private Menu search_menu;
     private MenuItem item_search;
 
-    private ViewPager viewPager;
     private TabLayout tabLayout;
     private String[] pageTitle = {"Results", "Categories"};
     private int[] tabIcons = {
@@ -57,26 +56,20 @@ public class SearchJobActivity extends AppCompatActivity {
         setSearchtoolbar();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        viewPager = (ViewPager)findViewById(R.id.view_pager);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         for (int i = 0; i < 2; i++) {
             tabLayout.addTab(tabLayout.newTab().setText(pageTitle[i]));
             //tabLayout.addTab(tabLayout.newTab().setIcon(tabIcons[i]));
-            //tabLayout.getTabAt(i).setIcon(tabIcons[i]);
         }
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(pagerAdapter);
-
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
-        //change ViewPager page when tab selected
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-                newFrameDim(tab.getPosition());
+                if (tab.getPosition() == 0)
+                    replaceFragment(new SearchFragment());
+                else
+                    replaceFragment(new CategoryFragment());
             }
 
             @Override
@@ -90,48 +83,16 @@ public class SearchJobActivity extends AppCompatActivity {
             }
         });
 
-        initFragment();
+        replaceFragment(new SearchFragment());
     }
 
-    public void initFragment(){
-        SearchFragment searchFragment = new SearchFragment();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, searchFragment);
-        fragmentTransaction.commit();
-        newFrameDim(0);
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.commit();
     }
 
-    public void newFrameDim(int flag) {
-        FrameLayout mframeLayout = (FrameLayout) findViewById(R.id.fragment_container);
-        if(flag == 0)   {
-           // mframeLayout.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            mframeLayout.setVisibility(View.VISIBLE);
-        } else if(flag == 1)   {
-            //mframeLayout.setLayoutParams(new FrameLayout.LayoutParams(0, 0));
-            mframeLayout.setVisibility(View.GONE);
-        }
-    }
-
-    public class ViewPagerAdapter extends FragmentPagerAdapter {
-
-        public ViewPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            if (position ==0) {
-                return new NullFragment();
-            } else if (position == 1) {
-                return new CategoryFragment();
-            } else return null;
-        }
-
-        @Override
-        public int getCount() {
-            return 2;
-        }
-    }
     @Override
     public void onBackPressed() {
 
@@ -252,7 +213,6 @@ public class SearchJobActivity extends AppCompatActivity {
             }
 
             public void callSearch(String query) {
-
                 query = query.toLowerCase();
                 Log.i("query", "" + query);
                 SearchFragment fragment = (SearchFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);

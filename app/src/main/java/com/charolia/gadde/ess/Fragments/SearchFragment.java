@@ -133,6 +133,8 @@ public class SearchFragment extends Fragment {
             }
         });
 
+
+        ///////////////// ---- Implementing Search here ----- //////////////////
         return view;
     }
 
