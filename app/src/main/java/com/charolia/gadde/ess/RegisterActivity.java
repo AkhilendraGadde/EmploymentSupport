@@ -10,7 +10,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,7 +38,7 @@ import java.util.Random;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    String name,username,password,email,phone,dob,location,gender;
+    String name,username,password,email,phone,dob,location,gender,otp;
     String type;
     EditText etName,etUsername,etPassword,etrPassword,etEmail,etPhone,etDOB,etLocation;
     ImageView ivDate;
@@ -48,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
     Spinner spGender;
     RadioGroup rg;
     RadioButton rb;
-    int rButtonId = 0,type_id = 0,otp_verified = 0;
+    int rButtonId = 0;
     Calendar myCalendar = Calendar.getInstance();
 
     @Override
@@ -92,11 +91,9 @@ public class RegisterActivity extends AppCompatActivity {
         bRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Name :",String.valueOf(type_id));
                 validateUser();
                 if(isValidUser) {
                     confirmOtp();
-                   // registerUser();
                 }
             }
         });
@@ -115,11 +112,9 @@ public class RegisterActivity extends AppCompatActivity {
         Snackbar.make(view, "Registering as : "+rb.getText().toString(), Snackbar.LENGTH_SHORT).show();
 
         if(rb.getText().toString().equals("Job Seeker")){
-            type = "Job Seeker";
-            type_id = 1;
+            type = rb.getText().toString();
         }else if(rb.getText().toString().equals("Recruiter")){
-            type = "Recruiter";
-            type_id = 2;
+            type = rb.getText().toString();
         }
     }
 
@@ -322,7 +317,7 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
     }
 
-    private void registerUser(String otp,int otp_verified){
+    private void registerUser(String otp){
         final ProgressDialog loading = ProgressDialog.show(RegisterActivity.this, "Registering", "Please wait...", false, false);
         name = etName.getText().toString();
         username = etUsername.getText().toString();
@@ -343,7 +338,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                     if(success) {
                         loading.dismiss();
-                        //confirmOtp();
                         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                         RegisterActivity.this.startActivity(intent);
                         RegisterActivity.this.finish();
@@ -363,7 +357,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         };
 
-        RegisterRequest regReq = new RegisterRequest(name, username, password, email, gender, phone, dob, location, type, type_id, otp, otp_verified, responseListener);
+        RegisterRequest regReq = new RegisterRequest(name, username, password, email, gender, phone, dob, location, type, otp, responseListener);
         RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
         queue.add(regReq);
 
@@ -373,7 +367,14 @@ public class RegisterActivity extends AppCompatActivity {
         final Context mContext = this;
         phone = etPhone.getText().toString();
         Random r = new Random(System.currentTimeMillis());
-        final String otp = String.valueOf((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
+        otp = String.valueOf((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
+
+        int val = Integer.parseInt(otp);
+        if(type.equals("Job Seeker"))
+            val = val * 10 + 1;
+        else
+            val = val * 10 + 2;
+        otp = Integer.toString(val);
 
         RequestOtp req;
         req = new RequestOtp(phone, otp, getApplicationContext());
@@ -393,9 +394,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String OTP = input.getText().toString();
                 if (OTP.equals(otp)) {
                     Toast.makeText(getApplicationContext(), "Phone number verification successfull.", Toast.LENGTH_LONG).show();
-                    //putOTPinDB(OTP);
-                    otp_verified = 1;
-                    registerUser(OTP,otp_verified);
+                    registerUser(OTP);
                 } else {
 
                     Toast.makeText(getApplicationContext(), "Incorrect OTP", Toast.LENGTH_LONG).show();

@@ -49,7 +49,7 @@ public class SearchFragmentJobData {
         this.job_company = job_company;
     }
 
-    public String getJob_locationy() {
+    public String getJob_location() {
         return job_location;
     }
 

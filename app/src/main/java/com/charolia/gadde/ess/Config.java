@@ -6,7 +6,7 @@ package com.charolia.gadde.ess;
 
 public class Config {
     public static final String OTP_URL = "https://akhilendragadde17.000webhostapp.com/sendsms.php";
-    public static final String REGISTER_REQUEST_URL = "https://akhilendragadde17.000webhostapp.com/nRegister.php";
+    public static final String REGISTER_REQUEST_URL = "https://akhilendragadde17.000webhostapp.com/nnRegister.php";
     public static final String LOGIN_REQUEST_URL = "https://akhilendragadde17.000webhostapp.com/nnLogin.php";
     public static final String DATA_REQUEST_URL = "https://akhilendragadde17.000webhostapp.com/job_desc.php?id=";
     public static final String JOBS_LIST_URL = "https://akhilendragadde17.000webhostapp.com/jobs.php?id=";
@@ -18,11 +18,9 @@ public class Config {
     public static final String KEY_TYPE = "type";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "password";
-    public static final String KEY_TYPE_ID = "type_id";
     public static final String KEY_PHONE = "phone";
     public static final String KEY_GENDER = "gender";
-    public static final String KEY_OTP = "otp";
-    public static final String KEY_OTP_VERIFY = "otp_verified";
+    public static final String KEY_UID = "user_id";
     public static final String KEY_DOB = "dob";
     public static final String KEY_LOC = "location";
 
@@ -39,7 +37,7 @@ public class Config {
     public static final String USERNAME_SHARED_PREF = "username";
     public static final String TYPE_SHARED_PREF = "type";
     public static final String PASSWORD_SHARED_PREF = "password";
-    //public static final String TYPEID_SHARED_PREF = "type_id";
+    public static final String UID_SHARED_PREF = "user_id";
     public static final String PHONE_SHARED_PREF = "phone";
 
     //We will use this to store the boolean in sharedpreference to track user is loggedin or not

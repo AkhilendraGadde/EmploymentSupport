@@ -2,8 +2,12 @@ package com.charolia.gadde.ess.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,12 +46,16 @@ public class SearchFragmentJobAdapter extends RecyclerView.Adapter<SearchFragmen
         holder.imageView.setImageResource(R.drawable.ic_job_loc_16);
         holder.jCompany.setText(job_data.get(position).getJob_company());
         holder.jTitle.setText(job_data.get(position).getJob_title());
-        holder.jLocation.setText(job_data.get(position).getJob_locationy());
+        holder.jLocation.setText(job_data.get(position).getJob_location());
         // onclick
         holder.setjTitle(job_data.get(position).getJob_title());
         holder.setjCompany(job_data.get(position).getJob_company());
-        holder.setjLocation(job_data.get(position).getJob_locationy());
+        holder.setjLocation(job_data.get(position).getJob_location());
         holder.setjDesc(job_data.get(position).getJob_desc());
+
+        String jTitle = job_data.get(position).getJob_title();
+        String jCompany = job_data.get(position).getJob_company();
+        String jLocation = job_data.get(position).getJob_location();
     }
 
     @Override

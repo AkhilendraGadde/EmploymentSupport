@@ -14,7 +14,7 @@ public class RegisterRequest extends StringRequest {
 
     private Map<String, String> params;
 
-    public RegisterRequest(String name, String username, String password, String email,String gender, String phone, String dob, String location, String type, int type_id, String otp, int otp_verified,  Response.Listener<String> listener) {
+    public RegisterRequest(String name, String username, String password, String email,String gender, String phone, String dob, String location, String type, String otp,  Response.Listener<String> listener) {
         super(Method.POST, Config.REGISTER_REQUEST_URL, listener, null);
         params = new HashMap<>();
         params.put(Config.KEY_NAME, name);
@@ -26,9 +26,7 @@ public class RegisterRequest extends StringRequest {
         params.put(Config.KEY_DOB, dob);
         params.put(Config.KEY_LOC, location);
         params.put(Config.KEY_TYPE, type);
-        params.put(Config.KEY_TYPE_ID, type_id + "");
-        params.put(Config.KEY_OTP, otp);
-        params.put(Config.KEY_OTP_VERIFY, otp_verified + "");
+        params.put(Config.KEY_UID, otp);
     }
 
     @Override

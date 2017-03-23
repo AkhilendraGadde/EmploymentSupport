@@ -73,7 +73,7 @@ public class SearchFragment extends Fragment {
 
             final String jTitle = mDataList.get(i).getJob_title().toLowerCase();
             final String jCompany = mDataList.get(i).getJob_company().toLowerCase();
-            final String jLoc = mDataList.get(i).getJob_locationy().toLowerCase();
+            final String jLoc = mDataList.get(i).getJob_location().toLowerCase();
             if (jTitle.contains(query) || jCompany.contains(query) || jLoc.contains(query) ) {
                 filteredList.add(mDataList.get(i));
             }

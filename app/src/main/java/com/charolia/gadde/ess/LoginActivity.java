@@ -32,21 +32,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_collapsetoolbar);
 
-       /* CollapsingToolbarLayout collapsingToolbarLayout;
-
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
-            ActionBar actionBar = getSupportActionBar();
-            actionBar.setDisplayHomeAsUpEnabled(false);
-
-            collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar);
-            collapsingToolbarLayout.setTitle(getResources().getString(R.string.user_name));
-            //dynamicToolbarColor();
-            //toolbarTextAppernce();
-
-        */
-
-
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
         bLogin = (Button) findViewById(R.id.bLogin);
@@ -109,10 +94,11 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (success) {
                         // Fetching user details from server......
+                        String user_id = jsonResponse.getString("user_id");
                         String name = jsonResponse.getString("name");
                         String username = jsonResponse.getString("username");
                         String email = jsonResponse.getString("email");
-                        //String password = jsonResponse.getString("password");
+                        String password = jsonResponse.getString("password");
                         String phone = jsonResponse.getString("phone");
                         String type = jsonResponse.getString("type");
 
@@ -124,9 +110,10 @@ public class LoginActivity extends AppCompatActivity {
 
                         //Adding values to editor
                         editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, true);
+                        editor.putString(Config.UID_SHARED_PREF, name);
                         editor.putString(Config.NAME_SHARED_PREF, name);
                         editor.putString(Config.USERNAME_SHARED_PREF, username);
-                        //editor.putString(Config.PASSWORD_SHARED_PREF, password);
+                        editor.putString(Config.PASSWORD_SHARED_PREF, password);
                         editor.putString(Config.EMAIL_SHARED_PREF, email);
                         editor.putString(Config.PHONE_SHARED_PREF, phone);
                         editor.putString(Config.TYPE_SHARED_PREF, type);

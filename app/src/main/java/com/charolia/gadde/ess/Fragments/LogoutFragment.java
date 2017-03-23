@@ -50,10 +50,6 @@ public class LogoutFragment extends Fragment {
             public void onClick(View v) {
 
                 ((UserActivity )  getActivity()).refreshContent();
-               /* HomeFragment home = new HomeFragment();
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, home);
-                fragmentTransaction.commit();*/
                 ((UserActivity )  getActivity()).ShowActionBar();
             }
         });
@@ -72,6 +68,8 @@ public class LogoutFragment extends Fragment {
 
             //Putting blank value to prefs
             editor.putString(Config.NAME_SHARED_PREF, "");
+            editor.putString(Config.PASSWORD_SHARED_PREF, "");
+            editor.putString(Config.UID_SHARED_PREF, "");
             editor.putString(Config.USERNAME_SHARED_PREF, "");
             editor.putString(Config.EMAIL_SHARED_PREF, "");
             editor.putString(Config.PHONE_SHARED_PREF, "");
