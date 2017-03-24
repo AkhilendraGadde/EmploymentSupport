@@ -6,4 +6,5 @@
     <dimen name="abc_action_button_min_width_material">46dp</dimen>
     <dimen name="abc_action_button_min_width_overflow_material">34dp</dimen>
     <dimen name="padding">4dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

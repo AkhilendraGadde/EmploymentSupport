@@ -10,6 +10,7 @@ public class Config {
     public static final String LOGIN_REQUEST_URL = "https://akhilendragadde17.000webhostapp.com/nnLogin.php";
     public static final String DATA_REQUEST_URL = "https://akhilendragadde17.000webhostapp.com/job_desc.php?id=";
     public static final String JOBS_LIST_URL = "https://akhilendragadde17.000webhostapp.com/jobs.php?id=";
+    public static final String QUERY_URL = "https://akhilendragadde17.000webhostapp.com/test/forum_query.php";
 
 
     //Keys as defined in our $_POST['key'] in login.php & register.php
@@ -23,6 +24,7 @@ public class Config {
     public static final String KEY_UID = "user_id";
     public static final String KEY_DOB = "dob";
     public static final String KEY_LOC = "location";
+    public static final String KEY_QUERY = "query";
 
     //If server response is equal to this that means login is successful
     public static final String LOGIN_SUCCESS = "success";
