@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -333,6 +334,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
+                    Log.d("Register Response",response);
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean success = jsonResponse.getBoolean("success");
 
@@ -376,6 +378,8 @@ public class RegisterActivity extends AppCompatActivity {
             val = val * 10 + 2;
         otp = Integer.toString(val);
 
+        Log.d("OTP",otp);
+        Toast.makeText(getApplicationContext(),"Your otp is :" + otp,Toast.LENGTH_LONG).show();
         RequestOtp req;
         req = new RequestOtp(phone, otp, getApplicationContext());
         req.execute((Void) null);

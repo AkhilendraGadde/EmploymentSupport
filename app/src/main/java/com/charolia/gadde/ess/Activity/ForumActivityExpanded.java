@@ -100,8 +100,12 @@ public class ForumActivityExpanded extends SwipeBackActivity {
     @Override
     public void onBackPressed() {
 
-        fab.setVisibility(View.VISIBLE);
-        cardView.setVisibility(View.GONE);
+        if (fab.getVisibility() == View.VISIBLE) {
+            super.onBackPressed();
+        }else   {
+            fab.setVisibility(View.VISIBLE);
+            cardView.setVisibility(View.GONE);
+        }
         //super.onBackPressed();
     }
 }
