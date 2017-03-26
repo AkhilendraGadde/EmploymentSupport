@@ -12,6 +12,7 @@ public class Config {
     public static final String JOBS_LIST_URL = "https://akhilendragadde17.000webhostapp.com/jobs.php?id=";
     public static final String FORUM_QLIST_URL = "https://akhilendragadde17.000webhostapp.com/test/forum_qlist.php?id=";
     public static final String QUERY_URL = "https://akhilendragadde17.000webhostapp.com/test/forum_query.php";
+    public static final String REPLY_URL = "https://akhilendragadde17.000webhostapp.com/test/forumReply_query.php";
 
 
     //Keys as defined in our $_POST['key'] in login.php & register.php
@@ -26,6 +27,7 @@ public class Config {
     public static final String KEY_DOB = "dob";
     public static final String KEY_LOC = "location";
     public static final String KEY_QUERY = "query";
+    public static final String KEY_REPLY = "reply";
 
     //If server response is equal to this that means login is successful
     public static final String LOGIN_SUCCESS = "success";

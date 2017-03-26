@@ -303,22 +303,9 @@ public class ForumFragment extends Fragment {
         mAdapter.notifyDataSetChanged();
     }
 
-
-
-    private void refresh(){
-        swipeRefreshLayout.setRefreshing(true);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        }, 5000);
-    }
-
     @Override
     public void onResume() {
         super.onResume();
-        refresh();
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         ActionBar actionBar = activity.getSupportActionBar();
         actionBar.setTitle("Community Forum");

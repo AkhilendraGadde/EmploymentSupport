@@ -15,11 +15,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/white"
             android:orientation="vertical">
-
-
-
-
 
             <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="vertical" android:layout_width="match_parent"
@@ -31,132 +28,162 @@
             </android.support.v7.widget.Toolbar>
 
             <LinearLayout
-                android:layout_below="@+id/nav_action"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:padding="8dp"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:id="@+id/rQuery"
-                    android:layout_height="wrap_content">
-
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/card_view_query"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:background="?attr/selectableItemBackground"
-                        android:foreground="?attr/selectableItemBackground"
-                        card_view:cardBackgroundColor="@color/white"
-                        card_view:cardCornerRadius="1dp"
-                        card_view:cardElevation="5dp"
-                        card_view:contentPadding="10dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <TextView
-                                    android:id="@+id/tvQuery"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Query"
-                                    android:textAllCaps="true"
-                                    android:textSize="18sp"
-                                    android:layout_centerVertical="true"
-                                    android:paddingBottom="2dp"
-                                    android:layout_marginStart="4dp"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_toEndOf="@+id/img_info" />
-
-                            <TextView
-                                android:id="@+id/tvPost"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingBottom="2dp"
-                                android:layout_marginStart="4dp"
-                                android:layout_marginEnd="10dp"
-                                android:text="Posted by"
-                                android:layout_below="@+id/tvQuery"
-                                android:layout_alignParentEnd="true"
-                                android:textSize="14sp" />
-                        </RelativeLayout>
-
-                    </android.support.v7.widget.CardView>
-                </LinearLayout>
+                android:id="@+id/rQuery"
+                android:layout_below="@+id/nav_action"
+                android:layout_height="wrap_content">
 
                 <android.support.v7.widget.CardView
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/card_reply"
+                    android:id="@+id/card_view_query"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    card_view:cardCornerRadius="1dp"
-                    card_view:contentPadding="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:foreground="?attr/selectableItemBackground"
                     card_view:cardBackgroundColor="@color/white"
-                    card_view:cardElevation="5dp">
+                    card_view:cardCornerRadius="1dp"
+                    card_view:cardElevation="5dp"
+                    card_view:contentPadding="10dp">
 
-                    <LinearLayout
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        android:orientation="vertical"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:text="Give your suggestions"
+                            android:id="@+id/tvQuery"
                             android:layout_width="wrap_content"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="16sp"
-                            android:layout_height="0dp"
-                            android:textAlignment="center"
-                            android:id="@+id/tvSuggestion"
-                            android:layout_weight="1" />
-
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp">
-
-                            <EditText
-                                android:id="@+id/queryReply"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_alignParentStart="true"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginTop="13dp"
-                                android:ems="10"
-                                android:hint="Enter your reply"
-                                android:inputType="none" />
-                        </android.support.design.widget.TextInputLayout>
-
-                        <Button
-                            android:text="Submit"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/queryReplySubmit"
-                            android:background="@color/colorPrimary"
-                            android:layout_marginTop="10dp"
-                            android:paddingBottom="1dp"
-                            android:paddingLeft="15dp"
-                            android:paddingRight="15dp"
-                            android:paddingTop="1dp"
+                            android:text="Query"
+                            android:textStyle="bold"
                             android:textAllCaps="true"
-                            android:textColor="@android:color/white"
-                            android:textSize="13sp"
-                            android:layout_gravity="center"/>
-                    </LinearLayout>
+                            android:textSize="18sp"
+                            android:paddingBottom="2dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginTop="14dp" />
+
+                        <TextView
+                            android:id="@+id/tvPostRtext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="5dp"
+                            android:text="\nPosted by"
+                            android:layout_below="@+id/tvQuery"
+                            android:layout_alignParentEnd="true"
+                            android:textColor="@color/job_loc"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tvPostR"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="5dp"
+                            android:textColor="@color/job_loc"
+                            android:text="Reply"
+                            android:layout_below="@+id/tvPostRtext"
+                            android:layout_alignParentEnd="true"
+                            android:textSize="14sp" />
+                    </RelativeLayout>
+
                 </android.support.v7.widget.CardView>
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvContentInfoQR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="199dp"
+                android:gravity="center"
+                android:text="No replies found to this query. Start by giving one?" />
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_reply"
+                android:layout_below="@+id/rQuery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                card_view:cardCornerRadius="1dp"
+                card_view:contentPadding="10dp"
+                card_view:cardBackgroundColor="@color/white"
+                card_view:cardElevation="5dp">
+
+                <LinearLayout
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:text="Give your suggestions"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp"
+                        android:layout_height="0dp"
+                        android:textAlignment="center"
+                        android:id="@+id/tvSuggestion"
+                        android:layout_weight="1" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <EditText
+                            android:id="@+id/queryReply"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="13dp"
+                            android:ems="10"
+                            android:hint="Enter your reply"
+                            android:inputType="none" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <Button
+                        android:text="Submit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/queryReplySubmit"
+                        android:background="@color/colorPrimary"
+                        android:layout_marginTop="10dp"
+                        android:paddingBottom="1dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:paddingTop="1dp"
+                        android:textAllCaps="true"
+                        android:textColor="@android:color/white"
+                        android:textSize="13sp"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_qReply"
+                android:layout_below="@+id/rQuery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:cacheColorHint="@android:color/transparent"
+                card_view:cardCornerRadius="1dp"
+                card_view:contentPadding="10dp"
+                card_view:cardBackgroundColor="@color/white"
+                card_view:cardElevation="5dp"
+                android:scrollbars="vertical" />
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab_forum_add_reply"
@@ -173,7 +200,6 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="45dp" />
         </RelativeLayout>
-
 
     </com.liuguangqiang.swipeback.SwipeBackLayout>
 </RelativeLayout>
