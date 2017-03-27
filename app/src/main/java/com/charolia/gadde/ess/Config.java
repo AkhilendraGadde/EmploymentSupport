@@ -12,7 +12,8 @@ public class Config {
     public static final String JOBS_LIST_URL = "https://akhilendragadde17.000webhostapp.com/jobs.php?id=";
     public static final String FORUM_QLIST_URL = "https://akhilendragadde17.000webhostapp.com/test/forum_qlist.php?id=";
     public static final String QUERY_URL = "https://akhilendragadde17.000webhostapp.com/test/forum_query.php";
-    public static final String REPLY_URL = "https://akhilendragadde17.000webhostapp.com/test/forumReply_query.php";
+    public static final String FORUM_RLIST_URL = "https://akhilendragadde17.000webhostapp.com/test/forum_rlist.php?query=";
+    public static final String REPLY_URL = "https://akhilendragadde17.000webhostapp.com/test/forum_reply.php";
 
 
     //Keys as defined in our $_POST['key'] in login.php & register.php
