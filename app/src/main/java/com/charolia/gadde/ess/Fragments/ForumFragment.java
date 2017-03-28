@@ -6,11 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +15,6 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,8 +22,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +35,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.charolia.gadde.ess.Config;
 import com.charolia.gadde.ess.R;
-import com.charolia.gadde.ess.util.OnSwipeTouchListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,7 +56,6 @@ public class ForumFragment extends Fragment {
     private List<ForumFragmentData> mDataList;
     private RequestQueue requestQueue;
 
-    private SwipeRefreshLayout swipeRefreshLayout;
     private CardView cardView;
     private TextView contentInfo;
     private Button bSubmit;
@@ -91,7 +83,7 @@ public class ForumFragment extends Fragment {
         mDataList = new ArrayList<>();
 
         requestQueue = Volley.newRequestQueue(getActivity());
-        getData();
+        //getData();
 
         final LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -138,20 +130,6 @@ public class ForumFragment extends Fragment {
                 cardView.setVisibility(View.VISIBLE);
             }
         });
-
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout_recycler_view);
-        swipeRefreshLayout.setColorSchemeResources(R.color.google_blue, R.color.google_green, R.color.google_red, R.color.google_yellow);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-                }, 5000);
-            }
-        });
     }
 
     private void initCheck() {
@@ -167,6 +145,7 @@ public class ForumFragment extends Fragment {
                             mRecyclerView.setVisibility(View.VISIBLE);
                             contentInfo.setVisibility(View.GONE);
                             visible = 1; // setRecyclerView
+                            getData();
                         } else {
                             loading.dismiss();
                             mRecyclerView.setVisibility(View.GONE);
@@ -268,20 +247,20 @@ public class ForumFragment extends Fragment {
     }
 
     private JsonArrayRequest getDataFromServer(int requestCount) {
-
+        final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching queries", "Please wait...", false, false);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Config.FORUM_QLIST_URL + String.valueOf(requestCount),
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        loading.dismiss();
                         parseData(response);
-                        swipeRefreshLayout.setRefreshing(false);
                     }
                 },
 
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        swipeRefreshLayout.setRefreshing(false);
+                        loading.dismiss();
                         Toast.makeText(getActivity(), "no internet access!", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -320,6 +299,9 @@ public class ForumFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+                    if(fab.getVisibility() == View.VISIBLE){
+                        (getActivity()).onBackPressed();
+                    }
                     if(visible == 1)    {
                         mRecyclerView.setVisibility(View.VISIBLE);
                         contentInfo.setVisibility(View.GONE);

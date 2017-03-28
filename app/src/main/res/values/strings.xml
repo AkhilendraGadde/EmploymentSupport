@@ -52,4 +52,6 @@
         <item>BoT</item>
         <item>JavaScripting</item>
     </string-array>
+
+    <string name="main_not_found_email">No email app found</string>
 </resources>

@@ -14,7 +14,12 @@ public class Config {
     public static final String QUERY_URL = "https://akhilendragadde17.000webhostapp.com/test/forum_query.php";
     public static final String FORUM_RLIST_URL = "https://akhilendragadde17.000webhostapp.com/test/forum_rlist.php?query=";
     public static final String REPLY_URL = "https://akhilendragadde17.000webhostapp.com/test/forum_reply.php";
+    public static final String FEEDBACK_LIST_URL = "https://akhilendragadde17.000webhostapp.com/test/feedback_qlist.php?id=";
+    public static final String FEEDBACK_URL = "https://akhilendragadde17.000webhostapp.com/test/feedback_query.php";
 
+    // Support Mail
+    public static final String CONTACT_EMAIL = "mailto:empsupess1725@gmail.com";
+    public static final String CONTACT_SUBJECT = "Feedback:Employment Support App";
 
     //Keys as defined in our $_POST['key'] in login.php & register.php
     public static final String KEY_NAME = "name";

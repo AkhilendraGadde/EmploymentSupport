@@ -37,7 +37,7 @@ public class ForumActivityExpandedAdapter extends RecyclerView.Adapter<ForumActi
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         holder.fReply.setText(data.get(position).getForum_reply());
-        holder.fPost.setText("Posted by " + data.get(position).getForum_post());
+        holder.fPost.setText(" - " + data.get(position).getForum_post());
         // onclick
         holder.setfReply(data.get(position).getForum_reply());
         holder.setfPost(data.get(position).getForum_post());

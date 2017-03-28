@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,7 +14,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.charolia.gadde.ess.Activity.SearchJobActivity;
 import com.charolia.gadde.ess.Fragments.AboutFragment;
@@ -31,10 +31,7 @@ import com.charolia.gadde.ess.Fragments.HomeFragment;
 import com.charolia.gadde.ess.Fragments.JobAlertFragment;
 import com.charolia.gadde.ess.Fragments.LogoutFragment;
 import com.charolia.gadde.ess.Fragments.ResumeFragment;
-import com.charolia.gadde.ess.Fragments.SearchFragment;
-import com.charolia.gadde.ess.Fragments.SupportFragment;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -114,13 +111,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         } else {
 
             Fragment f = this.getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-            if (f instanceof HomeFragment) {
-                // do something with f
-
-            /*if(ActionBarTitle.equals("Employment Support"))
-                moveTaskToBack(true);
-            else
-                super.onBackPressed();*/
+            if (f instanceof HomeFragment || f instanceof ForumFragment) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage("Are you sure , you want to exit?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -133,7 +124,6 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
                         .setCancelable(false)
                         .create()
                         .show();
-                //moveTaskToBack(true);
             }else
                 super.onBackPressed();
 
@@ -208,13 +198,21 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_feedback:
+
                 fragment = new FeedbackFragment();
                 ActionBarTitle = "Feedback";
                 break;
 
             case R.id.nav_sup:
-                fragment = new SupportFragment();
-                ActionBarTitle = "Contact Support";
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse(Config.CONTACT_EMAIL));
+                intent.putExtra(Intent.EXTRA_SUBJECT, Config.CONTACT_SUBJECT);
+                try {
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Toast.makeText(UserActivity.this, getString(R.string.main_not_found_email), Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.nav_about:

@@ -2,6 +2,8 @@ package com.charolia.gadde.ess.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,9 +42,8 @@ public class ForumFragmentAdapter extends RecyclerView.Adapter<ForumFragmentAdap
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        holder.imageView.setImageResource(R.drawable.ic_info_black);
         holder.fQuery.setText(data.get(position).getForum_query());
-        holder.fPost.setText("Posted by " + data.get(position).getForum_post());
+        holder.fPost.setText(" - " + data.get(position).getForum_post());
         // onclick
         holder.setfQuery(data.get(position).getForum_query());
         holder.setfPost(data.get(position).getForum_post());
@@ -61,14 +62,15 @@ public class ForumFragmentAdapter extends RecyclerView.Adapter<ForumFragmentAdap
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private String mQuery,mPost;
-
-        ImageView imageView;
         TextView fQuery,fPost;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);// onclick
-            imageView = (ImageView) itemView.findViewById(R.id.img_info);
+            Fragment f = ((FragmentActivity)context).getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            if (f instanceof FeedbackFragment)
+                itemView.setOnClickListener(null);// onclickDisable
+            else
+                itemView.setOnClickListener(this);// onclick
             fQuery = (TextView) itemView.findViewById(R.id.tvQuery);
             fPost = (TextView) itemView.findViewById(R.id.tvPost);
         }
