@@ -2,19 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.charolia.gadde.ess.Activity.CategoryFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="12sp"
+        android:text="How do you want to search for jobs?"
+        android:textStyle="bold"
+
+        android:padding="20dp"
+        android:id="@+id/cat_desc"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_job_cat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:overScrollMode="never"
         android:cacheColorHint="@android:color/transparent"
-        card_view:cardCornerRadius="1dp"
-        card_view:contentPadding="10dp"
+        android:scrollbars="vertical"
         card_view:cardBackgroundColor="@color/white"
+        card_view:cardCornerRadius="1dp"
         card_view:cardElevation="5dp"
-        android:scrollbars="vertical" />
+        card_view:contentPadding="10dp" />
 
 </LinearLayout>

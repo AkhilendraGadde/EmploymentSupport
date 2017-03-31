@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -43,8 +44,12 @@ public class CategoryFragment extends Fragment {
         setHasOptionsMenu(true);
         RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_job_cat);
         mRecyclerView.setHasFixedSize(true);
-        final LinearLayoutManager  mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        //final LinearLayoutManager  mLayoutManager = new LinearLayoutManager(getActivity());
+        //mRecyclerView.setLayoutManager(mLayoutManager);
+        RecyclerView.LayoutManager layoutManager;
+        layoutManager = new GridLayoutManager(getActivity(), 3);
+        mRecyclerView.setLayoutManager(layoutManager);
+
         initializeData();
         mCategoryViewAdapter = new CategoryViewAdapter(getContext(),mCat_data);
         mRecyclerView.setAdapter(mCategoryViewAdapter);
@@ -104,7 +109,7 @@ class CategoryViewAdapter extends RecyclerView.Adapter<CategoryViewAdapter.ViewH
     public void onBindViewHolder(CategoryViewAdapter.ViewHolder holder, int position) {
 
         holder.cat_name.setText(mCategory.get(position).name);
-        holder.cat_desc.setText(mCategory.get(position).desc);
+        //holder.cat_desc.setText(mCategory.get(position).desc);
         holder.img.setImageResource(mCategory.get(position).photoId);
 
         //holder.setnTitle(mCategory.get(position).name);
