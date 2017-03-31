@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -45,6 +46,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -55,7 +58,6 @@ public class ForumFragment extends Fragment {
     private ForumFragmentAdapter mAdapter;
     private List<ForumFragmentData> mDataList;
     private RequestQueue requestQueue;
-
     private CardView cardView;
     private TextView contentInfo;
     private Button bSubmit;

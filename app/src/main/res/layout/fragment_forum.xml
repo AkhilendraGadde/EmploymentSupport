@@ -9,15 +9,15 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view_forum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:cacheColorHint="@android:color/transparent"
-            card_view:cardCornerRadius="1dp"
-            card_view:contentPadding="10dp"
-            card_view:cardBackgroundColor="@color/white"
-            card_view:cardElevation="5dp"
-            android:scrollbars="vertical" />
+        android:id="@+id/recycler_view_forum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@android:color/transparent"
+        card_view:cardCornerRadius="1dp"
+        card_view:contentPadding="10dp"
+        card_view:cardBackgroundColor="@color/white"
+        card_view:cardElevation="5dp"
+        android:scrollbars="vertical" />
 
     <TextView
         android:id="@+id/tvContentInfo"

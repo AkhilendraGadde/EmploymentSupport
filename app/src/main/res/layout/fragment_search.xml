@@ -7,10 +7,10 @@ xmlns:card_view="http://schemas.android.com/apk/res-auto"
 tools:context="com.charolia.gadde.ess.Fragments.SearchFragment"
 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/swipe_refresh_layout_recycler_view">
+        android:id="@+id/main_swipe">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view_srcjob"
@@ -24,6 +24,6 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior">
             card_view:cardElevation="5dp"
             android:scrollbars="vertical" />
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout>
 
 </LinearLayout>

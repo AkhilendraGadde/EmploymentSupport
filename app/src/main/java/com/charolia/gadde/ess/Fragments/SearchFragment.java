@@ -41,6 +41,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,7 +56,7 @@ public class SearchFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private SearchFragmentJobAdapter mJobAdapter;
     private List<SearchFragmentJobData> mDataList;
-    private SwipeRefreshLayout swipeRefreshLayout;
+    private WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
     public Context context;
 
     private RequestQueue requestQueue;
@@ -211,7 +213,7 @@ public class SearchFragment extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_srcjob);
         mDataList = new ArrayList<>();
         requestQueue = Volley.newRequestQueue(getActivity());
-        getData();
+        //getData();
 
         final LinearLayoutManager  mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -229,32 +231,33 @@ public class SearchFragment extends Fragment {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                //if (isLastItemDisplaying(recyclerView)) {
-                //Calling the method getdata again
-                // getData(0);
-                //}
+
             }
         });
 
         // <----  Refresh Layout ----> //
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout_recycler_view);
-        swipeRefreshLayout.setColorSchemeResources(R.color.google_blue, R.color.google_green, R.color.google_red, R.color.google_yellow);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
-                        //getData();
-                        //mJobAdapter.notifyDataSetChanged();
-                    }
-                }, 5000);
-
-
+        mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout) view.findViewById(R.id.main_swipe);
+        mWaveSwipeRefreshLayout.setColorSchemeColors(Color.WHITE, Color.WHITE);
+        mWaveSwipeRefreshLayout.setWaveColor(Color.argb(200,128,0,128));
+        mWaveSwipeRefreshLayout.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener() {
+            @Override public void onRefresh() {
+                // Do work to refresh the list here.
+                mDataList.clear();
+                getData();
+                //new Task().execute();
             }
         });
+
+        initRefreshLayout();
+
         return view;
+    }
+
+    private void initRefreshLayout(){
+
+        mWaveSwipeRefreshLayout.setRefreshing(true);
+        mDataList.clear();
+        getData();
     }
 
     private boolean isLastItemDisplaying(RecyclerView recyclerView) {
@@ -283,14 +286,14 @@ public class SearchFragment extends Fragment {
                         //Calling method parseData to parse the json response
                         parseData(response);
                         //Hiding the progressbar
-                        swipeRefreshLayout.setRefreshing(false);
+                        mWaveSwipeRefreshLayout.setRefreshing(false);
                     }
                 },
 
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        swipeRefreshLayout.setRefreshing(false);
+                        mWaveSwipeRefreshLayout.setRefreshing(false);
                         Toast.makeText(getActivity(), "no internet access!", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -313,11 +316,11 @@ public class SearchFragment extends Fragment {
     }
 
     private void refresh(){
-        swipeRefreshLayout.setRefreshing(true);
+        mWaveSwipeRefreshLayout.setRefreshing(false);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                swipeRefreshLayout.setRefreshing(false);
+                mWaveSwipeRefreshLayout.setRefreshing(false);
                 //getData(0);
                 //mJobAdapter.notifyDataSetChanged();
             }
@@ -327,7 +330,7 @@ public class SearchFragment extends Fragment {
     @Override
     public void onResume() {
 
-        refresh();
+        //refresh();
         super.onResume();
     }
 }

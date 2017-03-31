@@ -111,7 +111,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         } else {
 
             Fragment f = this.getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-            if (f instanceof HomeFragment || f instanceof ForumFragment) {
+            if (f instanceof HomeFragment ){//|| f instanceof ForumFragment) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage("Are you sure , you want to exit?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -125,7 +125,8 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
                         .create()
                         .show();
             }else
-                super.onBackPressed();
+                drawer.openDrawer(GravityCompat.START);
+                //super.onBackPressed();
 
         }
 
