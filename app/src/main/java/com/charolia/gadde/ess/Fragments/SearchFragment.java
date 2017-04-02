@@ -52,7 +52,7 @@ public class SearchFragment extends Fragment {
     private Toolbar searchtoolbar;
     private Menu search_menu;
     private MenuItem item_search;
-
+    private TextView resultView;
     private RecyclerView mRecyclerView;
     private SearchFragmentJobAdapter mJobAdapter;
     private List<SearchFragmentJobData> mDataList;
@@ -70,7 +70,8 @@ public class SearchFragment extends Fragment {
     public void onSearch(String query){
         Log.d("Query From Activity",query);
         List<SearchFragmentJobData> filteredList = new ArrayList<>();
-
+        resultView = (TextView) this.getActivity().findViewById(R.id.result_view);
+        //resultView.setVisibility(View.GONE);
         for (int i = 0; i < mDataList.size(); i++) {
 
             final String jTitle = mDataList.get(i).getJob_title().toLowerCase();
@@ -78,6 +79,10 @@ public class SearchFragment extends Fragment {
             final String jLoc = mDataList.get(i).getJob_location().toLowerCase();
             if (jTitle.contains(query) || jCompany.contains(query) || jLoc.contains(query) ) {
                 filteredList.add(mDataList.get(i));
+                resultView.setVisibility(View.GONE);
+            } else {
+                resultView.setText("No results found for : " + query);
+                resultView.setVisibility(View.VISIBLE);
             }
         }
         final LinearLayoutManager  mLayoutManager = new LinearLayoutManager(getActivity());
@@ -85,6 +90,7 @@ public class SearchFragment extends Fragment {
         mJobAdapter = new SearchFragmentJobAdapter(getContext(),filteredList);
         mRecyclerView.setAdapter(mJobAdapter);
         mJobAdapter.notifyDataSetChanged();
+
     }
 
     @Override
@@ -110,7 +116,7 @@ public class SearchFragment extends Fragment {
         MenuItem item = menu.findItem(R.id.action_search);
         item.setVisible(true);
     }
-    public void setSearchtoolbar(View v)
+    public void setSearchtoolbar()
     {
         searchtoolbar = (Toolbar) this.getActivity().findViewById(R.id.searchtoolbar);
         if (searchtoolbar != null) {
@@ -207,13 +213,12 @@ public class SearchFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-        setSearchtoolbar(view);
+        setSearchtoolbar();
         setHasOptionsMenu(true);
         context = view.getContext();
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_srcjob);
         mDataList = new ArrayList<>();
         requestQueue = Volley.newRequestQueue(getActivity());
-        //getData();
 
         final LinearLayoutManager  mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -55,7 +56,6 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
 
         final TextView tvEmail, tvName, tvType;
-
         //Fetching values from shared preferences
         SharedPreferences sharedPreferences = this.getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         String name = sharedPreferences.getString(Config.NAME_SHARED_PREF,"Not Available");
@@ -65,15 +65,12 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         String type = sharedPreferences.getString(Config.TYPE_SHARED_PREF,"Not Available");
         String password = sharedPreferences.getString(Config.PASSWORD_SHARED_PREF,"Not Available");
         String uid = sharedPreferences.getString(Config.UID_SHARED_PREF,"Not Available");
-        //Showing the current logged in user details to textview
-        /*String message = "\n Name : "+name + "\n Username : " + username + "\n Email : " + email + "\n Phone : " + phone + "\n Type : " + type;
-        tv.setText(message);*/
-
 
         // Navigation View
         mToolbar = (Toolbar) findViewById(R.id.nav_action);
         setSupportActionBar(mToolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        mDrawerLayout.openDrawer(GravityCompat.START);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
@@ -91,6 +88,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         tvName.setText(type);
         tvEmail.setText(email);
         mNavigationView.setNavigationItemSelectedListener(this);
+        Snackbar.make(getWindow().getDecorView().getRootView(),"Hello, "+name+"! Welcome To Employment Support.",Snackbar.LENGTH_LONG).show();
     }
 
     public String trimUppercase(String name){
@@ -105,13 +103,12 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
 
             Fragment f = this.getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-            if (f instanceof HomeFragment ){//|| f instanceof ForumFragment) {
+            if (f instanceof HomeFragment ) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage("Are you sure , you want to exit?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -125,9 +122,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
                         .create()
                         .show();
             }else
-                drawer.openDrawer(GravityCompat.START);
-                //super.onBackPressed();
-
+                mDrawerLayout.openDrawer(GravityCompat.START);
         }
 
     }
@@ -178,8 +173,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_srch:
                 Intent i = new Intent(UserActivity.this, SearchJobActivity.class);
                 UserActivity.this.startActivity(i);
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
-                drawer.closeDrawer(GravityCompat.START);
+                mDrawerLayout.closeDrawer(GravityCompat.START);
                 ActionBarTitle = "Search Jobs";
                 break;
 
@@ -230,7 +224,6 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
 
-        // update selected fragment and title
         if (fragment != null) {
 
             getSupportFragmentManager()
@@ -240,9 +233,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
                     .commit();
             getSupportActionBar().setTitle(ActionBarTitle);
         }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
-        drawer.closeDrawer(GravityCompat.START);
+        mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 

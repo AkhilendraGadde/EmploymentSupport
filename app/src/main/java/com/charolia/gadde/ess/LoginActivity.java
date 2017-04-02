@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -62,15 +63,14 @@ public class LoginActivity extends AppCompatActivity {
         username = etUsername.getText().toString();
         password = etPassword.getText().toString();
 
-        if (username.equals("")) {
-            etUsername.setError("Username field cannot be empty.");
-            etUsername.requestFocus();
-            valid = "no";
-        }
-
         if (password.equals("")) {
             etPassword.setError("Password field cannot be empty.");
             etPassword.requestFocus();
+            valid = "no";
+        }
+        if (username.equals("")) {
+            etUsername.setError("Username field cannot be empty.");
+            etUsername.requestFocus();
             valid = "no";
         }
 
