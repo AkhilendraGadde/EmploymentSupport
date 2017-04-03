@@ -66,23 +66,17 @@ public class SearchFragment extends Fragment {
         // Required empty public constructor
     }
 
-    // < ---- Implementing Search begins here ---- > //
     public void onSearch(String query){
         Log.d("Query From Activity",query);
         List<SearchFragmentJobData> filteredList = new ArrayList<>();
         resultView = (TextView) this.getActivity().findViewById(R.id.result_view);
-        //resultView.setVisibility(View.GONE);
         for (int i = 0; i < mDataList.size(); i++) {
-
             final String jTitle = mDataList.get(i).getJob_title().toLowerCase();
             final String jCompany = mDataList.get(i).getJob_company().toLowerCase();
             final String jLoc = mDataList.get(i).getJob_location().toLowerCase();
             if (jTitle.contains(query) || jCompany.contains(query) || jLoc.contains(query) ) {
-                filteredList.add(mDataList.get(i));
                 resultView.setVisibility(View.GONE);
-            } else {
-                resultView.setText("No results found for : " + query);
-                resultView.setVisibility(View.VISIBLE);
+                filteredList.add(mDataList.get(i));
             }
         }
         final LinearLayoutManager  mLayoutManager = new LinearLayoutManager(getActivity());
@@ -90,7 +84,14 @@ public class SearchFragment extends Fragment {
         mJobAdapter = new SearchFragmentJobAdapter(getContext(),filteredList);
         mRecyclerView.setAdapter(mJobAdapter);
         mJobAdapter.notifyDataSetChanged();
-
+        if(filteredList.isEmpty())  {
+            mRecyclerView.setVisibility(View.GONE);
+            resultView.setText("No results found for : " + query);
+            resultView.setVisibility(View.VISIBLE);
+        } else {
+            mRecyclerView.setVisibility(View.VISIBLE);
+            resultView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -205,7 +206,6 @@ public class SearchFragment extends Fragment {
 
         });
     }
-    // < ---- Implementing Search ends here ---- > //
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -246,10 +246,8 @@ public class SearchFragment extends Fragment {
         mWaveSwipeRefreshLayout.setWaveColor(Color.argb(200,128,0,128));
         mWaveSwipeRefreshLayout.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener() {
             @Override public void onRefresh() {
-                // Do work to refresh the list here.
                 mDataList.clear();
                 getData();
-                //new Task().execute();
             }
         });
 
@@ -265,32 +263,18 @@ public class SearchFragment extends Fragment {
         getData();
     }
 
-    private boolean isLastItemDisplaying(RecyclerView recyclerView) {
-        if (recyclerView.getAdapter().getItemCount() != 0) {
-            int lastVisibleItemPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
-            if (lastVisibleItemPosition != RecyclerView.NO_POSITION && lastVisibleItemPosition == recyclerView.getAdapter().getItemCount() - 1)
-                Toast.makeText(getActivity(), "Reached end of view", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        return false;
-    }
-
     private void getData() {
-        //Adding the method to the queue by calling the method getDataFromServer
         requestQueue.add(getDataFromServer(requestCount));
         requestCount++;
     }
 
     private JsonArrayRequest getDataFromServer(int requestCount) {
 
-        //JsonArrayRequest of volley
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Config.JOBS_LIST_URL + String.valueOf(requestCount),
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        //Calling method parseData to parse the json response
                         parseData(response);
-                        //Hiding the progressbar
                         mWaveSwipeRefreshLayout.setRefreshing(false);
                     }
                 },
@@ -311,7 +295,11 @@ public class SearchFragment extends Fragment {
             JSONObject obj;
             try {
                 obj = array.getJSONObject(i);
-                SearchFragmentJobData data = new SearchFragmentJobData(obj.getInt("ID"),obj.getString("jTitle"),obj.getString("jDesc"),obj.getString("jCompany"),obj.getString("jLoc"));
+                SearchFragmentJobData data = new SearchFragmentJobData(obj.getInt("ID"),
+                        obj.getString("jTitle"),obj.getString("jDesc"),obj.getString("jCompany"),
+                        obj.getString("jLoc"),obj.getString("jDesig"),obj.getString("jSkills"),
+                        obj.getString("jSalary"),obj.getString("jVacancy"),obj.getString("jDuration"),
+                        obj.getString("jPost_id"));
                 mDataList.add(data);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -320,22 +308,9 @@ public class SearchFragment extends Fragment {
         mJobAdapter.notifyDataSetChanged();
     }
 
-    private void refresh(){
-        mWaveSwipeRefreshLayout.setRefreshing(false);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mWaveSwipeRefreshLayout.setRefreshing(false);
-                //getData(0);
-                //mJobAdapter.notifyDataSetChanged();
-            }
-        }, 5000);
-    }
-
     @Override
     public void onResume() {
 
-        //refresh();
         super.onResume();
     }
 }

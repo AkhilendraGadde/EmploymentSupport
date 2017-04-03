@@ -21,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -82,10 +83,10 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         View header = mNavigationView.getHeaderView(0);
         tvEmail = (TextView) header.findViewById(R.id.tvEmail);
         tvName = (TextView) header.findViewById(R.id.tvName);
-        tvType = (TextView) header.findViewById(R.id.tvType);
+        //tvType = (TextView) header.findViewById(R.id.tvType);
 
-        tvType.setText(trimUppercase(name));
-        tvName.setText(type);
+        //tvType.setText(trimUppercase(name));
+        tvName.setText(name);
         tvEmail.setText(email);
         mNavigationView.setNavigationItemSelectedListener(this);
         Snackbar.make(getWindow().getDecorView().getRootView(),"Hello, "+name+"! Welcome To Employment Support.",Snackbar.LENGTH_LONG).show();
@@ -142,9 +143,18 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         }
 
         switch (item.getItemId()) {
-            case R.id.refresh:
+            case R.id.logout:
 
-                refreshContent();
+                HideActionBar();
+                Fragment fragment = new LogoutFragment();
+                if (fragment != null) {
+
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, fragment)
+                            .addToBackStack(null)
+                            .commit();
+                }
                 return true;
 
             default:
@@ -158,7 +168,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         Fragment fragment = null;
 
         int id = item.getItemId();
-        if (id != R.id.nav_logout)   {
+        if (id != R.id.logout)   {
             ShowActionBar();
         }   else {
             HideActionBar();
@@ -213,11 +223,6 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_about:
                 fragment = new AboutFragment();
                 ActionBarTitle = "About";
-                break;
-
-            case R.id.nav_logout:
-                fragment = new LogoutFragment();
-                ActionBarTitle = "Logout";
                 break;
 
             default:

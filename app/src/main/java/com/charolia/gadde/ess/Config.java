@@ -19,7 +19,8 @@ public class Config {
 
     // Support Mail
     public static final String CONTACT_EMAIL = "mailto:empsupess1725@gmail.com";
-    public static final String CONTACT_SUBJECT = "Feedback:Employment Support App";
+    public static final String CONTACT_SUBJECT = "Support:Employment Support App";
+    public static final String GIT_HUB = "https://github.com/AkhilendraGadde/EmploymentSupport";
 
     //Keys as defined in our $_POST['key'] in login.php & register.php
     public static final String KEY_NAME = "name";

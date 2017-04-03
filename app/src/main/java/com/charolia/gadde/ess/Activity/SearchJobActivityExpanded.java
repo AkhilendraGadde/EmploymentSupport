@@ -32,9 +32,19 @@ public class SearchJobActivityExpanded extends SwipeBackActivity {
 
         String title = getIntent().getStringExtra("title");
         String description = getIntent().getStringExtra("description");
+        String company = getIntent().getStringExtra("company");
+        String location = getIntent().getStringExtra("location");
+        String designation = getIntent().getStringExtra("designation");
+        String duration = getIntent().getStringExtra("duration");
+        String vacancy = getIntent().getStringExtra("vacancy");
+        String salary = getIntent().getStringExtra("salary");
+        String skills = getIntent().getStringExtra("skills");
+        String post_id = getIntent().getStringExtra("post_id");
 
         title_tv.setText(title);
-        desc_tv.setText(description);
+        //desc_tv.setText(description);
+        desc_tv.setText(title+"\n"+description+"\n"+company+"\n"+location+"\n"+designation+"\n"+
+                duration+"\n"+vacancy+"\n"+salary+"\n"+skills+"\n"+post_id);
 
         Snackbar.make(getWindow().getDecorView().getRootView(), "Tap on FAB button to Apply for this job", Snackbar.LENGTH_SHORT).show();
     }

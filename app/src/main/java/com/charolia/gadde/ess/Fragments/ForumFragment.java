@@ -20,6 +20,8 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -109,6 +111,8 @@ public class ForumFragment extends Fragment {
 
     private void initLayout(View view) {
 
+
+
         etQuery = (EditText) view.findViewById(R.id.queryQuestion);
         contentInfo = (TextView) view.findViewById(R.id.tvContentInfo);
         cardView = (CardView) view.findViewById(R.id.card_forum);
@@ -130,6 +134,8 @@ public class ForumFragment extends Fragment {
                 contentInfo.setVisibility(View.GONE);
                 fab.setVisibility(View.GONE);
                 cardView.setVisibility(View.VISIBLE);
+                Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.anim_about_card_show);
+                cardView.startAnimation(animation);
             }
         });
     }

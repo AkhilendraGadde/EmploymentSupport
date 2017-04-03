@@ -52,6 +52,12 @@ public class SearchFragmentJobAdapter extends RecyclerView.Adapter<SearchFragmen
         holder.setjCompany(job_data.get(position).getJob_company());
         holder.setjLocation(job_data.get(position).getJob_location());
         holder.setjDesc(job_data.get(position).getJob_desc());
+        holder.setjDesig(job_data.get(position).getJob_desig());
+        holder.setjSkills(job_data.get(position).getJob_skills());
+        holder.setjSalary(job_data.get(position).getJob_salary());
+        holder.setjVacancy(job_data.get(position).getJob_vacancy());
+        holder.setjDuration(job_data.get(position).getJob_duration());
+        holder.setjPid(job_data.get(position).getJob_pid());
 
         String jTitle = job_data.get(position).getJob_title();
         String jCompany = job_data.get(position).getJob_company();
@@ -70,7 +76,7 @@ public class SearchFragmentJobAdapter extends RecyclerView.Adapter<SearchFragmen
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        private String mTitle,mDesc,mComp,mLoc;
+        private String mTitle,mDesc,mComp,mLoc,mDesig,mSkills,mSalary,mVac,mDur,mPid;
 
         ImageView imageView;
         TextView jTitle,jCompany,jLocation;
@@ -87,17 +93,32 @@ public class SearchFragmentJobAdapter extends RecyclerView.Adapter<SearchFragmen
         public void setjCompany(String item) {
             mComp = item;
         }
-
         public void setjTitle(String item) {
             mTitle = item;
         }
-
         public void setjDesc(String item) {
             mDesc = item;
         }
-
         public void setjLocation(String item) {
             mLoc = item;
+        }
+        public void setjDesig(String item) {
+            mDesig = item;
+        }
+        public void setjSkills(String item) {
+            mSkills = item;
+        }
+        public void setjSalary(String item) {
+            mSalary = item;
+        }
+        public void setjVacancy(String item) {
+            mVac = item;
+        }
+        public void setjDuration(String item) {
+            mDur = item;
+        }
+        public void setjPid(String item) {
+            mPid = item;
         }
         @Override
         public void onClick(View view) {
@@ -106,6 +127,12 @@ public class SearchFragmentJobAdapter extends RecyclerView.Adapter<SearchFragmen
             myIntent.putExtra("description", mDesc);
             myIntent.putExtra("company", mComp);
             myIntent.putExtra("location", mLoc);
+            myIntent.putExtra("designation", mDesig);
+            myIntent.putExtra("skills", mSkills);
+            myIntent.putExtra("salary", mSalary);
+            myIntent.putExtra("vacancy", mVac);
+            myIntent.putExtra("duration", mDur);
+            myIntent.putExtra("pid", mPid);
             context.startActivity(myIntent);
         }
     }

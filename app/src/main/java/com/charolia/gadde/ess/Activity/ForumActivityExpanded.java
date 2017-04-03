@@ -17,6 +17,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -145,6 +147,8 @@ public class ForumActivityExpanded extends AppCompatActivity {
                 contentInfo.setVisibility(View.GONE);
                 fab.setVisibility(View.GONE);
                 cardView.setVisibility(View.VISIBLE);
+                Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_about_card_show);
+                cardView.startAnimation(animation);
             }
         });
     }
