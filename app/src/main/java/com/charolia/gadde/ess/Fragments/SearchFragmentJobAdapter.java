@@ -46,7 +46,7 @@ public class SearchFragmentJobAdapter extends RecyclerView.Adapter<SearchFragmen
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        holder.imageView.setImageResource(R.drawable.ic_job_loc_16);
+        holder.imageView.setImageResource(R.drawable.ic_job_loc);
         holder.jTitle.setText(job_data.get(position).getJob_title());
         holder.jLocation.setText(job_data.get(position).getJob_location());
         holder.jCompany.setText(job_data.get(position).getJob_company());

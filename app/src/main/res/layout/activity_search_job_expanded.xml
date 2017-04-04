@@ -4,88 +4,212 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     tools:context="com.charolia.gadde.ess.Activity.SearchJobActivityExpanded">
 
-    <com.liuguangqiang.swipeback.SwipeBackLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/swipeBackLayout"
+    <include
+        layout="@layout/navigation_actionbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content" />
 
-        <LinearLayout
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view_srchjob"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        card_view:cardCornerRadius="1dp"
+        card_view:contentPadding="10dp"
+        card_view:cardBackgroundColor="@color/white"
+        card_view:cardElevation="5dp">
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <include
-                layout="@layout/navigation_actionbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            android:overScrollMode="never">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:padding="8dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.CardView
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/card_view_srchjob"
+                <TextView
+                    android:text="Title"
+                    android:textSize="18sp"
+                    android:padding="20dp"
+                    android:id="@+id/jTitle_ex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="Company"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:textSize="14sp"
+                    android:id="@+id/jComp_ex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="8dp"
-                    card_view:cardCornerRadius="1dp"
-                    card_view:contentPadding="10dp"
-                    card_view:cardBackgroundColor="@color/white"
-                    card_view:cardElevation="5dp">
-
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
                     <LinearLayout
+                        android:id="@+id/job_duration"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content"
+                        android:background="?android:selectableItemBackground"
+                        android:orientation="horizontal">
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <ImageView
-                                android:id="@+id/img_job_exp"
-                                android:layout_alignParentStart="true"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_resume"/>
-
-                            <TextView
-                                android:text="Title"
-                                android:textAllCaps="true"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="22sp"
-                                android:id="@+id/tvJobTitle_exp"
-                                android:layout_toEndOf="@id/img_job_exp"
-                                android:layout_marginStart="20dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
-                        </RelativeLayout>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="8dp"
+                            android:src="@drawable/ic_job_duration" />
 
                         <TextView
-                            android:text="Description"
-                            android:id="@+id/tvJobDesc_exp"
-                            android:textAllCaps="true"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="18sp"
+                            android:id="@+id/jDur_ex"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
                             android:layout_margin="8dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-
+                            android:text="Duration" />
                     </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/job_vac"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?android:selectableItemBackground"
+                        android:layout_below="@id/job_duration"
+                        android:orientation="horizontal">
 
-                </android.support.v7.widget.CardView>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="8dp"
+                            android:src="@drawable/ic_job_vacancy" />
+
+                        <TextView
+                            android:id="@+id/jVac_ex"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="8dp"
+                            android:text="Vacancy" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/job_loc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?android:selectableItemBackground"
+                        android:layout_below="@id/job_vac"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="8dp"
+                            android:src="@drawable/ic_job_loc" />
+
+                        <TextView
+                            android:id="@+id/jLoc_ex"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="8dp"
+                            android:text="Location" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/job_skills"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/job_loc"
+                        android:background="?android:selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="8dp"
+                            android:src="@drawable/ic_job_skills" />
+
+                        <TextView
+                            android:id="@+id/jSkills_ex"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="8dp"
+                            android:text="Skills" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/job_sal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/job_skills"
+                        android:background="?android:selectableItemBackground"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="8dp"
+                            android:src="@drawable/ic_job_salary" />
+                        <TextView
+                            android:id="@+id/jSal_ex"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="8dp"
+                            android:text="Salary" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/job_designation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/job_sal"
+                        android:background="?android:selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="8dp"
+                            android:src="@drawable/ic_job_designation" />
+
+                        <TextView
+                            android:id="@+id/jDesig_ex"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="8dp"
+                            android:text="Designation" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_marginTop="20dp"
+                    android:text="Job Description"
+                    android:textStyle="bold"
+                    android:id="@+id/desc"/>
+                <TextView
+                    android:text="Description"
+                    android:id="@+id/jDesc_ex"
+                    android:textSize="14sp"
+                    android:padding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
-        </LinearLayout>
+        </ScrollView>
 
-
-    </com.liuguangqiang.swipeback.SwipeBackLayout>
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>

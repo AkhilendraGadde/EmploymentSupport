@@ -125,7 +125,6 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
             }else
                 mDrawerLayout.openDrawer(GravityCompat.START);
         }
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

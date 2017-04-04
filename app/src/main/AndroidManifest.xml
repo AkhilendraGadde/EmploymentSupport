@@ -36,7 +36,7 @@
         <activity
             android:name=".Activity.SearchJobActivityExpanded"
             android:screenOrientation="portrait"
-            android:theme="@style/ThemeSwipeBack" />
+            android:theme="@style/SearchTheme" />
         <activity
             android:name=".Activity.ForumActivityExpanded"
             android:screenOrientation="portrait"
