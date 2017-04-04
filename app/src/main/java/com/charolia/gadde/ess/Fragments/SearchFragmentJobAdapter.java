@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.charolia.gadde.ess.Activity.SearchCategoryActivity;
 import com.charolia.gadde.ess.Activity.SearchJobActivityExpanded;
 import com.charolia.gadde.ess.R;
 
@@ -44,9 +47,31 @@ public class SearchFragmentJobAdapter extends RecyclerView.Adapter<SearchFragmen
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         holder.imageView.setImageResource(R.drawable.ic_job_loc_16);
-        holder.jCompany.setText(job_data.get(position).getJob_company());
         holder.jTitle.setText(job_data.get(position).getJob_title());
         holder.jLocation.setText(job_data.get(position).getJob_location());
+        holder.jCompany.setText(job_data.get(position).getJob_company());
+
+        if(context instanceof SearchCategoryActivity) {
+            String title = ((SearchCategoryActivity) context).getIntent().getStringExtra("Name");
+            if(title.equals("Title")){
+                holder.jCompany.setText(job_data.get(position).getJob_title());
+                holder.jTitle.setText(job_data.get(position).getJob_company());
+            } else if(title.equals("Designation"))   {
+                holder.jCompany.setText(job_data.get(position).getJob_desig());
+                holder.jTitle.setText(job_data.get(position).getJob_title());
+            } else if (title.equals("Company")){
+                holder.jCompany.setText(job_data.get(position).getJob_company());
+            } else if (title.equals("Skills")){
+                holder.jCompany.setText(job_data.get(position).getJob_skills());
+            } else if (title.equals("Salary")){
+                holder.jCompany.setText(job_data.get(position).getJob_salary()+"/- pm");
+            } else if (title.equals("Vacancy")){
+                holder.jCompany.setText("Required Employees : "+job_data.get(position).getJob_vacancy());
+                holder.jTitle.setText(job_data.get(position).getJob_company());
+            } else if (title.equals("Duration")){
+                holder.jCompany.setText(job_data.get(position).getJob_duration());
+            }
+        }
         // onclick
         holder.setjTitle(job_data.get(position).getJob_title());
         holder.setjCompany(job_data.get(position).getJob_company());
@@ -58,10 +83,6 @@ public class SearchFragmentJobAdapter extends RecyclerView.Adapter<SearchFragmen
         holder.setjVacancy(job_data.get(position).getJob_vacancy());
         holder.setjDuration(job_data.get(position).getJob_duration());
         holder.setjPid(job_data.get(position).getJob_pid());
-
-        String jTitle = job_data.get(position).getJob_title();
-        String jCompany = job_data.get(position).getJob_company();
-        String jLocation = job_data.get(position).getJob_location();
     }
 
     @Override

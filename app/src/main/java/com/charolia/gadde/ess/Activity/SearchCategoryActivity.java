@@ -5,6 +5,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+
+import com.charolia.gadde.ess.Fragments.SearchCategoryFragment;
 import com.charolia.gadde.ess.R;
 
 /**
@@ -14,26 +16,20 @@ import com.charolia.gadde.ess.R;
 public class SearchCategoryActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
-    private String ActionBarTitle = "Jobs by Category ";
-
+    public String ActionBarTitle;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_category);
 
-        //setDragEdge(SwipeBackLayout.DragEdge.LEFT);
-
-        // Navigation View
+        ActionBarTitle = "Jobs by " + getIntent().getStringExtra("Name");
         mToolbar = (Toolbar) findViewById(R.id.nav_action_category);
         setSupportActionBar(mToolbar);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.getSupportActionBar().setTitle(ActionBarTitle);
-
         initFragment();
     }
 
     public void initFragment(){
-
-
         SearchCategoryFragment catFrag = new SearchCategoryFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, catFrag);
