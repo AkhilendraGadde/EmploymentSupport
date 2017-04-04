@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.charolia.gadde.ess.Activity.SearchCategoryActivity;
+import com.charolia.gadde.ess.Activity.SearchJobActivity;
 import com.charolia.gadde.ess.R;
 
 import java.util.ArrayList;
@@ -58,6 +59,13 @@ public class SearchCategoryFragmentMain extends Fragment {
     public void onPrepareOptionsMenu(Menu menu) {
         MenuItem item = menu.findItem(R.id.action_search);
         item.setVisible(false);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        ((SearchJobActivity)getActivity()).onBackPressed();
+        return true;
     }
 
     private void initializeData(){

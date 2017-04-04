@@ -44,7 +44,7 @@
         <activity
             android:name=".Activity.SearchCategoryActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/ThemeSwipeBack" />
+            android:theme="@style/SearchTheme" />
         <activity android:name=".Activity.SearchJobActivity"
             android:label="Search Jobs"
             android:theme="@style/SearchTheme"
