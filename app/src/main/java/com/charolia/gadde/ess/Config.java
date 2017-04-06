@@ -9,6 +9,8 @@ public class Config {
     public static final String REGISTER_REQUEST_URL = "https://akhilendragadde17.000webhostapp.com/nnRegister.php";
     public static final String LOGIN_REQUEST_URL = "https://akhilendragadde17.000webhostapp.com/nnLogin.php";
     public static final String DATA_REQUEST_URL = "https://akhilendragadde17.000webhostapp.com/test/spinner_list.php?jPost_id=";
+    public static final String RESUME_SPINNER_REQUEST_URL = "https://akhilendragadde17.000webhostapp.com/test/resume_spinner.php?user_id=";
+    public static final String RESUME_REQUEST_URL = "https://akhilendragadde17.000webhostapp.com/test/resume.php";
     public static final String JOBS_LIST_URL = "https://akhilendragadde17.000webhostapp.com/jobs.php?id=";
     public static final String FORUM_QLIST_URL = "https://akhilendragadde17.000webhostapp.com/test/forum_qlist.php?id=";
     public static final String QUERY_URL = "https://akhilendragadde17.000webhostapp.com/test/forum_query.php";

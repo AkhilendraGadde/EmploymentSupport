@@ -1,12 +1,265 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     tools:context="com.charolia.gadde.ess.Fragments.ResumeFragment">
 
-    <TextView
+    <RelativeLayout
+        android:id="@+id/layout_spinner"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="This is Resume Fragment" />
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tvResume"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:padding="5dp"
+            android:text="Select your resume"
+            android:textColor="@color/colorAccent" />
+
+        <Spinner
+            android:id="@+id/resumeList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvResume"
+            android:padding="5dp" />
+
+        <Space
+            android:id="@+id/space4"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvResume" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:textSize="12sp"
+        android:layout_centerInParent="true"
+        android:text="No Resume found. Start by creating one?"
+        android:textStyle="bold"
+        android:padding="20dp"
+        android:id="@+id/res_desc"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:id="@+id/sView"
+        android:padding="8dp"
+        android:layout_below="@+id/layout_spinner"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:id="@+id/layout_inputs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:ems="10"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/etAadhar"
+                    android:layout_alignParentEnd="true"
+                    android:hint="Aadhaar ID" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:ems="10"
+                    android:layout_below="@+id/etAadhar"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="13dp"
+                    android:id="@+id/etQual"
+                    android:layout_alignParentEnd="true"
+                    android:hint="Your Qualifications" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:ems="10"
+                    android:layout_below="@+id/etQual"
+                    android:layout_marginTop="14dp"
+                    android:id="@+id/etSkills"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentStart="true"
+                    android:hint="Your Skills" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:ems="10"
+                    android:layout_below="@+id/etSkills"
+                    android:layout_marginTop="18dp"
+                    android:id="@+id/etProjects"
+                    android:layout_alignParentStart="true"
+                    android:hint="Your Projects" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:ems="10"
+                    android:layout_below="@+id/etProjects"
+                    android:layout_marginTop="18dp"
+                    android:id="@+id/etAchievements"
+                    android:layout_alignParentStart="true"
+                    android:hint="Your Achievements" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:ems="10"
+                    android:layout_marginTop="14dp"
+                    android:id="@+id/etHobbies"
+                    android:hint="Your Hobbies"
+                    android:layout_below="@+id/etAchievements"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:ems="10"
+                    android:layout_below="@+id/etHobbies"
+                    android:layout_marginTop="18dp"
+                    android:id="@+id/etWExp"
+                    android:layout_alignParentStart="true"
+                    android:hint="Work Experience" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/bSubmit"
+                android:layout_alignParentBottom="true"
+                android:text="Submit"
+                android:layout_width="173dp"
+                android:layout_marginTop="19dp"
+                android:layout_gravity="center"
+                android:layout_height="32dp"
+                android:background="@color/colorPrimary"
+                android:textAllCaps="true"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="8dp"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/menu_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        fab:menu_labels_style="@style/MenuLabelsStyle"
+        fab:menu_labels_showAnimation="@anim/jump_from_down"
+        fab:menu_labels_hideAnimation="@anim/jump_to_down"
+        fab:menu_animationDelayPerItem="0"
+        fab:menu_shadowColor="#444"
+        fab:menu_colorNormal="@color/colorAccent"
+        fab:menu_colorPressed="@color/fab_colorPressed"
+        fab:menu_colorRipple="@color/fab_colorRipple">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_fab_delete"
+            fab:fab_label="Delete Resume"
+            fab:fab_size="mini"
+            style="@style/MenuButtonsStyle" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_fab_update"
+            fab:fab_label="Update Resume"
+            style="@style/MenuButtonsStyle" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_fab_create"
+            fab:fab_label="Create Resume"
+            style="@style/MenuButtonsStyle" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+</RelativeLayout>

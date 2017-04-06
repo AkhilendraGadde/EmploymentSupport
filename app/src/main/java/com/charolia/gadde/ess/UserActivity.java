@@ -43,7 +43,8 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle mToggle;
     private Toolbar mToolbar;
     private NavigationView mNavigationView;
-    private String ActionBarTitle = "Employment Support";
+    private String ActionBarTitle = "Employment Support",uid;
+    private int type_id = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,13 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         String phone = sharedPreferences.getString(Config.PHONE_SHARED_PREF,"Not Available");
         String type = sharedPreferences.getString(Config.TYPE_SHARED_PREF,"Not Available");
         String password = sharedPreferences.getString(Config.PASSWORD_SHARED_PREF,"Not Available");
-        String uid = sharedPreferences.getString(Config.UID_SHARED_PREF,"Not Available");
+        uid = sharedPreferences.getString(Config.UID_SHARED_PREF,"Not Available");
+
+        if(uid.charAt(uid.length()-1) == '1')  {
+            type_id = 1;
+        }   else if(uid.charAt(uid.length()-1) == '2')   {
+            type_id = 2;
+        }
 
         // Navigation View
         mToolbar = (Toolbar) findViewById(R.id.nav_action);
@@ -83,12 +90,27 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         View header = mNavigationView.getHeaderView(0);
         tvEmail = (TextView) header.findViewById(R.id.tvEmail);
         tvName = (TextView) header.findViewById(R.id.tvName);
-        //tvType = (TextView) header.findViewById(R.id.tvType);
 
-        //tvType.setText(trimUppercase(name));
         tvName.setText(name);
         tvEmail.setText(email);
         mNavigationView.setNavigationItemSelectedListener(this);
+
+        Menu mMenu = mNavigationView.getMenu();
+        MenuItem resume,jobalerts;
+        resume = mMenu.findItem(R.id.nav_resume);
+        jobalerts = mMenu.findItem(R.id.nav_jobalert);
+
+        if(type_id == 1)   {
+            resume.setEnabled(true);
+            jobalerts.setEnabled(false);
+        } else if (type_id == 2)   {
+            resume.setEnabled(false);
+            jobalerts.setEnabled(true);
+        } else {
+            resume.setEnabled(true);
+            jobalerts.setEnabled(true);
+        }
+
         Snackbar.make(getWindow().getDecorView().getRootView(),"Hello, "+name+"! Welcome To Employment Support.",Snackbar.LENGTH_LONG).show();
     }
 

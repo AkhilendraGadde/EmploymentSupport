@@ -253,7 +253,7 @@ public class FeedbackFragment extends Fragment {
     }
 
     private JsonArrayRequest getDataFromServer(int requestCount) {
-        final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching replies", "Please wait...", false, false);
+        final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching feedbacks", "Please wait...", false, false);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Config.FEEDBACK_LIST_URL + String.valueOf(requestCount),
                 new Response.Listener<JSONArray>() {
                     @Override
