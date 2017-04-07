@@ -517,7 +517,7 @@ public class JobAlertFragment extends Fragment {
                 data = obj.getString("jTitle");
                 alertsList.add(data);
 
-                // make new list.... keep adding
+                // make new list.... keep adding....
                 alertHolder.add(obj.getString("jTitle"));
                 alertHolder.add(obj.getString("jDesc"));
                 alertHolder.add(obj.getString("jCompany"));
