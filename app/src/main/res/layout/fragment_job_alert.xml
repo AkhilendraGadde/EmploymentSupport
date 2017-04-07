@@ -6,6 +6,7 @@
     tools:context="com.charolia.gadde.ess.Fragments.JobAlertFragment">
 
     <RelativeLayout
+        android:id="@+id/layout_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusable="true"
@@ -22,7 +23,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:padding="5dp"
-            android:text="Select your created Job Alerts"
+            android:text="Select your Job Alerts"
             android:textColor="@color/colorAccent" />
 
         <Spinner
@@ -36,26 +37,221 @@
         <Space
             android:id="@+id/space4"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="5dp"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/alertList" />
+    </RelativeLayout>
 
-        <android.support.design.widget.TextInputLayout
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:textSize="12sp"
+        android:layout_centerInParent="true"
+        android:text="Have some jobs to provide? Start by creating an alert!"
+        android:textStyle="bold"
+        android:padding="20dp"
+        android:id="@+id/job_desc"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:id="@+id/sView"
+        android:padding="8dp"
+        android:layout_below="@+id/layout_spinner"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:id="@+id/layout_inputs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/space4">
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:visibility="gone">
 
-            <EditText
-                android:id="@+id/etAlert_1"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:hint="Title"
-                android:inputType="text" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
 
-    </RelativeLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:ems="10"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/etTitle"
+                    android:layout_alignParentEnd="true"
+                    android:hint="Title" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:ems="10"
+                    android:layout_below="@+id/etTitle"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="13dp"
+                    android:id="@+id/etDesc"
+                    android:layout_alignParentEnd="true"
+                    android:hint="Description" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:ems="10"
+                    android:layout_below="@+id/etDesc"
+                    android:layout_marginTop="14dp"
+                    android:id="@+id/etCompany"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentStart="true"
+                    android:hint="Company" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:ems="10"
+                    android:layout_below="@+id/etCompany"
+                    android:layout_marginTop="18dp"
+                    android:id="@+id/etLocation"
+                    android:layout_alignParentStart="true"
+                    android:hint="Location" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:ems="10"
+                    android:layout_below="@+id/etLocation"
+                    android:layout_marginTop="18dp"
+                    android:id="@+id/etDesignation"
+                    android:layout_alignParentStart="true"
+                    android:hint="Designation" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:ems="10"
+                    android:layout_marginTop="14dp"
+                    android:id="@+id/etrSkills"
+                    android:hint="Required Skills"
+                    android:layout_below="@+id/etDesignation"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:ems="10"
+                    android:layout_below="@+id/etrSkills"
+                    android:layout_marginTop="18dp"
+                    android:id="@+id/etSalary"
+                    android:layout_alignParentStart="true"
+                    android:hint="Salary" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:layout_below="@+id/etrSkills"
+                    android:layout_marginTop="18dp"
+                    android:id="@+id/etVacancy"
+                    android:layout_alignParentStart="true"
+                    android:hint="Vacancy" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:ems="10"
+                    android:layout_below="@+id/etVacancy"
+                    android:layout_marginTop="18dp"
+                    android:id="@+id/etDuration"
+                    android:layout_alignParentStart="true"
+                    android:hint="Duration" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/bSubmit"
+                android:layout_alignParentBottom="true"
+                android:text="Submit"
+                android:layout_width="173dp"
+                android:layout_marginTop="19dp"
+                android:layout_gravity="center"
+                android:layout_height="32dp"
+                android:background="@color/colorPrimary"
+                android:textAllCaps="true"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="8dp"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </ScrollView>
 
     <com.github.clans.fab.FloatingActionMenu
 

@@ -111,7 +111,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
             jobalerts.setEnabled(true);
         }
 
-        Snackbar.make(getWindow().getDecorView().getRootView(),"Hello, "+name+"! Welcome To Employment Support.",Snackbar.LENGTH_LONG).show();
+        Snackbar.make(getWindow().getDecorView().getRootView(),"Hello, "+name+"! Welcome To ESS",Snackbar.LENGTH_SHORT).show();
     }
 
     public String trimUppercase(String name){

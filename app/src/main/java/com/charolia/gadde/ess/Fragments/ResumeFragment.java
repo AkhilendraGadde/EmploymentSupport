@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.KeyListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,8 +70,6 @@ public class ResumeFragment extends Fragment {
     private FloatingActionButton fab2;
     private FloatingActionButton fab3;
     private TextView tvInfo;
-
-    private String resumeElements[];
     private List<FloatingActionMenu> menus = new ArrayList<>();
     private Handler mUiHandler = new Handler();
 
@@ -155,7 +154,6 @@ public class ResumeFragment extends Fragment {
         etHobb = (EditText) getActivity().findViewById(R.id.etHobbies);
         etExp = (EditText) getActivity().findViewById(R.id.etWExp);
         bSubmit = (Button) getActivity().findViewById(R.id.bSubmit);
-
 
     }
 
@@ -261,7 +259,7 @@ public class ResumeFragment extends Fragment {
                         } else {
                             loading.dismiss();
                             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                            builder.setMessage("Register Failed")
+                            builder.setMessage("Operation Failed")
                                     .setCancelable(false)
                                     .setNegativeButton("Retry",null)
                                     .create()
@@ -297,70 +295,87 @@ public class ResumeFragment extends Fragment {
         requestQueue.add(stringRequest);
     }
 
-    private void showLayout() {
+    private void showDetails()  {
         linearLayout = (LinearLayout) getActivity().findViewById(R.id.layout_inputs);
         linearLayout.setVisibility(View.VISIBLE);
         Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.anim_about_card_show);
         linearLayout.startAnimation(animation);
-    }
+        tvInfo = (TextView) getActivity().findViewById(R.id.res_desc);
+        try {
+            if(tvInfo.getVisibility() == View.VISIBLE)
+                tvInfo.setVisibility(View.GONE);
+        } catch ( Exception e){
+            e.printStackTrace();
+        }
 
-    private void showDetails()  {
-        onCreateClick();
+        initInputs();
         etAadhaar.setText(aadhaar);
-        etAadhaar.setKeyListener(null);
-
+        etAadhaar.setFocusable(false);
         etQual.setText(qual);
-        etQual.setKeyListener(null);
-
+        etQual.setFocusable(false);
         etProj.setText(proj);
-        etProj.setKeyListener(null);
-
+        etProj.setFocusable(false);
         etSkills.setText(skills);
-        etSkills.setKeyListener(null);
-
+        etSkills.setFocusable(false);
         etExp.setText(exp);
-        etExp.setKeyListener(null);
-
+        etExp.setFocusable(false);
         etAch.setText(ach);
-        etAch.setKeyListener(null);
-
+        etAch.setFocusable(false);
         etHobb.setText(hobb);
-        etHobb.setKeyListener(null);
-
+        etHobb.setFocusable(false);
         bSubmit.setVisibility(View.GONE);
     }
 
     private void showDetailsforUpdate()  {
-        onCreateClick();
+        linearLayout = (LinearLayout) getActivity().findViewById(R.id.layout_inputs);
+        linearLayout.setVisibility(View.VISIBLE);
+        tvInfo = (TextView) getActivity().findViewById(R.id.res_desc);
+        try{
+            if(tvInfo.getVisibility() == View.VISIBLE)
+                tvInfo.setVisibility(View.GONE);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        initInputs();
         etAadhaar.setText(aadhaar);
-        etAadhaar.setKeyListener(etAadhaar.getKeyListener());
-
+        etAadhaar.setFocusable(true);
+        etAadhaar.setFocusableInTouchMode(true);
         etQual.setText(qual);
-        etQual.setKeyListener(etQual.getKeyListener());
-
+        etQual.setFocusable(true);
+        etQual.setFocusableInTouchMode(true);
         etProj.setText(proj);
-        etProj.setKeyListener(etProj.getKeyListener());
-
+        etProj.setFocusable(true);
+        etProj.setFocusableInTouchMode(true);
         etSkills.setText(skills);
-        etSkills.setKeyListener(etSkills.getKeyListener());
-
+        etSkills.setFocusable(true);
+        etSkills.setFocusableInTouchMode(true);
         etExp.setText(exp);
-        etExp.setKeyListener(etExp.getKeyListener());
-
+        etExp.setFocusable(true);
+        etExp.setFocusableInTouchMode(true);
         etAch.setText(ach);
-        etAch.setKeyListener(etAch.getKeyListener());
-
+        etAch.setFocusable(true);
+        etAch.setFocusableInTouchMode(true);
         etHobb.setText(hobb);
-        etHobb.setKeyListener(etHobb.getKeyListener());
-
+        etHobb.setFocusable(true);
+        etHobb.setFocusableInTouchMode(true);
         bSubmit.setVisibility(View.VISIBLE);
     }
 
     private void onCreateClick()    {
 
-        showLayout();
-        if(tvInfo.getVisibility() == View.VISIBLE)
-            tvInfo.setVisibility(View.GONE);
+        linearLayout = (LinearLayout) getActivity().findViewById(R.id.layout_inputs);
+        linearLayout.setVisibility(View.VISIBLE);
+        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.anim_about_card_show);
+        linearLayout.startAnimation(animation);
+        tvInfo = (TextView) getActivity().findViewById(R.id.res_desc);
+        try {
+            if(tvInfo.getVisibility() == View.VISIBLE)
+                tvInfo.setVisibility(View.GONE);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         initInputs();
         bSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -374,8 +389,6 @@ public class ResumeFragment extends Fragment {
     }
 
     private void onUpdateClick()    {
-        showLayout();
-        initInputs();
         showDetailsforUpdate();
 
         bSubmit.setOnClickListener(new View.OnClickListener() {
@@ -453,7 +466,7 @@ public class ResumeFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(), "no internet access!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Click to create resume", Toast.LENGTH_SHORT).show();
                     }
                 });
         return jsonArrayRequest;
