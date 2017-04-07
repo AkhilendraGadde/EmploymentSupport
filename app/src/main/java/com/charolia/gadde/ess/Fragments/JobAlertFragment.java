@@ -506,7 +506,7 @@ public class JobAlertFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(), "no internet access!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "No job alerts found!", Toast.LENGTH_SHORT).show();
                     }
                 });
         return jsonArrayRequest;
@@ -550,7 +550,6 @@ public class JobAlertFragment extends Fragment {
             alertsList.clear();
             alertsList.add("Select your created alert");
             getData();
-
             spinner.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, alertsList));
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
