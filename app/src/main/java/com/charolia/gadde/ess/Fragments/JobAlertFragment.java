@@ -62,7 +62,16 @@ public class JobAlertFragment extends Fragment {
 
     private Spinner spinner;
     private ArrayList<String> alertsList = new ArrayList<String>();
-    private ArrayList<String> alertHolder = new ArrayList<String>();
+    private ArrayList<String> alertTitle = new ArrayList<String>();
+    private ArrayList<String> alertDesc = new ArrayList<String>();
+    private ArrayList<String> alertComp = new ArrayList<String>();
+    private ArrayList<String> alertLoc = new ArrayList<String>();
+    private ArrayList<String> alertDesig = new ArrayList<String>();
+    private ArrayList<String> alertSkills = new ArrayList<String>();
+    private ArrayList<String> alertSalary = new ArrayList<String>();
+    private ArrayList<String> alertVacancy = new ArrayList<String>();
+    private ArrayList<String> alertDuration = new ArrayList<String>();
+
     private RequestQueue requestQueue;
     private String user_id,data;
     private FloatingActionMenu menuYellow;
@@ -73,6 +82,7 @@ public class JobAlertFragment extends Fragment {
     private List<FloatingActionMenu> menus = new ArrayList<>();
     private Handler mUiHandler = new Handler();
 
+    int getArraySize=0;
 
     private LinearLayout linearLayout;
     EditText etTitle,etDesc,etCompany,etLocation,etDesignation,etrSkills,etSalary,etVacancy,etDuration;
@@ -411,6 +421,7 @@ public class JobAlertFragment extends Fragment {
 
         initInputs();
         setEmpty();
+        bSubmit.setVisibility(View.VISIBLE);
         bSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -502,37 +513,28 @@ public class JobAlertFragment extends Fragment {
     }
 
     private void parseData(JSONArray array) {
-        /*
-            array = 3
-            1 = set
-            2 = set
-            3 = set
-        */
 
         for (int i = 0; i < array.length(); i++) {
-
+            getArraySize = array.length();
             JSONObject obj;
             try {
                 obj = array.getJSONObject(i);
                 data = obj.getString("jTitle");
                 alertsList.add(data);
-
-                // make new list.... keep adding....
-                alertHolder.add(obj.getString("jTitle"));
-                alertHolder.add(obj.getString("jDesc"));
-                alertHolder.add(obj.getString("jCompany"));
-                alertHolder.add(obj.getString("jLoc"));
-                alertHolder.add(obj.getString("jDesig"));
-                alertHolder.add(obj.getString("jSkills"));
-                alertHolder.add(obj.getString("jSalary"));
-                alertHolder.add(obj.getString("jVacancy"));
-                alertHolder.add(obj.getString("jDuration"));
+                alertTitle.add(obj.getString("jTitle"));
+                alertDesc.add(obj.getString("jDesc"));
+                alertComp.add(obj.getString("jCompany"));
+                alertLoc.add(obj.getString("jLoc"));
+                alertDesig .add(obj.getString("jDesig"));
+                alertSkills.add(obj.getString("jSkills"));
+                alertSalary.add(obj.getString("jSalary"));
+                alertVacancy.add(obj.getString("jVacancy"));
+                alertDuration.add(obj.getString("jDuration"));
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-        Log.d("size",String.valueOf(alertHolder.size()));
         if(alertsList.size() == 1){
             tvInfo = (TextView) getActivity().findViewById(R.id.job_desc);
             tvInfo.setVisibility(View.VISIBLE);
@@ -556,10 +558,20 @@ public class JobAlertFragment extends Fragment {
                         public void onItemSelected(AdapterView<?> arg0,
                                                    View arg1, int position, long arg3) {
 
-
                             String temp = (String) spinner.getSelectedItem();
 
                             if(!temp.equals("Select your created alert"))  {
+
+                                int id = spinner.getSelectedItemPosition()-1;
+                                title = alertTitle.get(id);
+                                desc = alertDesc.get(id);
+                                comp = alertComp.get(id);
+                                loc = alertLoc.get(id);
+                                desig = alertDesig.get(id);
+                                skills = alertSkills.get(id);
+                                salary = alertSalary.get(id);
+                                vacancy = alertVacancy.get(id);
+                                duration = alertDuration.get(id);
                                 showDetails();
                             }   else {
                                 linearLayout = (LinearLayout) getActivity().findViewById(R.id.layout_inputs);
@@ -587,73 +599,4 @@ public class JobAlertFragment extends Fragment {
         ActionBar actionBar = activity.getSupportActionBar();
         actionBar.setTitle("Job Alerts");
     }
-}
-
-/*class MyCustomAdapter extends ArrayAdapter<String> {
-
-    private Context context;
-    private List<ListElements> data;
-
-    public class ViewHolder {
-        //TextView address;
-        //TextView body;
-        EditText etTitle,etDesc,etCompany,etLocation,etDesignation,etrSkills,etSalary,etVacancy,etDuration;
-    }
-
-    public MyCustomAdapter(Context context, List<ListElements> data) {
-        this.context = context;
-        this.data = data;
-    }
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View row;
-        ViewHolder viewHolder;
-
-        if(convertView == null) {
-            row = LayoutInflater.from(getContext()).inflate(R.layout.single_row_offers, parent, false);
-
-            viewHolder = new ViewHolder();
-            viewHolder.address = row.findViewById(R.id.textViewSingleOffer1);
-            viewHolder.body = row.findViewById(R.id.textViewSingleOffer2);
-
-            row.setTag(viewHolder);
-        } else {
-            row = convertView;
-            viewHolder = (ViewHolder) row.getTag();
-        }
-
-        Data item = getItem(position);
-
-        viewHolder.address.setText(item.getAddress());
-        viewHolder.body.setText(item.getBody());
-
-        return row;
-    }
-}*/
-
-class ListElements {
-    private String title,desc,comp,loc,desig,skills,salary,vacancy,duration;
-
-    public ListElements(String title, String desc,String comp, String loc,String desig,
-                        String skills,String salary, String vacancy,String duration) {
-        this.title= title;
-        this.desc = desc;
-        this.comp= comp;
-        this.loc = loc;
-        this.desig= desig;
-        this.skills = skills;
-        this.salary= salary;
-        this.vacancy = vacancy;
-        this.duration= duration;
-    }
-
-    public String getTitle() { return title; }
-    public String getDesc() { return desc; }
-    public String getComp() { return comp; }
-    public String getLoc() { return loc; }
-    public String getDesig() { return desig; }
-    public String getSkills() { return skills; }
-    public String getSalary() { return salary; }
-    public String getVacancy() { return vacancy; }
-    public String getDuration() { return duration; }
 }
