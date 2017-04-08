@@ -280,8 +280,12 @@ public class SearchFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        mWaveSwipeRefreshLayout.setRefreshing(false);
-                        Toast.makeText(getActivity(), "no internet access!", Toast.LENGTH_SHORT).show();
+                        try {
+                            mWaveSwipeRefreshLayout.setRefreshing(false);
+                            Toast.makeText(getActivity().getApplication().getApplicationContext(), "no internet access!", Toast.LENGTH_SHORT).show();
+                        } catch (Exception e)   {
+                            e.printStackTrace();
+                        }
                     }
                 });
         return jsonArrayRequest;

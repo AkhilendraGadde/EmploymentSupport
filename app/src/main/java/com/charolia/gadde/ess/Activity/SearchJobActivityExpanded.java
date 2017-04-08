@@ -1,5 +1,6 @@
 package com.charolia.gadde.ess.Activity;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,7 +53,7 @@ public class SearchJobActivityExpanded extends AppCompatActivity {
         vacancy = getIntent().getStringExtra("vacancy");
         salary = getIntent().getStringExtra("salary");
         skills = getIntent().getStringExtra("skills");
-        post_id = getIntent().getStringExtra("post_id");
+        post_id = getIntent().getStringExtra("pid");
 
         title_tv.setText(title);
         desc_tv.setText(description);
@@ -66,7 +68,7 @@ public class SearchJobActivityExpanded extends AppCompatActivity {
         dur_tv.setText(duration);
         vac_tv.setText(vacancy+" Vacancies");
 
-        Snackbar.make(getWindow().getDecorView().getRootView(), "Tap on FAB button to Apply for this job", Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(getWindow().getDecorView().getRootView(), "Tap on menu icon to apply for this job", Snackbar.LENGTH_SHORT).show();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -82,7 +84,20 @@ public class SearchJobActivityExpanded extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.jApply:
 
-                Snackbar.make(getWindow().getDecorView().getRootView(),"Apply for "+company+"?",Snackbar.LENGTH_LONG).show();
+                Snackbar
+                        .make(getWindow().getDecorView().getRootView(),"Apply for "+designation+" in this company?",Snackbar.LENGTH_LONG)
+                        .setAction("Yes", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent apply = new Intent(SearchJobActivityExpanded.this,ApplyForJobsActivity.class);
+                                apply.putExtra("post_id",post_id);
+                                apply.putExtra("title",title);
+                                apply.putExtra("designation",description);
+                                apply.putExtra("company",company);
+                                SearchJobActivityExpanded.this.startActivity(apply);
+                            }
+                        })
+                        .show();
                 return true;
 
             default:

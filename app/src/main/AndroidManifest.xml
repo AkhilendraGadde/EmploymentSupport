@@ -3,7 +3,7 @@
     package="com.charolia.gadde.ess">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -46,10 +46,15 @@
             android:name=".Activity.SearchCategoryActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SearchTheme" />
-        <activity android:name=".Activity.SearchJobActivity"
+        <activity
+            android:name=".Activity.SearchJobActivity"
             android:label="Search Jobs"
-            android:theme="@style/SearchTheme"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/SearchTheme" />
+        <activity
+            android:name=".Activity.ApplyForJobsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SearchTheme" />
     </application>
 
 </manifest>

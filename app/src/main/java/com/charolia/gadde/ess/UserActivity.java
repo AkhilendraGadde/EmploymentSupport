@@ -32,6 +32,7 @@ import com.charolia.gadde.ess.Fragments.ForumFragment;
 import com.charolia.gadde.ess.Fragments.HomeFragment;
 import com.charolia.gadde.ess.Fragments.JobAlertFragment;
 import com.charolia.gadde.ess.Fragments.LogoutFragment;
+import com.charolia.gadde.ess.Fragments.ProfileFragment;
 import com.charolia.gadde.ess.Fragments.ResumeFragment;
 
 import java.util.regex.Matcher;
@@ -52,9 +53,9 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_user);
 
         // set initial fragment.
-        HomeFragment home = new HomeFragment();
+        ProfileFragment profileFragment = new ProfileFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, home);
+        fragmentTransaction.replace(R.id.fragment_container, profileFragment);
         fragmentTransaction.commit();
 
         final TextView tvEmail, tvName, tvType;
@@ -114,16 +115,6 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         Snackbar.make(getWindow().getDecorView().getRootView(),"Hello, "+name+"! Welcome To ESS",Snackbar.LENGTH_SHORT).show();
     }
 
-    public String trimUppercase(String name){
-        Pattern p = Pattern.compile("((^| )[A-Za-z])");
-        Matcher m = p.matcher(name);
-        String initials="";
-        while(m.find()){
-            initials+=m.group().trim();
-        }
-        return initials.toUpperCase();
-    }
-
     @Override
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -131,7 +122,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         } else {
 
             Fragment f = this.getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-            if (f instanceof HomeFragment ) {
+            if (f instanceof ProfileFragment) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage("Are you sure , you want to exit?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -144,8 +135,19 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
                         .setCancelable(false)
                         .create()
                         .show();
-            }else
-                mDrawerLayout.openDrawer(GravityCompat.START);
+            }else {
+                if(f instanceof HomeFragment)   {
+                    Fragment fragment = new ProfileFragment();
+                         getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, fragment)
+                                .addToBackStack(null)
+                                .commit();
+                }
+                else
+                    mDrawerLayout.openDrawer(GravityCompat.START);
+            }
+
         }
     }
 
@@ -197,8 +199,8 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
 
         switch (item.getItemId()) {
             case R.id.nav_home:
-                fragment = new HomeFragment();
-                ActionBarTitle = "Employment Support";
+                fragment = new ProfileFragment();
+                ActionBarTitle = "Profile";
                 break;
 
             case R.id.nav_srch:
