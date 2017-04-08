@@ -79,79 +79,81 @@ public class SearchCategoryFragmentMain extends Fragment {
         mCat_data.add(new Category("Vacancy", R.drawable.ic_job));
         mCat_data.add(new Category("Duration", R.drawable.ic_job));
     }
-}
 
-class Category {
-    String name;
-    int photoId;
+    class Category {
+        String name;
+        int photoId;
 
-    Category(String name, int photoId) {
-        this.name = name;
-        this.photoId = photoId;
-    }
-}
-
-class CategoryViewAdapter extends RecyclerView.Adapter<CategoryViewAdapter.ViewHolder>{
-
-    private Context context;
-    private List<Category> mCategory;
-
-    public CategoryViewAdapter(Context context, List<Category> mCategory) {
-        this.context = context;
-        this.mCategory = mCategory;
-    }
-
-    @Override
-    public CategoryViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_job_cat,parent,false);
-        return new CategoryViewAdapter.ViewHolder(itemView);
-    }
-
-    @Override
-    public void onBindViewHolder(CategoryViewAdapter.ViewHolder holder, int position) {
-
-        holder.cat_name.setText(mCategory.get(position).name);
-        holder.img.setImageResource(mCategory.get(position).photoId);
-
-        holder.getName(mCategory.get(position).name);
-    }
-
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-    }
-
-    @Override
-    public int getItemCount() {
-        return mCategory.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        CardView cView;
-        TextView cat_name;
-        TextView cat_desc;
-        ImageView img;
-        String mName;
-
-        ViewHolder(View itemView) {
-            super(itemView);
-            itemView.setOnClickListener(this);
-            cView = (CardView)itemView.findViewById(R.id.cat_card);
-            cat_name = (TextView)itemView.findViewById(R.id.cat_name);
-            cat_desc = (TextView)itemView.findViewById(R.id.cat_desc);
-            img = (ImageView)itemView.findViewById(R.id.img_job);
+        Category(String name, int photoId) {
+            this.name = name;
+            this.photoId = photoId;
         }
-        public void getName(String item) {
-            mName = item;
+    }
+    class CategoryViewAdapter extends RecyclerView.Adapter<CategoryViewAdapter.ViewHolder>{
+
+        private Context context;
+        private List<Category> mCategory;
+
+        public CategoryViewAdapter(Context context, List<Category> mCategory) {
+            this.context = context;
+            this.mCategory = mCategory;
         }
 
         @Override
-        public void onClick(View v) {
-            Intent myIntent = new Intent(v.getContext(), SearchCategoryActivity.class);
-            myIntent.putExtra("Name", mName);
-            context.startActivity(myIntent);
+        public CategoryViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_job_cat,parent,false);
+            return new CategoryViewAdapter.ViewHolder(itemView);
+        }
+
+        @Override
+        public void onBindViewHolder(CategoryViewAdapter.ViewHolder holder, int position) {
+
+            holder.cat_name.setText(mCategory.get(position).name);
+            holder.img.setImageResource(mCategory.get(position).photoId);
+
+            holder.getName(mCategory.get(position).name);
+        }
+
+        @Override
+        public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+            super.onAttachedToRecyclerView(recyclerView);
+        }
+
+        @Override
+        public int getItemCount() {
+            return mCategory.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+            CardView cView;
+            TextView cat_name;
+            TextView cat_desc;
+            ImageView img;
+            String mName;
+
+            ViewHolder(View itemView) {
+                super(itemView);
+                itemView.setOnClickListener(this);
+                cView = (CardView)itemView.findViewById(R.id.cat_card);
+                cat_name = (TextView)itemView.findViewById(R.id.cat_name);
+                cat_desc = (TextView)itemView.findViewById(R.id.cat_desc);
+                img = (ImageView)itemView.findViewById(R.id.img_job);
+            }
+            public void getName(String item) {
+                mName = item;
+            }
+
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(v.getContext(), SearchCategoryActivity.class);
+                myIntent.putExtra("Name", mName);
+                context.startActivity(myIntent);
+            }
         }
     }
-
 }
+
+
+
+

@@ -4,6 +4,7 @@ package com.charolia.gadde.ess.Fragments;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -52,6 +53,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,9 +73,10 @@ public class JobAlertFragment extends Fragment {
     private ArrayList<String> alertSalary = new ArrayList<String>();
     private ArrayList<String> alertVacancy = new ArrayList<String>();
     private ArrayList<String> alertDuration = new ArrayList<String>();
+    private ArrayList<String> alertID = new ArrayList<String>();
 
     private RequestQueue requestQueue;
-    private String user_id,data;
+    private String alert_id,user_id,data;
     private FloatingActionMenu menuYellow;
     private FloatingActionButton fab1;
     private FloatingActionButton fab2;
@@ -86,7 +89,7 @@ public class JobAlertFragment extends Fragment {
 
     private LinearLayout linearLayout;
     EditText etTitle,etDesc,etCompany,etLocation,etDesignation,etrSkills,etSalary,etVacancy,etDuration;
-    String title,desc,comp,loc,desig,skills,salary,vacancy,duration;
+    String title,desc,comp,loc,desig,skills,salary,vacancy,duration,aid;
     Button bSubmit;
 
     public JobAlertFragment() {
@@ -211,6 +214,10 @@ public class JobAlertFragment extends Fragment {
     private void toDatabase(final String str) {
         final ProgressDialog loading = ProgressDialog.show(getContext(), "Processing", "Please wait...", false, false);
 
+        if(str.equals("create"))    {
+
+        }
+
         title = etTitle.getText().toString();
         desc = etDesc.getText().toString();
         comp = etCompany.getText().toString();
@@ -233,10 +240,14 @@ public class JobAlertFragment extends Fragment {
                                     .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
+                                            clearList();
                                             JobAlertFragment fragment = (JobAlertFragment) getFragmentManager().findFragmentById(R.id.fragment_container);
                                             getFragmentManager().beginTransaction()
                                                     .detach(fragment)
+                                                    .remove(fragment)
                                                     .attach(fragment)
+                                                    .replace(R.id.fragment_container, fragment)
+                                                    .addToBackStack(null)
                                                     .commit();
                                             InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                                             imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
@@ -277,6 +288,12 @@ public class JobAlertFragment extends Fragment {
                 params.put("duration", duration);
                 params.put("context", str);
                 params.put("uid", user_id);
+                if(str.equals("create"))    {
+                    Random r = new Random(System.currentTimeMillis());
+                    alert_id = String.valueOf((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
+                    params.put("aid",alert_id);
+                } else
+                    params.put("aid",aid);
                 return params;
             }
         };
@@ -284,6 +301,18 @@ public class JobAlertFragment extends Fragment {
         requestQueue.add(stringRequest);
     }
 
+    private void clearList()    {
+        alertTitle.clear();
+        alertDesc.clear();
+        alertComp.clear();
+        alertLoc.clear();
+        alertDesig.clear();
+        alertSkills.clear();
+        alertSalary.clear();
+        alertVacancy.clear();
+        alertDuration.clear();
+        alertID.clear();
+    }
     private void initInputs()   {
         etTitle = (EditText) getActivity().findViewById(R.id.etTitle);
         etDesc = (EditText) getActivity().findViewById(R.id.etDesc);
@@ -530,17 +559,25 @@ public class JobAlertFragment extends Fragment {
                 alertSalary.add(obj.getString("jSalary"));
                 alertVacancy.add(obj.getString("jVacancy"));
                 alertDuration.add(obj.getString("jDuration"));
-
+                alertID.add(obj.getString("jAlert_id"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
         if(alertsList.size() == 1){
-            tvInfo = (TextView) getActivity().findViewById(R.id.job_desc);
-            tvInfo.setVisibility(View.VISIBLE);
+            try {
+                tvInfo = (TextView) getActivity().findViewById(R.id.job_desc);
+                tvInfo.setVisibility(View.VISIBLE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }else {
-            tvInfo = (TextView) getActivity().findViewById(R.id.job_desc);
-            tvInfo.setVisibility(View.GONE);
+            try {
+                tvInfo = (TextView) getActivity().findViewById(R.id.job_desc);
+                tvInfo.setVisibility(View.GONE);
+            } catch (Exception e)   {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -571,6 +608,7 @@ public class JobAlertFragment extends Fragment {
                                 salary = alertSalary.get(id);
                                 vacancy = alertVacancy.get(id);
                                 duration = alertDuration.get(id);
+                                aid = alertID.get(id);
                                 showDetails();
                             }   else {
                                 linearLayout = (LinearLayout) getActivity().findViewById(R.id.layout_inputs);

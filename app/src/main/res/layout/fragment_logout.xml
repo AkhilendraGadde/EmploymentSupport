@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/splashscreen_bg"
+        android:background="@color/white"
         tools:context="com.charolia.gadde.ess.Fragments.LogoutFragment">
 
     <TextView
@@ -13,7 +13,7 @@
             android:layout_marginTop="35dp"
             android:text="Are you sure you want"
             android:textSize="22sp"
-            android:textColor="@android:color/white"
+            android:textColor="@color/splashscreen_bg"
             android:layout_height="wrap_content" />
 
     <TextView
@@ -24,13 +24,13 @@
             android:layout_marginTop="10dp"
             android:text=" to log out? "
             android:textSize="22sp"
-            android:textColor="@android:color/white"
+            android:textColor="@color/splashscreen_bg"
             android:layout_height="wrap_content" />
 
     <ImageView
         android:id="@+id/logout_id"
         android:layout_width="100px"
-        android:background="@drawable/ic_logout"
+        android:background="@drawable/ic_logout_black"
         android:layout_height="100px"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -51,7 +51,7 @@
         android:paddingRight="15dp"
         android:paddingTop="1dp"
         android:textAllCaps="true"
-        android:textColor="@android:color/white"
+        android:textColor="@color/splashscreen_bg"
         android:textSize="13sp"
         android:layout_gravity="center"
         android:gravity="center_vertical|center_horizontal|center"

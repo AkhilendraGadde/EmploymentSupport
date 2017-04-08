@@ -5,6 +5,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -36,6 +41,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -50,6 +57,10 @@ public class RegisterActivity extends AppCompatActivity {
     RadioButton rb;
     int rButtonId = 0;
     Calendar myCalendar = Calendar.getInstance();
+    private final int seconds = 15;
+    private Timer timer;
+    private ProgressDialog loading;
+    private Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,12 +103,33 @@ public class RegisterActivity extends AppCompatActivity {
         bRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validateUser();
-                if(isValidUser) {
-                    confirmOtp();
+
+                isConnectedToInternet();
+                if(isConnectedToInternet()) {
+                    validateUser();
+                    if (isValidUser) {
+                        confirmOtp();
+                    }
+                }   else {
+                    Toast.makeText(RegisterActivity.this,"No Internet Connection found",Toast.LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+    public boolean isConnectedToInternet(){
+        ConnectivityManager connectivity = (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null)
+        {
+            NetworkInfo info = connectivity.getActiveNetworkInfo();
+            if (info != null)
+                if (info.getState() == NetworkInfo.State.CONNECTED)
+                {
+                    return true;
+                }
+
+        }
+        return false;
     }
 
     private void updateLabel() {
@@ -319,7 +351,18 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void registerUser(String otp){
-        final ProgressDialog loading = ProgressDialog.show(RegisterActivity.this, "Registering", "Please wait...", false, false);
+        loading = ProgressDialog.show(RegisterActivity.this, "Registering", "Please wait...", false, false);
+
+        timer = new Timer();
+        timer.schedule(new Notify(),seconds*1000);
+        mHandler = new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(Message message) {
+                loading.dismiss();
+                Toast.makeText(RegisterActivity.this, "Connection Timed Out!", Toast.LENGTH_LONG).show();
+            }
+        };
+
         name = etName.getText().toString();
         username = etUsername.getText().toString();
         password = etPassword.getText().toString();
@@ -339,11 +382,13 @@ public class RegisterActivity extends AppCompatActivity {
                     boolean success = jsonResponse.getBoolean("success");
 
                     if(success) {
+                        timer.cancel();
                         loading.dismiss();
                         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                         RegisterActivity.this.startActivity(intent);
                         RegisterActivity.this.finish();
                     }else{
+                        timer.cancel();
                         loading.dismiss();
                         AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                         builder.setMessage("Register Failed")
@@ -363,6 +408,16 @@ public class RegisterActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
         queue.add(regReq);
 
+    }
+
+    private class Notify extends TimerTask  {
+
+        @Override
+        public void run() {
+            Message message = mHandler.obtainMessage(seconds);
+            message.sendToTarget();
+            timer.cancel();
+        }
     }
 
     public void confirmOtp() {

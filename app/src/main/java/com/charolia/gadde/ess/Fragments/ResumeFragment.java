@@ -495,11 +495,19 @@ public class ResumeFragment extends Fragment {
             }
         }
         if(resumeList.size() == 1){
-            tvInfo = (TextView) getActivity().findViewById(R.id.res_desc);
-            tvInfo.setVisibility(View.VISIBLE);
+            try {
+                tvInfo = (TextView) getActivity().findViewById(R.id.res_desc);
+                tvInfo.setVisibility(View.VISIBLE);
+            } catch (Exception e)   {
+                e.printStackTrace();
+            }
         }else {
-            tvInfo = (TextView) getActivity().findViewById(R.id.res_desc);
-            tvInfo.setVisibility(View.GONE);
+            try {
+                tvInfo = (TextView) getActivity().findViewById(R.id.res_desc);
+                tvInfo.setVisibility(View.GONE);
+            } catch (Exception e)   {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -508,7 +516,6 @@ public class ResumeFragment extends Fragment {
             resumeList.clear();
             resumeList.add("Select your created resume");
             getData();
-            Log.d("size " ,String.valueOf(resumeList.size()));
 
             spinner.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, resumeList));
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
