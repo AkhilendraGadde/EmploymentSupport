@@ -1,11 +1,14 @@
 package com.charolia.gadde.ess.Fragments;
 
 
+import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -49,10 +52,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,7 +72,7 @@ public class ResumeFragment extends Fragment {
     private Spinner spinner;
     private ArrayList<String> resumeList = new ArrayList<String>();
     private RequestQueue requestQueue;
-    private String user_id,data;
+    private String user_id,data,Uname;
     private FloatingActionMenu menuYellow;
     private FloatingActionButton fab1;
     private FloatingActionButton fab2;
@@ -75,7 +83,7 @@ public class ResumeFragment extends Fragment {
 
     private LinearLayout linearLayout;
     EditText etAadhaar,etQual,etSkills,etProj,etAch,etHobb,etExp;
-    String aadhaar,qual,skills,proj,ach,hobb,exp;
+    public String resume,aadhaar,qual,skills,proj,ach,hobb,exp;
     Button bSubmit;
 
     public ResumeFragment() {
@@ -86,8 +94,11 @@ public class ResumeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_resume, container, false);
-
+        if (shouldAskPermissions()) {
+            askPermissions();
+        }
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        Uname = sharedPreferences.getString(Config.USERNAME_SHARED_PREF,"Not Available");
         user_id = sharedPreferences.getString(Config.UID_SHARED_PREF,"Not Available");
 
         spinner = (Spinner) view.findViewById(R.id.resumeList);
@@ -248,7 +259,10 @@ public class ResumeFragment extends Fragment {
                                             ResumeFragment fragment = (ResumeFragment) getFragmentManager().findFragmentById(R.id.fragment_container);
                                             getFragmentManager().beginTransaction()
                                                     .detach(fragment)
+                                                    .remove(fragment)
                                                     .attach(fragment)
+                                                    .replace(R.id.fragment_container, fragment)
+                                                    .addToBackStack(null)
                                                     .commit();
                                             InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                                             imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
@@ -324,6 +338,12 @@ public class ResumeFragment extends Fragment {
         etHobb.setText(hobb);
         etHobb.setFocusable(false);
         bSubmit.setVisibility(View.GONE);
+
+        try {
+            saveToStorage();
+        }   catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void showDetailsforUpdate()  {
@@ -362,6 +382,30 @@ public class ResumeFragment extends Fragment {
         bSubmit.setVisibility(View.VISIBLE);
     }
 
+    private void setEmpty() {
+        etAadhaar.setText("");
+        etAadhaar.setFocusable(true);
+        etAadhaar.setFocusableInTouchMode(true);
+        etQual .setText("");
+        etQual.setFocusable(true);
+        etQual.setFocusableInTouchMode(true);
+        etProj.setText("");
+        etProj.setFocusable(true);
+        etProj.setFocusableInTouchMode(true);
+        etSkills.setText("");
+        etSkills.setFocusable(true);
+        etSkills.setFocusableInTouchMode(true);
+        etExp.setText("");
+        etExp.setFocusable(true);
+        etExp.setFocusableInTouchMode(true);
+        etAch.setText("");
+        etAch.setFocusable(true);
+        etAch.setFocusableInTouchMode(true);
+        etHobb.setText("");
+        etHobb.setFocusable(true);
+        etHobb.setFocusableInTouchMode(true);
+    }
+
     private void onCreateClick()    {
 
         linearLayout = (LinearLayout) getActivity().findViewById(R.id.layout_inputs);
@@ -377,11 +421,17 @@ public class ResumeFragment extends Fragment {
         }
 
         initInputs();
+        setEmpty();
         bSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 validateDetails();
                 if(isValidDetails) {
+                    try {
+                        saveToStorage();
+                    }   catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     toDatabase("create");
                 }
             }
@@ -396,6 +446,11 @@ public class ResumeFragment extends Fragment {
             public void onClick(View v) {
                 validateDetails();
                 if(isValidDetails) {
+                    try {
+                        saveToStorage();
+                    }   catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     toDatabase("update");
                 }
             }
@@ -415,6 +470,38 @@ public class ResumeFragment extends Fragment {
                 .setNegativeButton("no",null)
                 .create()
                 .show();
+    }
+
+    private void saveToStorage() throws IOException {
+
+        resume = "\t\t\t\tRESUME : \n\n\nAadhar ID : "+aadhaar+"\n\n"+
+                "Educational Qualifications : \n\n\t\t"+qual+"\n\n"+
+                "Skills : \n\n\t\t"+skills+"\n\n"+
+                "Projects Undertaken : \n\n\t\t"+proj+"\n\n"+
+                "Achievements : \n\n\t\t"+ach+"\n\n"+
+                "Hobbies : \n\n\t\t"+hobb+"\n\n"+
+                "Work Experience : \n\n\t\t"+exp+"\n\n";
+
+        String root = Environment.getExternalStorageDirectory().toString();
+        File myDir = new File(root + "/EmploymentSupport");
+        myDir.mkdirs();
+        String fname = "Resume_"+Uname+".txt";
+        File file = new File(myDir, fname);
+        if (file.exists())
+            file.delete();
+        file.createNewFile();
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            PrintWriter pw = new PrintWriter(out);
+            pw.println(resume);
+            pw.flush();
+            pw.close();
+            out.flush();
+            out.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private View.OnClickListener clickListener = new View.OnClickListener() {
@@ -473,8 +560,6 @@ public class ResumeFragment extends Fragment {
     }
 
     private void parseData(JSONArray array) {
-        Log.d("",String.valueOf(array));
-        Log.d("",String.valueOf(array.length()));
         for (int i = 0; i < array.length(); i++) {
 
             JSONObject obj;
@@ -547,7 +632,18 @@ public class ResumeFragment extends Fragment {
         }
     }
 
-
+    @TargetApi(23)
+    protected void askPermissions() {
+        String[] permissions = {
+                "android.permission.READ_EXTERNAL_STORAGE",
+                "android.permission.WRITE_EXTERNAL_STORAGE"
+        };
+        int requestCode = 200;
+        requestPermissions(permissions, requestCode);
+    }
+    protected boolean shouldAskPermissions() {
+        return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
+    }
     @Override
     public void onResume() {
         super.onResume();

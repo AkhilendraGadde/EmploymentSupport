@@ -19,6 +19,9 @@ public class Config {
     public static final String REPLY_URL = "https://akhilendragadde17.000webhostapp.com/test/forum_reply.php";
     public static final String FEEDBACK_LIST_URL = "https://akhilendragadde17.000webhostapp.com/test/feedback_qlist.php?id=";
     public static final String FEEDBACK_URL = "https://akhilendragadde17.000webhostapp.com/test/feedback_query.php";
+    public static final String RECRUITER_REQUEST_URL = "https://akhilendragadde17.000webhostapp.com/test/recruiter_data.php?user_id=";
+    public static final String CHK_RESUME_URL = "https://akhilendragadde17.000webhostapp.com/test/checkResume.php";
+    public static final String PROFILE_UPDATE_URL = "https://akhilendragadde17.000webhostapp.com/test/profile.php";
 
     // Support Mail
     public static final String CONTACT_EMAIL = "mailto:empsupess1725@gmail.com";
@@ -58,98 +61,3 @@ public class Config {
     //We will use this to store the boolean in sharedpreference to track user is loggedin or not
     public static final String LOGGEDIN_SHARED_PREF = "loggedin";
 }
-    /*
-            @snack bar styles !
-            Snackbar snackbar = Snackbar
-                .make(view, "Replace with your own action" , Snackbar.LENGTH_SHORT);
-            snackbar.show();
-
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
-
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).show();
-
-            Snackbar.make(getWindow().getDecorView().getRootView(), "Replace with your own action", Snackbar.LENGTH_SHORT).show();
-
-            View parentLayout = findViewById(R.id.activity_register);
-            Snackbar.make(parentLayout, "Replace with your own action", Snackbar.LENGTH_SHORT).show();
-    */
-
-/*
-    private void login(){
-
-        final ProgressDialog loading = ProgressDialog.show(LoginActivity.this, "Logging in", "Please wait...", false, false);
-        username = etUsername.getText().toString();
-        password = etPassword.getText().toString();
-
-        //Creating a string request
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.LOGIN_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        //If we are getting success from server
-                        if(response.equalsIgnoreCase(Config.LOGIN_SUCCESS)){
-                            //Creating a shared preference
-                            SharedPreferences sharedPreferences = LoginActivity.this.getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-
-                            //Creating editor to store values to shared preferences
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                            //Adding values to editor
-                            editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, true);
-                            editor.putString(Config.USERNAME_SHARED_PREF, username);
-
-                            //Saving values to editor
-                            editor.commit();
-
-                            //Starting profile activity
-                            Intent intent = new Intent(LoginActivity.this, UserActivity.class);
-                            startActivity(intent);
-                        }else{
-                            loading.dismiss();
-                            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                            builder.setMessage("Login Failed")
-                                    .setNegativeButton("Retry", null)
-                                    .create()
-                                    .show();
-                            View parentLayout = findViewById(R.id.activity_login);
-                            Snackbar.make(parentLayout, "Invalid username or password", Snackbar.LENGTH_LONG).show();
-                            //Toast.makeText(LoginActivity.this, "Invalid username or password", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //You can handle error here if you want
-                    }
-                }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                //Adding parameters to request
-                params.put(Config.KEY_USERNAME, username);
-                params.put(Config.KEY_PASSWORD, password);
-
-                //returning parameter
-                return params;
-            }
-        };
-
-        //Adding the string request to the queue
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-    }
-*/
-
-/*
-        Fetch from svr  : DO in LOGIN
-        String name = jsonResponse.getString("name");
-        intent.putExtra("name", name);
-
-        Put in userAct
-        Intent intent = getIntent();
-        String name = intent.getStringExtra("name");
-
-        tv.setText(name);
- */

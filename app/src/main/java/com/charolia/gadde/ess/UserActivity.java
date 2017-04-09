@@ -21,7 +21,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,14 +28,10 @@ import com.charolia.gadde.ess.Activity.SearchJobActivity;
 import com.charolia.gadde.ess.Fragments.AboutFragment;
 import com.charolia.gadde.ess.Fragments.FeedbackFragment;
 import com.charolia.gadde.ess.Fragments.ForumFragment;
-import com.charolia.gadde.ess.Fragments.HomeFragment;
 import com.charolia.gadde.ess.Fragments.JobAlertFragment;
 import com.charolia.gadde.ess.Fragments.LogoutFragment;
 import com.charolia.gadde.ess.Fragments.ProfileFragment;
 import com.charolia.gadde.ess.Fragments.ResumeFragment;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class UserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -135,19 +130,8 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
                         .setCancelable(false)
                         .create()
                         .show();
-            }else {
-                if(f instanceof HomeFragment)   {
-                    Fragment fragment = new ProfileFragment();
-                         getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.fragment_container, fragment)
-                                .addToBackStack(null)
-                                .commit();
-                }
-                else
-                    mDrawerLayout.openDrawer(GravityCompat.START);
-            }
-
+            }else
+                mDrawerLayout.openDrawer(GravityCompat.START);
         }
     }
 

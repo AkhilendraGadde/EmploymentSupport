@@ -84,20 +84,24 @@ public class SearchJobActivityExpanded extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.jApply:
 
-                Snackbar
-                        .make(getWindow().getDecorView().getRootView(),"Apply for "+designation+" in this company?",Snackbar.LENGTH_LONG)
-                        .setAction("Yes", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent apply = new Intent(SearchJobActivityExpanded.this,ApplyForJobsActivity.class);
-                                apply.putExtra("post_id",post_id);
-                                apply.putExtra("title",title);
-                                apply.putExtra("designation",description);
-                                apply.putExtra("company",company);
-                                SearchJobActivityExpanded.this.startActivity(apply);
-                            }
-                        })
-                        .show();
+                if(post_id.charAt(5) == '2')    {
+                    Snackbar.make(getWindow().getDecorView().getRootView(),"Recruiter cannot apply for jobs",Snackbar.LENGTH_LONG).show();
+                }   else {
+                    Snackbar
+                            .make(getWindow().getDecorView().getRootView(),"Apply for "+designation+" in this company?",Snackbar.LENGTH_LONG)
+                            .setAction("Yes", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent apply = new Intent(SearchJobActivityExpanded.this,ApplyForJobsActivity.class);
+                                    apply.putExtra("post_id",post_id);
+                                    apply.putExtra("title",title);
+                                    apply.putExtra("designation",designation);
+                                    apply.putExtra("company",company);
+                                    SearchJobActivityExpanded.this.startActivity(apply);
+                                }
+                            })
+                            .show();
+                }
                 return true;
 
             default:

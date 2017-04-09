@@ -16,13 +16,13 @@ import java.net.URLEncoder;
  * Created by Administrator on 2/9/2017.
  */
 
-class RequestOtp extends AsyncTask<Void, Void, String> {
+public class RequestOtp extends AsyncTask<Void, Void, String> {
 
     private final String mobile;
     private final String otp;
     private final Context Ctx;
 
-    RequestOtp(String Mobile, String OTP, Context ctx)
+    public RequestOtp(String Mobile, String OTP, Context ctx)
     {
         mobile = Mobile;
         otp = OTP;
@@ -55,11 +55,15 @@ class RequestOtp extends AsyncTask<Void, Void, String> {
 
     protected void onPostExecute(final String success)
     {
-        if(success.equals("SENT OTP."))
-        {
-            Toast.makeText(Ctx, "SUCCESS in sending OTP", Toast.LENGTH_LONG).show();
+        try {
+            if(success.equals("SENT OTP."))
+            {
+                Toast.makeText(Ctx, "SUCCESS in sending OTP", Toast.LENGTH_LONG).show();
+            }
+            else
+                Toast.makeText(Ctx,success, Toast.LENGTH_LONG).show();
+        }   catch (Exception e) {
+            e.printStackTrace();
         }
-        else
-            Toast.makeText(Ctx,success, Toast.LENGTH_LONG).show();
     }
 }
