@@ -36,6 +36,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.charolia.gadde.ess.Config;
+import com.charolia.gadde.ess.Fragments.JobAlertFragment;
 import com.charolia.gadde.ess.Fragments.ResumeFragment;
 import com.charolia.gadde.ess.Fragments.SearchFragmentJobData;
 import com.charolia.gadde.ess.R;
@@ -304,6 +305,12 @@ public class ApplyForJobsActivity extends AppCompatActivity {
                 fab.setVisibility(View.VISIBLE);
                 cvJ.setVisibility(View.VISIBLE);
                 cvP.setVisibility(View.VISIBLE);
+                ResumeFragment fragment = (ResumeFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+                getSupportFragmentManager().beginTransaction()
+                        .detach(fragment)
+                        .remove(fragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         }   catch (Exception e) {
             e.printStackTrace();
