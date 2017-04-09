@@ -1,23 +1,27 @@
 package com.charolia.gadde.ess.Activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.Snackbar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.charolia.gadde.ess.Config;
 import com.charolia.gadde.ess.R;
 
 public class SearchJobActivityExpanded extends AppCompatActivity {
 
     private Toolbar mToolbar;
     private String ActionBarTitle,company,title,description,location,designation,
-            duration,vacancy,salary,skills,post_id;
+            duration,vacancy,salary,skills,post_id,uid;
     private TextView title_tv,desc_tv,desig_tv,comp_tv,skills_tv,loc_tv,sal_tv,dur_tv,vac_tv;
 
     @Override
@@ -30,6 +34,9 @@ public class SearchJobActivityExpanded extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(ActionBarTitle);
+
+        SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        uid = sharedPreferences.getString(Config.UID_SHARED_PREF,"Not Available");
 
         title_tv = (TextView) findViewById(R.id.jTitle_ex);
         desc_tv = (TextView) findViewById(R.id.jDesc_ex);
@@ -81,7 +88,8 @@ public class SearchJobActivityExpanded extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.jApply:
 
-                if(post_id.charAt(post_id.length()-1) == '2')    {
+                Log.d("id",uid);
+                if(uid.charAt(uid.length()-1) == '2')    {
                     Snackbar.make(getWindow().getDecorView().getRootView(),"Recruiter cannot apply for jobs",Snackbar.LENGTH_LONG).show();
                 }   else {
                     Snackbar
