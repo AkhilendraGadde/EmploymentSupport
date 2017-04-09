@@ -3,7 +3,6 @@ package com.charolia.gadde.ess.Activity;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -11,9 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.charolia.gadde.ess.Fragments.LogoutFragment;
 import com.charolia.gadde.ess.R;
 
 public class SearchJobActivityExpanded extends AppCompatActivity {
@@ -84,7 +81,7 @@ public class SearchJobActivityExpanded extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.jApply:
 
-                if(post_id.charAt(5) == '2')    {
+                if(post_id.charAt(post_id.length()-1) == '2')    {
                     Snackbar.make(getWindow().getDecorView().getRootView(),"Recruiter cannot apply for jobs",Snackbar.LENGTH_LONG).show();
                 }   else {
                     Snackbar
