@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary_bak">#3F51B5</color>
+    <color name="colorPrimaryDark_bak">#303F9F</color>
+    <color name="colorPrimary">#800080</color>
+    <color name="colorPrimaryDark">#660066</color>
+    <color name="colorAccent">#ff4081</color>
+    <color name="fab_colorPressed">#ff4081</color>
+    <color name="fab_colorRipple">#e6004c</color>
+    <color name="splashscreen_bg">#222222</color>
+    <color name="white">#ffffff</color>
+    <color name="red">#ff0000</color>
+    <color name="blue">#0000ff</color>
+    <color name="gray">#808080</color>
+    <color name="green">#008000</color>
+    <!-- Google Logo -->
+    <color name="google_blue">#4285F4</color>
+    <color name="google_green">#34A853</color>
+    <color name="google_yellow">#FBBC05</color>
+    <color name="google_red">#EA4335</color>
+    <!-- Search Logo -->
+    <color name="colorTextPrimary">#FFFFFF</color>
+    <color name="colorTextDisable">#66FFFFFF</color>1F1F1F
+    <!-- Search Job -->
+    <color name="job_title">#1F1F1F</color>1F1F1F
+    <color name="job_cname">#4F4F4F</color>
+    <color name="job_loc">#ADADAD</color>
+</resources>

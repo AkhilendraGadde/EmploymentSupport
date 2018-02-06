@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="163dp"
+    android:padding="8dp"
+    android:background="@drawable/canvas">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_above="@+id/tvName"
+        android:id="@+id/circleView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignStart="@+id/tvName"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginStart="10dp"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@color/white"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:text=""
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvEmail"
+        android:id="@+id/tvName"
+        android:includeFontPadding="false"
+        android:textColor="@android:color/background_light"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:maxLines="1"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:text=""
+        android:textSize="15sp"
+        android:textColor="@android:color/background_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvEmail"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="2dp"
+        android:maxLines="1"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"/>
+
+
+</RelativeLayout>

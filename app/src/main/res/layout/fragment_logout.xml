@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context="com.charolia.gadde.ess.Fragments.LogoutFragment">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/logout_id"
+            android:id="@+id/tv_log1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:text="Are you sure you want"
+            android:textSize="22sp"
+            android:textColor="@color/splashscreen_bg"
+            android:layout_height="wrap_content" />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/tv_log1"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/tv_log2"
+            android:layout_marginTop="10dp"
+            android:text=" to log out? "
+            android:textSize="22sp"
+            android:textColor="@color/splashscreen_bg"
+            android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/logout_id"
+        android:layout_width="100px"
+        android:background="@drawable/ic_logout_black"
+        android:layout_height="100px"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp" />
+
+
+    <Button
+        android:text="Cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bLogoutYes"
+        android:layout_alignEnd="@+id/bLogoutYes"
+        android:layout_marginTop="22dp"
+        android:id="@+id/bLogoutNo"
+        android:background="@drawable/rect_background"
+        android:paddingBottom="1dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="1dp"
+        android:textAllCaps="true"
+        android:textColor="@color/splashscreen_bg"
+        android:textSize="13sp"
+        android:layout_gravity="center"
+        android:gravity="center_vertical|center_horizontal|center"
+        android:layout_alignStart="@+id/tv_log1"/>
+
+    <Button
+        android:text="Logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="185dp"
+        android:id="@+id/bLogoutYes"
+        android:background="@color/colorPrimary"
+        android:paddingBottom="1dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="1dp"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="13sp"
+        android:layout_gravity="center"
+        android:gravity="center_vertical|center_horizontal|center"
+        android:layout_below="@+id/tv_log2"
+        android:layout_alignEnd="@+id/tv_log1"
+        android:layout_alignStart="@+id/tv_log1" />
+
+</RelativeLayout>
+
