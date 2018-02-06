@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
@@ -8,3 +9,15 @@
     <dimen name="padding">4dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 </resources>
+=======
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_margin">16dp</dimen>
+    <dimen name="abc_action_button_min_width_material">46dp</dimen>
+    <dimen name="abc_action_button_min_width_overflow_material">34dp</dimen>
+    <dimen name="padding">4dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+</resources>
+>>>>>>> f706976561161babd0bad7879af2a8e13e4cdf25

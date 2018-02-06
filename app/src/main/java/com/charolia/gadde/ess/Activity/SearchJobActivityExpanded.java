@@ -72,7 +72,11 @@ public class SearchJobActivityExpanded extends AppCompatActivity {
         dur_tv.setText(duration);
         vac_tv.setText(vacancy+" Vacancies");
 
+<<<<<<< HEAD
         Snackbar.make(findViewById(R.id.main_view), "Tap on menu icon to apply for this job", Snackbar.LENGTH_SHORT).show();
+=======
+        Snackbar.make(getWindow().getDecorView().getRootView(), "Tap on menu icon to apply for this job", Snackbar.LENGTH_SHORT).show();
+>>>>>>> f706976561161babd0bad7879af2a8e13e4cdf25
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -90,10 +94,17 @@ public class SearchJobActivityExpanded extends AppCompatActivity {
 
                 Log.d("id",uid);
                 if(uid.charAt(uid.length()-1) == '2')    {
+<<<<<<< HEAD
                     Snackbar.make(findViewById(R.id.main_view),"Recruiter cannot apply for jobs",Snackbar.LENGTH_LONG).show();
                 }   else {
                     Snackbar
                             .make(findViewById(R.id.main_view),"Apply for "+designation+" in this company?",Snackbar.LENGTH_LONG)
+=======
+                    Snackbar.make(getWindow().getDecorView().getRootView(),"Recruiter cannot apply for jobs",Snackbar.LENGTH_LONG).show();
+                }   else {
+                    Snackbar
+                            .make(getWindow().getDecorView().getRootView(),"Apply for "+designation+" in this company?",Snackbar.LENGTH_LONG)
+>>>>>>> f706976561161babd0bad7879af2a8e13e4cdf25
                             .setAction("Yes", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {

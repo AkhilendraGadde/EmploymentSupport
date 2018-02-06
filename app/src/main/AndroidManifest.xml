@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.charolia.gadde.ess">
@@ -59,4 +60,67 @@
             android:theme="@style/NavigationTheme" />
     </application>
 
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.charolia.gadde.ess">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".InitActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/login_entry"
+            android:screenOrientation="portrait"
+            android:theme="@style/LoginTheme" />
+        <activity
+            android:name=".UserActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/NavigationTheme" />
+        <activity
+            android:name=".RegisterActivity"
+            android:label="@string/register"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.SearchJobActivityExpanded"
+            android:screenOrientation="portrait"
+            android:theme="@style/SearchTheme" />
+        <activity
+            android:name=".Activity.ForumActivityExpanded"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeSwipeBack" />
+        <activity
+            android:name=".Activity.SearchCategoryActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SearchTheme" />
+        <activity
+            android:name=".Activity.SearchJobActivity"
+            android:label="Search Jobs"
+            android:screenOrientation="portrait"
+            android:theme="@style/SearchTheme" />
+        <activity
+            android:name=".Activity.ApplyForJobsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NavigationTheme" />
+    </application>
+
+>>>>>>> f706976561161babd0bad7879af2a8e13e4cdf25
 </manifest>

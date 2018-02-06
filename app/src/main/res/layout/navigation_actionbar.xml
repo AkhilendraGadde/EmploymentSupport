@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
@@ -6,4 +7,14 @@
     android:id="@+id/nav_action"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:id="@+id/nav_action"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+>>>>>>> f706976561161babd0bad7879af2a8e13e4cdf25
 </android.support.v7.widget.Toolbar>

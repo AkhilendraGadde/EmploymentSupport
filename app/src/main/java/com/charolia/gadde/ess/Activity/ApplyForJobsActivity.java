@@ -11,7 +11,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+<<<<<<< HEAD
 import android.os.StrictMode;
+=======
+>>>>>>> f706976561161babd0bad7879af2a8e13e4cdf25
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -74,9 +77,12 @@ public class ApplyForJobsActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
 
         try {
+<<<<<<< HEAD
             StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
             StrictMode.setVmPolicy(builder.build());
 
+=======
+>>>>>>> f706976561161babd0bad7879af2a8e13e4cdf25
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle(ActionBarTitle);
         } catch (Exception e)   {
